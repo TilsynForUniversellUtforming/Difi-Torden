@@ -1,0 +1,30 @@
+<h2>side</h2>
+{{vm.indicator.title}}
+<ul dnd-list="vm.indicator.activities">
+    <li ng-repeat="item in vm.indicator.activities"
+        dnd-draggable="item"
+        dnd-moved="vm.indicator.activities.splice($index, 1)"
+        dnd-effect-allowed="move"
+        dnd-selected="vm.listSelected = item"
+        ng-class="{'selected': vm.listSelected === item}"
+        >
+        
+        <div class="container-element box box-blue">
+            <h3>{{item.title}} lal</h3>
+            <div  >
+                <ul dnd-list="item.inputs">
+                    <li ng-repeat="in in item.inputs"
+                        dnd-draggable="in"
+                        dnd-effect-allowed="move"
+                        dnd-moved="item.inputs.splice($index, 1)"
+                        dnd-selected="vm.listSelected = in"
+                        ng-class="{selected: vm.listSelected === in}"
+                        >
+                        {{in.text}}
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </li>
+</ul>
