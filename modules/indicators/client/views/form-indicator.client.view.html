@@ -7,7 +7,9 @@
             <div ui-view="side@indicators.create"></div>
         </div>
         <div class="col-sm-9">
-            <div ui-view="ind-general@indicators.create"></div>
+            <div ng-if="vm.currentView='main'" ui-view="main@indicators.create"></div>
+            <div ng-if="vm.currentView='activity-details'" ui-view="activity-details@indicators.create"></div>
+            <div ng-if="vm.currentView='input-details'" ui-view="input-details@indicators.create"></div>
         </div>
     </div>
 </section>
