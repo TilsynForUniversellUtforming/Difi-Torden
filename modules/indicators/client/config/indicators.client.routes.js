@@ -30,7 +30,7 @@
             })
             .state('indicators.create',
             {
-                url: '/create',
+                url: '/create?keywords',
                 views:
                 {
                     "":
@@ -43,9 +43,17 @@
                     {
                         templateUrl: "modules/indicators/client/views/form-indicator-side.client.view.html"
                     },
-                    "ind-general@indicators.create":
+                    "main@indicators.create":
                     {
                         templateUrl: "modules/indicators/client/views/form-indicator-main.client.view.html"
+                    },
+                     "activity-details-main@indicators.create":
+                    {
+                        templateUrl: "modules/indicators/client/views/activity-details-main.client.view.html"
+                    },
+                     "input-details-main@indicators.create":
+                    {
+                        templateUrl: "modules/indicators/client/views/input-details-main.client.view.html"
                     }
                 },
                 resolve:
@@ -76,7 +84,7 @@
             })
             .state('indicators.view',
             {
-                url: '/:articleId',
+                url: '/:indicatorId',
                 templateUrl: 'modules/indicators/client/views/view-indicator.client.view.html',
                 controller: 'IndicatorsController',
                 controllerAs: 'vm',

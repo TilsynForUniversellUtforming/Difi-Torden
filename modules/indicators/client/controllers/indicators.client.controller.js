@@ -20,6 +20,12 @@
         vm.form = {};
         vm.remove = remove;
         vm.save = save;
+
+        vm.details=null;
+        vm.currentView = "main";
+        vm.enableDetailsView=enableDetailsView;
+
+
         vm.listSelected;
         vm.indicator.title = "1.2.3 - Indikator Taktil";
         vm.indicator.description = "";
@@ -51,6 +57,11 @@
             }]
         }]
         console.log(vm.indicator)
+
+        function enableDetailsView(type, item){
+            vm.details = item;
+            $state.go('indicators.activity-detail');
+        }
         // Remove existing indicator
         function remove()
         {
