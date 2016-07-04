@@ -60,7 +60,7 @@
 
         function enableDetailsView(type, item){
             vm.details = item;
-            $state.go('indicators.activity-detail');
+            vm.currentView = type;
         }
         // Remove existing indicator
         function remove()

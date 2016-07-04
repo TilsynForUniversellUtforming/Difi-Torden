@@ -10,7 +10,7 @@
         >
 
         <div class="container-element box box-blue">
-            <h3 ng-click="vm.enableDetailsView('activity-detail', item)">{{item.title}} lal</h3>
+            <h3 ng-click="vm.enableDetailsView('activity-details', item)">{{item.title}} lal</h3>
             <div  >
                 <ul dnd-list="item.inputs">
                     <li ng-repeat="in in item.inputs"
@@ -19,6 +19,7 @@
                         dnd-moved="item.inputs.splice($index, 1)"
                         dnd-selected="vm.listSelected = in"
                         ng-class="{selected: vm.listSelected === in}"
+                        ng-click="vm.enableDetailsView('input-details',in)"
                         >
                         {{in.text}}
                     </li>
