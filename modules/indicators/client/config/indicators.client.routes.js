@@ -54,6 +54,14 @@
                      "input-details-main@indicators.create":
                     {
                         templateUrl: "modules/indicators/client/views/input-details-main.client.view.html"
+                    },
+                     "form-activity@indicators.create":
+                    {
+                        templateUrl: "modules/indicators/client/views/form-activity.client.view.html"
+                    },
+                     "input-form@indicators.create":
+                    {
+                        templateUrl: "modules/indicators/client/views/form-input.client.view.html"
                     }
                 },
                 resolve:
@@ -115,4 +123,5 @@
     {
         return new IndicatorsService();
     }
+
 }());

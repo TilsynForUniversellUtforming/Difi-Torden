@@ -1,3 +1,20 @@
-<h2>activity details</h2>
-<p>{{vm.details.title}}</p>
-<p>{{vm.details.description}}</p>
+<section >
+    <h2>activity details</h2>
+    <a ng-click="vm.createService.goToView('form-activity', vm.createService.details)">endre</a>
+    <a ng-click="vm.removeActivity(index)">remove</a>
+    <p>{{vm.createService.details.title}}</p>
+    <p>{{vm.createService.details.description}}</p>
+</section>
+
+<section>
+     <h3>Registreringer:</h3>
+    <div ng-repeat="input in vm.createService.details.inputs">
+    <hr>
+        <div ui-view="input-details-main@indicators.create"></div>
+    </div>
+</section>
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn btn-default" ng-click="vm.createService.backToMain()">Tilbake</button>
+    </div>
+</div>

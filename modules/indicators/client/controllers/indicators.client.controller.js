@@ -6,25 +6,25 @@
         .module('indicators')
         .controller('IndicatorsController', IndicatorsController);
 
-    IndicatorsController.$inject = ['$scope', '$state', 'indicatorResolve', '$window', 'Authentication',
+    IndicatorsController.$inject = ['$scope', '$state', 'indicatorResolve', '$window', 'Authentication','IndicatorsCreateService'];
 
-    ];
-
-    function IndicatorsController($scope, $state, indicator, $window, Authentication)
+    function IndicatorsController($scope, $state, indicator, $window, Authentication,IndicatorsCreateService)
     {
         var vm = this;
-
         vm.indicator = indicator;
         vm.authentication = Authentication;
         vm.error = null;
         vm.form = {};
         vm.remove = remove;
         vm.save = save;
+        vm.addActivity = addActivity;
+        vm.removeActivity = removeActivity;
 
-        vm.details=null;
-        vm.currentView = "main";
-        vm.enableDetailsView=enableDetailsView;
+        vm.activity={};
+        vm.input={};
 
+        vm.createService = IndicatorsCreateService;
+        vm.details = vm.createService.details;
 
         vm.listSelected;
         vm.indicator.title = "1.2.3 - Indikator Taktil";
@@ -56,12 +56,7 @@
                 type: "numeric"
             }]
         }]
-        console.log(vm.indicator)
 
-        function enableDetailsView(type, item){
-            vm.details = item;
-            vm.currentView = type;
-        }
         // Remove existing indicator
         function remove()
         {
@@ -70,7 +65,15 @@
                 vm.indicator.$remove($state.go('indicators.list'));
             }
         }
-
+        function addActivity(){
+            vm.createService.details = {title:"Aktivitet uten navn", description:"Ingen Beskrivelse", krav:[], inputs:[]}
+            vm.indicator.activities.push(vm.createService.details);
+            vm.createService.goToView('form-activity', vm.createService.details)
+        }
+        function removeActivity(obj){
+            var index = vm.indicator.activities.indexOf(obj);
+            vm.indicator.activities.splice(index, 1);
+        }
         // Save indicator
         function save(isValid)
         {

@@ -1,3 +1,12 @@
-<h2>input details</h2>
-<p>text: {{vm.details.text}}</p>
-<p>{{vm.details.type}}</p>
+<section ng-hide="editInput">
+    <h2 ng-hide="input">input details</h2>
+    <p><b>{{$index + 1}}</b>  {{vm.createService.details.text || input.text}} <a ng-click="editInput=true">endre</a> <a>slett</a></p>
+    <p> type: {{vm.createService.details.type || input.type}}</p>
+    <button ng-hide="input" class="btn btn-default" ng-click="vm.createService.backToMain()">tilbake</button>
+</section>
+<section ng-show="editInput">
+    <h2 ng-hide="input">input details</h2>
+    <input type="text" ng-model="input.text">{{input.text}}</input>
+    <input type="text" ng-model="input.type">{{input.type}}</input>
+    <button  class="btn btn-default" ng-click="editInput=false">ok</button>
+</section>

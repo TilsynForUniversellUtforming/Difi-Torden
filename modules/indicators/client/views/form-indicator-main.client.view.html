@@ -1,2 +1,33 @@
-<h2>main</h2>
-{{vm.test}}
+<section >
+    <div class="row" >
+        <div class="col-xs-11" style=" margin-left:1em; margin-right:-20px;border-top:1px solid #ddd;border-bottom:1px solid #ddd; border-right:1px solid #ddd; border-left:1px solid #ddd;padding-top:1em;">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam aperiam quam consectetur minima fugit dolor ex quis minus cupiditate aliquam labore, quibusdam error illum esse laboriosam, illo quos nam nesciunt!
+            </p>
+        </div>
+        <div class="col-xs-1"></div>
+    </div>
+    <div class="form-group">
+        <label  class="control-label" for="IndName">Navn:</label>
+        <input class="form-control" type="text" name="IndName" ng-model="ind.indicator.name"></input>
+    </div>
+    <div class="form-group">
+        <label  class="control-label" for="description">Beskrivelse:</label>
+        <textarea class="form-control" rows="4" name="description" ng-model="ind.indicator.description"></textarea>
+    </div>
+</section>
+<section>
+    <div class="row" >
+        <hr>
+        <div class="col-sm-9" style="border-right:1px solid #eee">
+            <p>
+                Velg en aktivitet fra listen til venstre for å innspisere detaljer og registreringer.
+            </p>
+        </div>
+        <div class="col-sm-3">
+            <p class="text-center">
+                <button  ng-hide="ind.creatingActivity" class="btn btn-default btn-lg" ng-click="vm.addActivity()">Ny aktivitet</button>
+            </p>
+        </div>
+    </div>
+</section>

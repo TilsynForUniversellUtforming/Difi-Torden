@@ -1,0 +1,31 @@
+<section>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="activity-title" class="control-label">Aktivitettekst:</label>
+                <input type="text" class="form-control" name="activity-title" ng-model="vm.createService.details.title"></input>
+            </div>
+            <div class="form-group">
+                <label for="Description" class="control-label">Beskrivelse:</label>
+                <textarea class="form-control" rows="3" name="Description" ng-model="vm.createService.details.description"></textarea>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+             <h3>Registreringer:</h3>
+        <button class="btn btn-default" ng-click="vm.createService.goToView('input-form', vm.createService.details);vm.createService.setMainView('input-form')">Ny registrering</button>
+        <div ng-repeat="input in vm.createService.details.inputs">
+            <hr>
+            <div ui-view="input-details-main@indicators.create"></div>
+        </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <button class="btn btn-default pull-right" ng-click="vm.createService.goToView('activity-details', vm.createService.details)">Lagre Endringer</button>
+        </div>
+    </div>
+</section>
