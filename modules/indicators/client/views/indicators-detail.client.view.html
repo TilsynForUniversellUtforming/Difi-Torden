@@ -12,11 +12,11 @@
   </div>
   <small>
     <em class="text-muted">
-      Posted on
+      Laget
       <span ng-bind="vm.indicator.created | date:'mediumDate'"></span>
-      by
+      av
       <span ng-if="vm.indicator.created_by" ng-bind="vm.indicator.created_by"></span>
-      <span ng-if="!vm.indicator.created_by">Deleted User</span>
+      <span ng-if="!vm.indicator.created_by">Ukjent bruker</span>
     </em>
   </small>
   <p class="lead" ng-bind="vm.indicator.description"></p>
