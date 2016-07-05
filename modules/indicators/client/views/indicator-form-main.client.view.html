@@ -19,6 +19,32 @@
         <label  class="control-label" for="search">Krav:</label>
         <input class="form-control" type="text" name="search" ng-model="vm.searchRequirement" placeholder="Søk">
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul ng-hide="!vm.searchRequirement.length > 0" style="list-style-type: none;  padding: 10px auto 10px auto">
+                <li ng-repeat="req in vm.Requirements | filter:vm.searchRequirement" style="border:1px solid #eee;">
+                    <div class="row">
+                        <div class="col-sm-1"><b>ID:</b> {{req.id}}</div>
+                        <div class="col-sm-2"><b>Std:</b> {{req.standard}}</div>
+                        <div class="col-sm-2"><b>Kategori:</b> {{req.category}}</div>
+                        <div class="col-sm-5">{{req.text | limitTo:85}}...</div>
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-default">Detaljer</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-primary">Legg til</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </section>
 <section>
     <div class="row" >

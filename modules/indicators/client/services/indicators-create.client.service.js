@@ -1,17 +1,22 @@
-(function() {
+(function()
+{
     'use strict';
 
     angular
         .module('indicators.services')
         .service('IndicatorsCreateService', IndicatorsCreateService);
 
-    function IndicatorsCreateService() {
+    function IndicatorsCreateService()
+    {
         var service = {
-            details: {},
-            views: {
+            details:
+            {},
+            views:
+            {
                 currentView: 'main',
                 main: 'main',
-                options:{}
+                options:
+                {}
             },
             goToView: goToView,
             backToMain: backToMain,
@@ -22,26 +27,34 @@
         return service;
         var storedDetails = null;
 
-        function goToView(name, item, options = {}) {
+        function goToView(name, item, options)
+        {
             console.log("Current view: " + service.views.currentView + ", going to " + name)
             service.views.currentView = name;
-            if (item && item != null && item != undefined) {
+            if (item && item != null && item != undefined)
+            {
                 service.details = item;
             }
             service.views.options = options;
         }
 
-        function backToMain() {
+        function backToMain()
+        {
             goToView(service.views.main, storedDetails);
         }
 
-        function setMainView(name, options={}) {
+        function setMainView(name, options)
+        {
             console.log("setting main view to " + name)
             service.views.main = name;
-            if(options.details){storedDetails = options.details};
+            if (options.details)
+            {
+                storedDetails = options.details
+            };
         }
 
-        function resetMainView() {
+        function resetMainView()
+        {
             service.views.main = "main";
         }
     }
