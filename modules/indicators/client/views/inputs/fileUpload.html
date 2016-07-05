@@ -1,0 +1,25 @@
+<button ng-click="upload_file= ! upload_file" class="btn">Legg ved et bilde</button>
+<form ng-show="upload_file" name="picture_form">
+    <p><b>OBS. Work in progress</b></p>
+    <fieldset  class="form-group">
+        Drop File:
+        <div ngf-drop ngf-select
+        ng-model="files" 
+        class="drop-box"
+        ngf-drag-over-class="'dragover'" 
+        ngf-multiple="true" 
+        ngf-allow-dir="true"
+        accept="image/*,application/pdf"
+        ngf-pattern="'image/*,application/pdf'">
+            <p>Drop pdfs or images here or click to upload</p></div>
+        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+    </fieldset>
+     <button class="btn" type="submit" ng-click="submitPictures()">OK</button>
+    Files:
+    <ul>
+        <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
+    </ul>
+    Log:
+        <pre>{{log}}</pre>
+</form>
+ 

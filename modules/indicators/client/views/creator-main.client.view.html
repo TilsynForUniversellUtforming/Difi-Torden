@@ -46,8 +46,8 @@
         </div>
         <div class="col-sm-9">
             <div ng-if="vm.createService.views.currentView=='main'" ui-view="main@indicators.create"></div>
-            <div ng-if="vm.createService.views.currentView=='activity-details'" ui-view="activity-details-main@indicators.create"></div>
-            <div ng-if="vm.createService.views.currentView=='form-activity'" ui-view="form-activity@indicators.create"></div>
+            <div ng-if="vm.createService.views.currentView=='activity-details'" ui-view="activity-details@indicators.create"></div>
+            <div ng-if="vm.createService.views.currentView=='form-activity'" ui-view="activity-form@indicators.create"></div>
             <div ng-if="vm.createService.views.currentView=='input-details'" ui-view="input-details-main@indicators.create"></div>
             <div ng-if="vm.createService.views.currentView=='input-form'" ui-view="input-form@indicators.create"></div>
         </div>

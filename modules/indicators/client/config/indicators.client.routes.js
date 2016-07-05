@@ -35,33 +35,33 @@
                 {
                     "":
                     {
-                        templateUrl: 'modules/indicators/client/views/form-indicator.client.view.html',
+                        templateUrl: 'modules/indicators/client/views/creator-main.client.view.html',
                         controller: 'IndicatorsController',
                         controllerAs: 'vm',
                     },
                     "side@indicators.create":
                     {
-                        templateUrl: "modules/indicators/client/views/form-indicator-side.client.view.html"
+                        templateUrl: "modules/indicators/client/views/creator-side.client.view.html"
                     },
                     "main@indicators.create":
                     {
-                        templateUrl: "modules/indicators/client/views/form-indicator-main.client.view.html"
+                        templateUrl: "modules/indicators/client/views/indicator-form-main.client.view.html"
                     },
-                     "activity-details-main@indicators.create":
+                     "activity-details@indicators.create":
                     {
-                        templateUrl: "modules/indicators/client/views/activity-details-main.client.view.html"
+                        templateUrl: "modules/indicators/client/views/activity-details.client.view.html"
                     },
                      "input-details-main@indicators.create":
                     {
                         templateUrl: "modules/indicators/client/views/input-details-main.client.view.html"
                     },
-                     "form-activity@indicators.create":
+                     "activity-form@indicators.create":
                     {
-                        templateUrl: "modules/indicators/client/views/form-activity.client.view.html"
+                        templateUrl: "modules/indicators/client/views/activity-form.client.view.html"
                     },
                      "input-form@indicators.create":
                     {
-                        templateUrl: "modules/indicators/client/views/form-input.client.view.html"
+                        templateUrl: "modules/indicators/client/views/input-form.client.view.html"
                     }
                 },
                 resolve:

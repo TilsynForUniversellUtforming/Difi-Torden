@@ -1,7 +1,7 @@
 <section >
     <h2>activity details</h2>
     <a ng-click="vm.createService.goToView('form-activity', vm.createService.details)">endre</a>
-    <a ng-click="vm.removeActivity(index)">remove</a>
+    <a ng-click="vm.removeActivity(vm.createService.details)">remove</a>
     <p>{{vm.createService.details.title}}</p>
     <p>{{vm.createService.details.description}}</p>
 </section>

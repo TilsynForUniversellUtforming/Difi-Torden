@@ -1,18 +1,18 @@
-<h2 >side</h2>
-<div ng-click="vm.createService.backToMain()">
-{{vm.indicator.title}}
+<div ng-click="vm.createService.resetMainView(); vm.createService.backToMain()">
+<h2>{{vm.indicator.title}}</h2>
 </div>
-<ul dnd-list="vm.indicator.activities">
+<ul dnd-list="vm.indicator.activities" style="list-style-type:none;padding:0">
     <li ng-repeat="item in vm.indicator.activities"
         dnd-draggable="item"
         dnd-moved="vm.indicator.activities.splice($index, 1)"
         dnd-effect-allowed="move"
         dnd-selected="vm.listSelected = item"
         ng-class="{'selected': vm.listSelected === item}"
+        style="margin: 15px 0 15px 0"
         >
 
         <div class="container-element box box-blue">
-            <h3 ng-click="vm.createService.goToView('activity-details', item)">{{$index+1}}{{item.title}}</h3>
+            <h3 ng-click="vm.createService.goToView('activity-details', item)">{{$index+1}} - {{item.title}}</h3>
             <div  >
                 <ul dnd-list="item.inputs">
                     <li ng-repeat="in in item.inputs"

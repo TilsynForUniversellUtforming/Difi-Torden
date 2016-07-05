@@ -1,0 +1,48 @@
+<div class="">
+  <b><em>Svaralternativer:</em></b>
+  <div class="form-group">
+    <label class="sr-only" for="">Legg til ny svaralernativ...</label>
+    <div class="input-group">
+      <div class="input-group-addon">Alternativtekst:</div>
+      <input type="text" class="form-control" ng-model="vm.input.options.alternative.text" placeholder="tekst">
+      <div class="input-group-addon">Poeng:</div>
+      <input type="number" class="form-control" ng-model="vm.input.options.alternative.points" placeholder="antall">
+      <div class="input-group-addon" ><a ng-click="vm.addAnswerAlternative()" style="color:black">Legg til</a></div>
+    </div>
+  </div>
+  <br>
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="alternative in vm.input.alternatives">
+      <div class="row">
+        <div class="col-sm-8">
+          <input type="checkbox" value="alternative.correct" ng-model="alternative.correct">
+          <span ng-show="editAlternative !== $index">{{alternative.text}}</span>
+          <span ng-show="editAlternative == $index">Text:</span>
+          <input ng-show="editAlternative == $index" type="text" ng-value="alternative.text" ng-model="alternative.text" style="width:100%"/>
+        </div>
+        <div class="col-sm-2">
+          <span ng-show="editAlternative !== $index" > Poeng: {{alternative.points}}</span>
+          <span ng-show="editAlternative == $index" >Poeng:</span>
+          <input ng-show="editAlternative == $index" type="numeric" ng-value="alternative.points" ng-model="alternative.points" style="width:100%;"/>
+        </div>
+        <div class="col-sm-1">
+          <a ng-show="editAlternative !== $index" ng-click="editAlternative = $index">endre</a>
+          <a ng-show="editAlternative == $index" ng-click="editAlternative = -1">ferdig</a>
+        </div>
+        <div class="col-sm-1">
+          <a ng-click="vm.input.alternatives.splice($index, 1)">slett</a>
+        </div>
+      </div>
+    </li>
+    <li  class="list-group-item">
+      <input  type="checkbox" value="true" ng-model="vm.input.additionalFreetextAllowed">
+      <label class="control-label" >Mulighet for en annen, fritekst registrering</label>
+    </li>
+  </ul>
+  <br>
+</div>
+<!-- <div class="row">
+  <div class="col-sm-12">
+    <button class="btn pull-right" ng-click="addInput('checkbox')">Legg til registrering</button>
+  </div>
+</div> -->

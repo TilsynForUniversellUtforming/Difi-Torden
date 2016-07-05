@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-sm-12">
              <h3>Registreringer:</h3>
-        <button class="btn btn-default" ng-click="vm.createService.goToView('input-form', vm.createService.details);vm.createService.setMainView('input-form')">Ny registrering</button>
+        <button class="btn btn-default" ng-click="vm.goToInputForm(vm.createService.details, null)">Ny registrering</button>
         <div ng-repeat="input in vm.createService.details.inputs">
             <hr>
             <div ui-view="input-details-main@indicators.create"></div>
