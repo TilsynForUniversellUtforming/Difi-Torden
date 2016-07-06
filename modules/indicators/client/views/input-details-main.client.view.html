@@ -1,3 +1,9 @@
-<h2>input details</h2>
-<p>text: {{vm.details.text}}</p>
-<p>{{vm.details.type}}</p>
+<section>
+    <p>
+        <b>{{$index + 1}}</b>
+        {{input.text}}
+        <a ng-click="vm.goToInputForm(vm.createService.details, input, {edit:true})">endre</a>
+        <a>slett</a>
+    </p>
+    <p> Registreringstype: {{input.type}}</p>
+</section>

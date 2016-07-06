@@ -1,0 +1,47 @@
+<h2 ng-if="!vm.createService.views.options.header">Ny registrering</h2>
+<h2 ng-if="vm.createService.views.options.header">{{vm.createService.views.options.header}}</h2>
+<div class="row">
+    <div class="col-sm-12 input-button"  style="margin-bottom:10px; background-color:#eee">
+        <h3>Registreringstype:
+        <button ng-repeat="type in vm.inputTypes" class="btn btn-default btn-large" ng-value="type.name" ng-model="vm.input.type" ng-click="vm.showInput(type)">{{type.name_no}}</button></h3>
+    </div>
+</div>
+<div class="row" >
+    <div ng-show="vm.inputShow" class="col-sm-12">
+        <h3>{{vm.input.options.type.name_no}}</h3>
+        <div class="form-group">
+            <label for="inputTekst" class="control-label">Registreringstekst:</label>
+            <textarea class="form-control" rows="3" name="inputTekst" ng-model="vm.input.text"></textarea>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label  class="control-label" for="score">Poeng: </label>
+                    <input class="" name="score" ng-model="vm.input.points" type="number"></input>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="mandytory">Obligatorisk: </label>
+                    <input name="mandytory" ng-model="vm.input.mandytory" type="checkbox" value="true"></input>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div ng-include="'modules/indicators/client/views/inputs/fileUpload.html'"></div>
+                </div>
+            </div>
+        </div>
+        <div ng-include="vm.input.options.type.url" >
+
+        </div>
+    </div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+    <button class="btn btn-default" ng-click="vm.createService.backToMain();vm.createService.resetMainView()">Avbryt</button>
+    <button class="btn btn-primary" ng-click="vm.saveInput(vm.input);vm.createService.backToMain();vm.createService.resetMainView()">Ferdig</button>
+</div>
+</div>

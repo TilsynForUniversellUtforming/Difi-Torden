@@ -1,0 +1,63 @@
+<section >
+    <div class="row" >
+        <div class="col-xs-11" style=" margin-left:1em; margin-right:-20px;border-top:1px solid #ddd;border-bottom:1px solid #ddd; border-right:1px solid #ddd; border-left:1px solid #ddd;padding-top:1em;">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam aperiam quam consectetur minima fugit dolor ex quis minus cupiditate aliquam labore, quibusdam error illum esse laboriosam, illo quos nam nesciunt!
+            </p>
+        </div>
+        <div class="col-xs-1"></div>
+    </div>
+    <div class="form-group">
+        <label  class="control-label" for="IndName">Navn:</label>
+        <input class="form-control" type="text" name="IndName" ng-model="vm.indicator.title"></input>
+    </div>
+    <div class="form-group">
+        <label  class="control-label" for="description">Beskrivelse:</label>
+        <textarea class="form-control" rows="4" name="description" ng-model="vm.indicator.description" placeholder="Beskriv indikatoren her"></textarea>
+    </div>
+    <div class="form-group">
+        <label  class="control-label" for="search">Krav:</label>
+        <input class="form-control" type="text" name="search" ng-model="vm.searchRequirement" placeholder="Søk">
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul ng-hide="!vm.searchRequirement.length > 0" style="list-style-type: none;  padding: 10px auto 10px auto">
+                <li ng-repeat="req in vm.Requirements | filter:vm.searchRequirement" style="border:1px solid #eee;">
+                    <div class="row">
+                        <div class="col-sm-1"><b>ID:</b> {{req.id}}</div>
+                        <div class="col-sm-2"><b>Std:</b> {{req.standard}}</div>
+                        <div class="col-sm-2"><b>Kategori:</b> {{req.category}}</div>
+                        <div class="col-sm-5">{{req.text | limitTo:85}}...</div>
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-default">Detaljer</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-primary">Legg til</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="row" >
+        <hr>
+        <div class="col-sm-9" style="border-right:1px solid #eee">
+            <p>
+                Velg en aktivitet fra listen til venstre for å innspisere detaljer og registreringer.
+            </p>
+        </div>
+        <div class="col-sm-3">
+            <p class="text-center">
+                <button  ng-hide="ind.creatingActivity" class="btn btn-default btn-lg" ng-click="vm.addActivity()">Ny aktivitet</button>
+            </p>
+        </div>
+    </div>
+</section>

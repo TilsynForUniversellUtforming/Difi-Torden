@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-md-12">
+        <p><b>Fasit:</b></p>
+    </div>
+    <div class="col-sm-6">
+    <div class="radio">
+            <label>
+                <input type="radio" name="numericOption" id="numericOption0" ng-model="vm.input.subtype" value="any" checked>
+                Vilkårlig tall
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="numericOption" id="numericOption1" ng-model="vm.input.subtype" value="one" >
+                Et besemt tall
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="numericOption" id="numericOption2" ng-model="vm.input.subtype" value="range">
+                Verdi mellom to referanseverdier.
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="numericOption" id="numericOption3" ng-model="vm.input.subtype" value="lessThan">
+                Mindre enn...
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="numericOption" id="numericOption4" ng-model="vm.input.subtype" value="moreThan" >
+                Mer enn...
+            </label>
+        </div>
+
+    </div>
+    <div class="col-sm-6" >
+
+        <div class="input-group" >
+            <div class="input-group-addon">
+            <span ng-show="vm.input.subtype=='range'">Fra og med:</span>
+            <span ng-show="vm.input.subtype=='one'">Verdi:</span>
+            <span ng-show="vm.input.subtype=='lessThan'">Mindre enn::</span>
+            <span ng-show="vm.input.subtype=='moreThan'">Mer enn:</span>
+            </div>
+            <input  ng-hide="vm.input.subtype=='any'" class="form-control" placeholder="Tallverdi" name="fasit1" type="number" ng-model="vm.input.solution.value"></input>
+            <div class="input-group-addon" style="padding:0;">
+                <div >
+                    <label class="control-label" for="units">Enheter:</label>
+                    <select ng-model="vm.input.data.units"  name="units" style="background-color: #eee; padding:5px" >
+                        <option  value="">(ingen)</option>
+                        <option  value="mm">mm</option>
+                        <option  value="cm">cm</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+           <div class="input-group" ng-show="vm.input.subtype=='range'">
+            <div class="input-group-addon">
+                Til og med:
+            </div>
+            <input class="form-control" placeholder="Tallverdi" name="fasit1" type="number" ng-model="vm.input.solution.rangeMax"></input>
+            <div class="input-group-addon" >
+                <div >
+                    <span>{{vm.input.data.units}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- <div class="row">
+    <div class="col-sm-12">
+            <button class="btn pull-right" ng-click="addInput('numeric')">Legg til registrering</button>
+    </div>
+</div> -->

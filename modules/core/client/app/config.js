@@ -2,7 +2,7 @@
 {
     'use strict';
 
-    var applicationModuleName = 'mean';
+    var applicationModuleName = 'torden';
 
     var service = {
         applicationModuleName: applicationModuleName,
