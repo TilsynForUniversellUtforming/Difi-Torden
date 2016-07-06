@@ -1,0 +1,59 @@
+<section>
+    <h1>KRAV!!!</h1>
+
+    <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search">SØK</i></div>
+        <input type="text" class="form-control" placeholder="Søk etter krav.." ng-model="searchReq">
+      </div>      
+    </div>
+  </form>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+
+                <th>nr. v9</th>
+                
+                <th>Skal/Bør/Kan</th>
+                <th>Formulering i standard</th>
+                <th>Standard</th>
+                <th>Type dokumenter</th>
+                <th>Kappitel nr.</th>
+                <th>Kap. nr med overskrift</th>
+                <th>Vurdering etter post-it session</th>
+                <th>Kategori etter post-it session</th>
+                <th>Duplikater</th>
+               
+                <th>Oversatt i veileder</th>
+                <th>Ny på lista</th>
+                <th>Navn</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+              <tr dir-paginate='req in vm.requirements|itemsPerPage:25|filter:searchReq'>
+
+                <td>{{req.nr_v9}}</td>
+                
+                <td>{{req.level_no}}</td>
+                <td>{{req.level_org}}</td>
+                <td>{{req.standard}}</td>
+                <td>{{req.doc_type}}</td>
+                <td>{{req.nr_chapter}}</td>
+                <td>{{req.chapter_title}}</td>
+                <td>{{req.grading}}</td>
+                <td>{{req.category}}</td>
+                <td>{{req.duplicates}}</td>
+                
+                <td>{{req.guide_translated}}</td>
+                <td>{{req.added}}</td>
+                <td>{{req.name}}</td>
+
+            </tr>
+       </tbody>
+    </table>
+<dir-pagination-controls max-size="25" direction-links="true" boundary-links="true">
+</dir-pagination-controls>
+
+</section>
