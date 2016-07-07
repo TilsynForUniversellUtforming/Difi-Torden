@@ -1,9 +1,15 @@
-<h2 ng-if="!vm.createService.views.options.header">Ny registrering</h2>
-<h2 ng-if="vm.createService.views.options.header">{{vm.createService.views.options.header}}</h2>
+<sectio class="main">
+<secion class="main-content">
+<div class="header">
+    <h2> <span  ng-show="!vm.createService.views.options.header" >Ny registrering </span><span  ng-show="vm.createService.views.options.header">{{vm.createService.views.options.header}}</span></h2>
+</div>
 <div class="row">
     <div class="col-sm-12 input-button"  style="margin-bottom:10px; background-color:#eee">
         <h3>Registreringstype:
-        <button ng-repeat="type in vm.inputTypes" class="btn btn-default btn-large" ng-value="type.name" ng-model="vm.input.type" ng-click="vm.showInput(type)">{{type.name_no}}</button></h3>
+        <div class="btn-group" role="group" aria-label="Registreringstyper">
+            <button type="button" ng-repeat="type in vm.inputTypes" class="btn btn-default btn-large" ng-value="type.name" ng-model="vm.input.type" ng-click="vm.showInput(type)">{{type.name_no}}</button>
+        </div>
+        </h3>
     </div>
 </div>
 <div class="row" >
@@ -12,7 +18,6 @@
         <div class="form-group">
             <label for="inputTekst" class="control-label">Registreringstekst:</label>
             <textarea class="form-control" rows="3" name="inputTekst" ng-model="vm.input.text"></textarea>
-
         </div>
         <div class="row">
             <div class="col-sm-6">
@@ -34,14 +39,16 @@
             </div>
         </div>
         <div ng-include="vm.input.options.type.url" >
-
         </div>
     </div>
 </div>
-</div>
 <div class="row">
-<div class="col-sm-12">
-    <button class="btn btn-default" ng-click="vm.createService.backToMain();vm.createService.resetMainView()">Avbryt</button>
-    <button class="btn btn-primary" ng-click="vm.saveInput(vm.input);vm.createService.backToMain();vm.createService.resetMainView()">Ferdig</button>
+    <div class="col-sm-12">
+        <p class="text-center">
+            <button class="btn btn-default" ng-click="vm.createService.backToMain();vm.createService.resetMainView()">Avbryt</button>
+            <button class="btn btn-primary" ng-click="vm.saveInput(vm.input);vm.createService.backToMain();vm.createService.resetMainView()">Ferdig</button>
+        </p>
+    </div>
 </div>
-</div>
+</secion>
+</sectio>

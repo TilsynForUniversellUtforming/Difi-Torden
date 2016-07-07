@@ -1,28 +1,55 @@
-<section >
-    <div class="row" >
-        <div class="col-xs-11" style=" margin-left:1em; margin-right:-20px;border-top:1px solid #ddd;border-bottom:1px solid #ddd; border-right:1px solid #ddd; border-left:1px solid #ddd;padding-top:1em;">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam aperiam quam consectetur minima fugit dolor ex quis minus cupiditate aliquam labore, quibusdam error illum esse laboriosam, illo quos nam nesciunt!
-            </p>
+<section class="main">
+    <section class="main-content">
+        <div class="header">
+            <h2>
+                {{vm.indicator.title}}
+                <span> - Indikator</span>
+                <span class="pull-right edits">
+                    <!--                 <a ng-click="vm.createService.goToView('form-activity', vm.createService.details)">endre</a> -->
+                    <!-- <a ng-click="vm.removeActivity(vm.createService.details)">slett</a> -->
+                </span>
+                <span alt="hjelp" class="pull-right glyphicon glyphicon-question-sign"></span>
+            </h2>
         </div>
-        <div class="col-xs-1"></div>
-    </div>
-    <div class="form-group">
-        <label  class="control-label" for="IndName">Navn:</label>
-        <input class="form-control" type="text" name="IndName" ng-model="vm.indicator.title"></input>
-    </div>
-    <div class="form-group">
-        <label  class="control-label" for="description">Beskrivelse:</label>
-        <textarea class="form-control" rows="4" name="description" ng-model="vm.indicator.description" placeholder="Beskriv indikatoren her"></textarea>
-    </div>
-    <div class="form-group">
-        <label  class="control-label" for="search">Krav:</label>
-        <input class="form-control" type="text" name="search" ng-model="vm.searchRequirement" placeholder="Søk">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label  class="control-label" for="IndName">Navn:</label>
+                    <input class="form-control" type="text" name="IndName" ng-model="vm.indicator.title"></input>
+                </div>
+                <div class="form-group">
+                    <label  class="control-label" for="description">Beskrivelse:</label>
+                    <textarea class="form-control" rows="4" name="description" ng-model="vm.indicator.description" placeholder="Beskriv indikatoren her"></textarea>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="main-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Krav</h3>
+                <p class="lead">
+                    Søk og velg krav som skal brukes i indikatoren.
+                </p>
+                <div class="form-group">
+                    <div class="row">
+                     <div class="col-sm-6">
+                        <div class="col-sm-10" style="padding-right:0">
+
+                            <input class="form-control" type="text" name="search" ng-model="vm.searchRequirement" placeholder="Søk">
+                        </div>
+                        <div class="col-sm-2" style="padding-left:0">
+                            <button class="btn btn-default" style="width:100%" ng-click="vm.searchRequirement=''">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <ul ng-hide="!vm.searchRequirement.length > 0" style="list-style-type: none;  padding: 10px auto 10px auto">
-                <li ng-repeat="req in vm.Requirements | filter:vm.searchRequirement" style="border:1px solid #eee;">
+            <ul ng-hide="!vm.searchRequirement.length > 0" style="list-style-type: none;  padding-left:0">
+                <li ng-repeat="req in vm.Requirements | filter:vm.searchRequirement" ng-show="(vm.indicator.requirements.indexOf(req)) == -1" style="border:1px solid #eee;margin-lefy:0">
                     <div class="row">
                         <div class="col-sm-1"><b>ID:</b> {{req.id}}</div>
                         <div class="col-sm-2"><b>Std:</b> {{req.standard}}</div>
@@ -31,12 +58,38 @@
                         <div class="col-sm-2">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-default">Detaljer</button>
+                                    <button style="width:100%" class="btn btn-default">Detaljer</button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-primary">Legg til</button>
+                                    <button style="width:100%" class="btn btn-primary" ng-click="vm.addRequirement(req)">Legg til</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul style="list-style-type: none;  padding-left:0">
+                <li ng-repeat="req in vm.indicator.requirements" style="margin-left:0">
+                    <div class="row">
+                        <div class="col-sm-1"><b>ID:</b> {{req.id}}</div>
+                        <div class="col-sm-2"><b>Std:</b> {{req.standard}}</div>
+                        <div class="col-sm-2"><b>Kategori:</b> {{req.category}}</div>
+                        <div class="col-sm-5">{{req.text | limitTo:85}}...</div>
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button style="width:100%" class="btn btn-default">Detaljer</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button style="width:100%" class="btn btn-danger" ng-click="vm.removeRequirement(req)">Slett</button>
                                 </div>
                             </div>
                         </div>
@@ -46,18 +99,17 @@
         </div>
     </div>
 </section>
-<section>
+<section class="main-content">
     <div class="row" >
-        <hr>
-        <div class="col-sm-9" style="border-right:1px solid #eee">
-            <p>
-                Velg en aktivitet fra listen til venstre for å innspisere detaljer og registreringer.
-            </p>
-        </div>
-        <div class="col-sm-3">
+        <div class="col-sm-12 ">
+            <h3>Aktiviteter</h3>
+            <a ng-click="vm.addActivity()">Legg till aktivitet</a>
+            <p class="lead"></p>
             <p class="text-center">
-                <button  ng-hide="ind.creatingActivity" class="btn btn-default btn-lg" ng-click="vm.addActivity()">Ny aktivitet</button>
+                <!-- <button  ng-hide="ind.creatingActivity" class="btn btn-default btn-lg pull-left" ng-click="vm.addActivity()">Ny aktivitet</button> -->
+                <button  ng-hide="ind.creatingActivity" class="btn btn-default btn-lg " ng-click="vm.addActivity()">Neste</button>
             </p>
         </div>
     </div>
+</section>
 </section>

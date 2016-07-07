@@ -1,3 +1,109 @@
-.input-button{
-    background-color:red;
+.content-list{
+
+    padding:0;
+    background-color: white;
+    border: 2px solid #555;
+}
+.content-list ul{
+    list-style-type:none;
+    padding:0;
+    padding-bottom: 0.4em;
+    padding-top: 0.4em;
+    padding-left:0.7em;
+    padding-right:0.7em;
+    padding-bottom:0.5em;
+}
+.content-list ul li.main{
+    background-color: #fff;
+    padding-left:0.7em;
+    padding-right:0.7em;
+    padding-top:0.5em;
+    /*margin-bottom: 0.5em;*/
+    margin-top: 0.5em;
+    /*padding-left: 0.5em;*/
+    border: 1px solid #ccc;
+}
+.content-list ul li .subheader{
+    border-bottom: 1px solid #ccc;
+    padding-left:0.6em;
+    padding-right:0.6em;
+    -webkit-transition: all 0.15s ease-in-out;
+    -moz-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+}
+/*.content-list ul li .subheader:hover{
+    background-color: #ccc;
+    -webkit-box-shadow: -3px 10px 30px -9px rgba(0,0,0,0.29);
+    -moz-box-shadow: -3px 10px 30px -9px rgba(0,0,0,0.29);
+    box-shadow: -3px 10px 30px -9px rgba(0,0,0,0.29);
+
+}*/
+.content-list ul li .subheader h3{
+    padding-top:0.4em;
+    margin-top:0;
+    -webkit-transition: all 0.15s ease-in-out;
+    -moz-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+
+}
+.content-list ul li .subheader h3:hover{
+    /*color:white;*/
+}
+.content-list .header {
+    padding-top:0.1em;
+    padding-bottom:0.1em;
+    background-color: #555;
+}
+.content-list .header h2{
+    color:white;
+    font-size: 1.7em;
+}
+.secondary-li {
+    border-left: 3px solid red;
+}
+
+
+.main-content{
+    /*background-color: red;*/
+}
+.main-content > .header {
+    background-color: #555;
+    color:white;
+    padding-top:0.1em;
+    padding-bottom:0.1em;
+}
+.main-content > .header h2{
+    color:white;
+    font-size: 1.7em;
+    padding-left: 0.6em;
+}
+.main-content > .header h2 > span {
+    color: #ddd; padding-right:1em;
+}
+.edits{
+    border-bottom: 1px solid #555;
+    border-right: 1px solid #555;
+}
+.main-content > .row{
+    padding-top: 0.6em;
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+}
+.edits > a{
+    color:#eee;
+    font-size: 0.8em;
+    /*padding: 0.7em;*/
+    /*padding-right: 0.35em;*/
+}
+.main{
+    border: 1px solid #444
+}
+.list-group-item:hover{
+    background-color: #eee;
+}
+.page-header{
+    background-color: #444;
+    color:white;
 }

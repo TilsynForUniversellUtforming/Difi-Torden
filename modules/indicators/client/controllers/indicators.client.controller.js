@@ -12,6 +12,7 @@
     {
         var vm = this;
         vm.indicator = indicator;
+        if(!vm.indicator.requirements)vm.indicator.requirements=[];
         vm.authentication = Authentication;
         vm.error = null;
         vm.form = {};
@@ -26,36 +27,39 @@
         vm.activity = {};
         vm.input = {};
         vm.Requirements = [
-        {
-            id: 1123,
-            text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime sequi in modi amet ducimus, ipsam rerum saepe ut eligendi. Amet ipsum nulla aliquid autem ea iusto id qui doloribus voluptatum.",
-            category: "A",
-            standard: "STD 101"
-        },
-        {
-            id: 1124,
-            text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime sequi in modi amet ducimus, ipsam rerum saepe ut eligendi. Amet ipsum nulla aliquid autem ea iusto id qui doloribus voluptatum.",
-            category: "B",
-            standard: "STD 102"
-        },
-        {
-            id: 1125,
-            text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime sequi in modi amet ducimus, ipsam rerum saepe ut eligendi. Amet ipsum nulla aliquid autem ea iusto id qui doloribus voluptatum.",
-            category: "A",
-            standard: "STD 101"
-        },
-        {
-            id: 1126,
-            text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime sequi in modi amet ducimus, ipsam rerum saepe ut eligendi. Amet ipsum nulla aliquid autem ea iusto id qui doloribus voluptatum.",
-            category: "C",
-            standard: "STD 101"
-        },
-        {
-            id: 1127,
-            text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime sequi in modi amet ducimus, ipsam rerum saepe ut eligendi. Amet ipsum nulla aliquid autem ea iusto id qui doloribus voluptatum.",
-            category: "C",
-            standard: "STD 102"
-        }];
+            {
+                id: 1123,
+                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime sequi in modi amet ducimus, ipsam rerum saepe ut eligendi. Amet ipsum nulla aliquid autem ea iusto id qui doloribus voluptatum.",
+                category: "A",
+                standard: "STD 101"
+            },
+            {
+                id: 1124,
+                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime sequi in modi amet ducimus, ipsam rerum saepe ut eligendi. Amet ipsum nulla aliquid autem ea iusto id qui doloribus voluptatum.",
+                category: "B",
+                standard: "STD 102"
+            },
+            {
+                id: 1125,
+                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime sequi in modi amet ducimus, ipsam rerum saepe ut eligendi. Amet ipsum nulla aliquid autem ea iusto id qui doloribus voluptatum.",
+                category: "A",
+                standard: "STD 101"
+            },
+            {
+                id: 1126,
+                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime sequi in modi amet ducimus, ipsam rerum saepe ut eligendi. Amet ipsum nulla aliquid autem ea iusto id qui doloribus voluptatum.",
+                category: "C",
+                standard: "STD 101"
+            },
+            {
+                id: 1127,
+                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime sequi in modi amet ducimus, ipsam rerum saepe ut eligendi. Amet ipsum nulla aliquid autem ea iusto id qui doloribus voluptatum.",
+                category: "C",
+                standard: "STD 102"
+            }
+        ];
+        vm.addRequirement=addRequirement;
+        vm.removeRequirement=removeRequirement;
 
         vm.createService = IndicatorsCreateService;
         vm.details = vm.createService.details;
@@ -63,66 +67,83 @@
         vm.listSelected;
         vm.indicator.title = "1.2.3 - Indikator Taktil";
         vm.indicator.description = "";
-        vm.indicator.activities = [
-        {
-            title: "Test Act 1",
-            description: "Test act 1 description.",
-            inputs: [
+        vm.indicator.activities =
+        [
             {
-                text: "Is it blue?",
-                type: "yesno"
+                title: "Test Act 1",
+                description: "Test act 1 description.",
+                inputs: [
+                {
+                    text: "Is it blue?",
+                    type: "yesno"
+                },
+                {
+                    text: "What is 2+2?",
+                    type: "numeric"
+                }]
             },
             {
-                text: "What is 2+2?",
-                type: "numeric"
-            }]
-        },
-        {
-            title: "Test Act 2",
-            description: "Test act 2 description.",
-            inputs: [
+                title: "Test Act 2",
+                description: "Test act 2 description.",
+                inputs: [
+                {
+                    text: "Is it green?",
+                    type: "yesno"
+                },
+                {
+                    text: "What is 3+3?",
+                    type: "numeric"
+                }]
+            }
+        ]
+
+        vm.inputTypes =
+        [
             {
-                text: "Is it green?",
-                type: "yesno"
+                name: "yesno",
+                name_no: 'Ja / Nei',
+                url: "modules/indicators/client/views/inputs/yesNo.html"
             },
             {
-                text: "What is 3+3?",
-                type: "numeric"
-            }]
-        }]
+                name: "radio",
+                name_no: 'Radioknapper',
+                url: "modules/indicators/client/views/inputs/radio.html"
+            },
+            {
+                name: "checkbox",
+                name_no: 'Checkbox',
+                url: "modules/indicators/client/views/inputs/checkbox.html"
+            },
+            {
+                name: "freetext",
+                name_no: 'Fritekst',
+                url: "modules/indicators/client/views/inputs/freetext.html"
+            },
+            {
+                name: "numeric",
+                name_no: 'Numerisk',
+                url: "modules/indicators/client/views/inputs/numeric.html"
+            },
+            {
+                name: "picture",
+                name_no: 'Bilde',
+                url: "modules/indicators/client/views/inputs/picture.html"
+            }
+        ];
 
-        vm.inputTypes = [
-        {
-            name: "yesno",
-            name_no: 'Ja / Nei',
-            url: "modules/indicators/client/views/inputs/yesNo.html"
-        },
-        {
-            name: "radio",
-            name_no: 'Radioknapper',
-            url: "modules/indicators/client/views/inputs/radio.html"
-        },
-        {
-            name: "checkbox",
-            name_no: 'Checkbox',
-            url: "modules/indicators/client/views/inputs/checkbox.html"
-        },
-        {
-            name: "freetext",
-            name_no: 'Fritekst',
-            url: "modules/indicators/client/views/inputs/freetext.html"
-        },
-        {
-            name: "numeric",
-            name_no: 'Numerisk',
-            url: "modules/indicators/client/views/inputs/numeric.html"
-        },
-        {
-            name: "picture",
-            name_no: 'Bilde',
-            url: "modules/indicators/client/views/inputs/picture.html"
-        }];
 
+
+
+        function addRequirement(req){
+            if(!vm.indicator.requirements)vm.indicator.requirements = [];
+            vm.indicator.requirements.push(req);
+        }
+        function removeRequirement(req){
+            if(typeof req ==='number')
+                vm.indicator.requirements.splice(req, 1);
+            else
+                vm.indicator.requirements.splice(vm.indicator.requirements.indexOf(req), 1);
+        }
         function addAnswerAlternative()
         {
             console.log(vm.input.options.alternative)
@@ -179,7 +200,7 @@
 
         function goToInputForm(activity, input, options)
         {
-            if (options.edit && options.edit == true)
+            if (options && options.edit && options.edit == true)
             {
                 editInput(input);
             }

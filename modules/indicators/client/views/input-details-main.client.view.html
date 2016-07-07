@@ -3,7 +3,7 @@
         <b>{{$index + 1}}</b>
         {{input.text}}
         <a ng-click="vm.goToInputForm(vm.createService.details, input, {edit:true})">endre</a>
-        <a>slett</a>
+        <a ng-click="vm.createService.details.inputs.splice($index, 1)">slett</a>
     </p>
     <p> Registreringstype: {{input.type}}</p>
 </section>

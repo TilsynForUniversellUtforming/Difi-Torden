@@ -1,20 +1,42 @@
-<section >
-    <h2>activity details</h2>
-    <a ng-click="vm.createService.goToView('form-activity', vm.createService.details)">endre</a>
-    <a ng-click="vm.removeActivity(vm.createService.details)">remove</a>
-    <p>{{vm.createService.details.title}}</p>
-    <p>{{vm.createService.details.description}}</p>
-</section>
+<section class="main">
+    <section class="main-content">
+        <div class="header">
+            <h2>
+            Detaljer: {{vm.createService.details.title}}
+                <span> - Aktivitet</span>
+                <span class="pull-right edits">
+                    <a ng-click="vm.createService.goToView('form-activity', vm.createService.details)">endre</a>
+                    <a ng-click="vm.removeActivity(vm.createService.details)">slett</a>
+                </span>
+                <span alt="hjelp" class="pull-right glyphicon glyphicon-question-sign"></span>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-6 col-sm-6">
+                <div class="pull-right edits">
 
-<section>
-     <h3>Registreringer:</h3>
-    <div ng-repeat="input in vm.createService.details.inputs">
-    <hr>
-        <div ui-view="input-details-main@indicators.create"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="lead"><b>Beskrivelse:</b> {{vm.createService.details.description}}</p>
+            </div>
+        </div>
+    </section>
+    <section class="main-content">
+       <div class="row">
+           <div class="col-sm-12">
+            <p><b>Registreringer</b></p>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="input in vm.createService.details.inputs" ui-view="input-details-main@indicators.create"></li>
+            </ul>
+           </div class="col-sm-12">
+       </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="text-center"><button class="btn btn-default" ng-click="vm.createService.backToMain()">Tilbake</button></p>
+        </div>
     </div>
+    </section>
 </section>
-<div class="row">
-    <div class="col-sm-12">
-        <button class="btn btn-default" ng-click="vm.createService.backToMain()">Tilbake</button>
-    </div>
-</div>
