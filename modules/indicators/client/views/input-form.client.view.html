@@ -7,29 +7,29 @@
     <div class="col-sm-12 input-button"  style="margin-bottom:10px; background-color:#eee">
         <h3>Registreringstype:
         <div class="btn-group" role="group" aria-label="Registreringstyper">
-            <button type="button" ng-repeat="type in vm.inputTypes" class="btn btn-default btn-large" ng-value="type.name" ng-model="vm.input.type" ng-click="vm.showInput(type)">{{type.name_no}}</button>
+            <button type="button" ng-repeat="type in ic.inputTypes" class="btn btn-default btn-large" ng-value="type.name" ng-model="ic.input.type" ng-click="ic.input.name_no=type.name_no;ic.input.tempUrl=type.url">{{type.name_no}}</button>
         </div>
         </h3>
     </div>
 </div>
 <div class="row" >
-    <div ng-show="vm.inputShow" class="col-sm-12">
-        <h3>{{vm.input.options.type.name_no}}</h3>
+    <div class="col-sm-12">
+        <h3>{{ic.input.name_no}}</h3>
         <div class="form-group">
             <label for="inputTekst" class="control-label">Registreringstekst:</label>
-            <textarea class="form-control" rows="3" name="inputTekst" ng-model="vm.input.text"></textarea>
+            <textarea class="form-control" rows="3" name="inputTekst" ng-model="ic.input.text"></textarea>
         </div>
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
                     <label  class="control-label" for="score">Poeng: </label>
-                    <input class="" name="score" ng-model="vm.input.points" type="number"></input>
+                    <input class="" name="score" ng-model="ic.input.points" type="number"></input>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="mandytory">Obligatorisk: </label>
-                    <input name="mandytory" ng-model="vm.input.mandytory" type="checkbox" value="true"></input>
+                    <input name="mandytory" ng-model="ic.input.mandytory" type="checkbox" value="true"></input>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -38,15 +38,15 @@
                 </div>
             </div>
         </div>
-        <div ng-include="vm.input.options.type.url" >
+        <div ng-include="ic.input.tempUrl" >
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-12">
         <p class="text-center">
-            <button class="btn btn-default" ng-click="vm.createService.backToMain();vm.createService.resetMainView()">Avbryt</button>
-            <button class="btn btn-primary" ng-click="vm.saveInput(vm.input);vm.createService.backToMain();vm.createService.resetMainView()">Ferdig</button>
+            <button class="btn btn-default" ng-click="ic.goBack()">Avbryt</button>
+            <button class="btn btn-primary" ng-click="ic.goBack()">Ferdig</button>
         </p>
     </div>
 </div>

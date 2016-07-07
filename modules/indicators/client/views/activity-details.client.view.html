@@ -1,12 +1,13 @@
+<ui-view>
 <section class="main">
     <section class="main-content">
         <div class="header">
             <h2>
-            Detaljer: {{vm.createService.details.title}}
-                <span> - Aktivitet</span>
+            Detaljer: {{ac.activity.title}}
+                <span> - Aktivitet </span>
                 <span class="pull-right edits">
-                    <a ng-click="vm.createService.goToView('form-activity', vm.createService.details)">endre</a>
-                    <a ng-click="vm.removeActivity(vm.createService.details)">slett</a>
+                    <a ui-sref=".form({activityInd:ac.activity.id.toString()})">endre</a>
+                    <a >slett</a>
                 </span>
                 <span alt="hjelp" class="pull-right glyphicon glyphicon-question-sign"></span>
             </h2>
@@ -20,7 +21,8 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <p class="lead"><b>Beskrivelse:</b> {{vm.createService.details.description}}</p>
+                <p class="lead"><b>Beskrivelse:</b> {{ac.activity.description}}</p>
+                <p class="lead">ID: {{ac.activity.id}}</p>
             </div>
         </div>
     </section>
@@ -29,7 +31,7 @@
            <div class="col-sm-12">
             <p><b>Registreringer</b></p>
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="input in vm.createService.details.inputs" ui-view="input-details-main@indicators.create"></li>
+                <li class="list-group-item" ng-repeat="input in ac.activity.inputs" ui-view="input-details-main"></li>
             </ul>
            </div class="col-sm-12">
        </div>

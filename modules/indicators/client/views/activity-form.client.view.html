@@ -2,10 +2,10 @@
     <section class="main-content">
         <div class="header">
             <h2>
-            Endre: {{vm.createService.details.title}}
+            Endre: {{ac.activity.title}}
             <span> - Aktivitet</span>
             <span class="pull-right edits">
-                <!--                 <a ng-click="vm.createService.goToView('form-activity', vm.createService.details)">endre</a> -->
+                <!--                 <a ng-click="vm.createService.goToView('form-activity', ac.activity)">endre</a> -->
                 <a ng-click="vm.removeActivity(vm.createService.details)">slett</a>
             </span>
             <span alt="hjelp" class="pull-right glyphicon glyphicon-question-sign"></span>
@@ -15,11 +15,11 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="activity-title" class="control-label">Titel:</label>
-                    <input type="text" class="form-control" name="activity-title" ng-model="vm.createService.details.title"></input>
+                    <input type="text" class="form-control" name="activity-title" ng-model="ac.activity.title"></input>
                 </div>
                 <div class="form-group">
                     <label for="Description" class="control-label">Beskrivelse:</label>
-                    <textarea class="form-control" rows="3" name="Description" ng-model="vm.createService.details.description"></textarea>
+                    <textarea class="form-control" rows="3" name="Description" ng-model="ac.activity.description"></textarea>
                 </div>
             </div>
         </div>
@@ -27,10 +27,10 @@
             <div class="col-sm-12">
                 <p><b>Registreringer</b></p>
                 <ul class="list-group">
-                    <li class="list-group-item" ng-click="vm.goToInputForm(vm.createService.details, null)">
+                    <li class="list-group-item" ng-click="ac.newInput()">
                         <p><b><a >Ny registrering</a></b></p>
                     </li>
-                    <li class=" list-group-item" ng-repeat="input in vm.createService.details.inputs" ui-view="input-details-main@indicators.create"></li>
+                    <li class=" list-group-item" ng-repeat="input in ac.activity.inputs" ui-view="input-details-main"></li>
                 </ul>
             </div>
         </div>

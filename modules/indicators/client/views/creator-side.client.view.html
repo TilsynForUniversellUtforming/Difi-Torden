@@ -1,6 +1,6 @@
 <section class="content-list" style="min-height:500px">
-    <div ng-click="vm.createService.resetMainView(); vm.createService.backToMain()" class="header">
-        <h2 class="text-center"> {{vm.indicator.title}}</h2>
+    <div class="header">
+        <h2 class="text-center"> <a ui-sref=".main" ng-hide="!vm.indicator.title" style="text-decoration:none; color:white">{{vm.indicator.title}}</a><a ng-show="!vm.indicator.title" ui-sref=".main" style="text-decoration:none; color:white">Indikator uten navn</a></h2>
     </div>
     <ul dnd-list="vm.indicator.activities" class="list-group">
         <li class="list-group-item">
@@ -16,7 +16,8 @@
             >
 
                 <div class="subheader">
-                    <h3 ng-click="vm.createService.goToView('activity-details', item)">{{$index+1}} - {{item.title}}</h3>
+                    <h3 ng-click="vm.setWorkingObject(item)" ui-sref=".activity({indicatorId: vm.indicatorId, activityInd:$index.toString()})">{{$index+1}} - {{item.title}}</h3>
+                    id:{{$index}}
                 </div>
                 <div >
                     <ul dnd-list="item.inputs" >

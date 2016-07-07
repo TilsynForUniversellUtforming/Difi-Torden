@@ -5,8 +5,6 @@
                 {{vm.indicator.title}}
                 <span> - Indikator</span>
                 <span class="pull-right edits">
-                    <!--                 <a ng-click="vm.createService.goToView('form-activity', vm.createService.details)">endre</a> -->
-                    <!-- <a ng-click="vm.removeActivity(vm.createService.details)">slett</a> -->
                 </span>
                 <span alt="hjelp" class="pull-right glyphicon glyphicon-question-sign"></span>
             </h2>
@@ -14,12 +12,12 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label  class="control-label" for="IndName">Navn:</label>
-                    <input class="form-control" type="text" name="IndName" ng-model="vm.indicator.title"></input>
+                    <label  class="control-label" for="IndName">Titel:</label>
+                    <input class="form-control" type="text" name="IndName" ng-model="vm.form.title" ng-value="vm.indicator.title"></input>
                 </div>
                 <div class="form-group">
                     <label  class="control-label" for="description">Beskrivelse:</label>
-                    <textarea class="form-control" rows="4" name="description" ng-model="vm.indicator.description" placeholder="Beskriv indikatoren her"></textarea>
+                    <textarea class="form-control" rows="4" name="description" ng-model="vm.form.description" ng-value="vm.indicator.description"  placeholder="Beskriv indikatoren her"></textarea>
                 </div>
             </div>
         </div>
