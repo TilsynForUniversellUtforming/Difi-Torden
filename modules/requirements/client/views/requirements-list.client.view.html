@@ -4,51 +4,35 @@
     <form>
     <div class="form-group">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-search">SØK</i></div>
-        <input type="text" class="form-control" placeholder="Søk etter krav.." ng-model="searchReq">
+        <div class="input-group-addon"><label  for="Søk etter krav" class="fa fa-search">SØK</label>
+        <input type="text" id="Søk etter krav" class="form-control" placeholder="Søk etter krav.." ng-model="searchReq"/>
       </div>      
     </div>
   </form>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" summary="Liste over kravene som er lagret i databasen.">
         <thead>
             <tr>
 
-                <th>nr. v9</th>
-                
-                <th>Skal/Bør/Kan</th>
-                <th>Formulering i standard</th>
+                <th>nummer. v9</th>
+                <th>Krav i standard</th>
                 <th>Standard</th>
-                <th>Type dokumenter</th>
-                <th>Kappitel nr.</th>
-                <th>Kap. nr med overskrift</th>
-                <th>Vurdering etter post-it session</th>
-                <th>Kategori etter post-it session</th>
-                <th>Duplikater</th>
-               
-                <th>Oversatt i veileder</th>
-                <th>Ny på lista</th>
-                <th>Navn</th>
+                <th>Kapittel med tittel</th>
+                <th>Nivå (skal/bør/kan)</th>
+                <th>Kategori</th>
+                <th>hmm</th>
             
             </tr>
         </thead>
         <tbody>
-              <tr dir-paginate='req in vm.requirements|itemsPerPage:25|filter:searchReq'>
+              <tr dir-paginate='req in vm.requirements | filter: searchReq | itemsPerPage:25' >
 
                 <td>{{req.nr_v9}}</td>
-                
-                <td>{{req.level_no}}</td>
-                <td>{{req.level_org}}</td>
+                <td>{{req.req_in_standard}}</td>
                 <td>{{req.standard}}</td>
-                <td>{{req.doc_type}}</td>
-                <td>{{req.nr_chapter}}</td>
                 <td>{{req.chapter_title}}</td>
-                <td>{{req.grading}}</td>
+                <td>{{req.level}}</td>
                 <td>{{req.category}}</td>
-                <td>{{req.duplicates}}</td>
-                
-                <td>{{req.guide_translated}}</td>
-                <td>{{req.added}}</td>
-                <td>{{req.name}}</td>
+                <td><a ui-sref="vm.remove()">slett</a></td>
 
             </tr>
        </tbody>

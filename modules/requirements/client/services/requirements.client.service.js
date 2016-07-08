@@ -9,7 +9,7 @@
 
   function RequirementsService($resource) {
     return $resource('api/requirements/:requirementId', {
-      indicatorId: '@_id'
+      requirementId: '@_id'
     }, {
       update: {
         method: 'PUT'

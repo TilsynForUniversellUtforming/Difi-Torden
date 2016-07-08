@@ -6,11 +6,11 @@
         .module('requirements')
         .controller('RequirementsController', RequirementsController);
 
-    RequirementsController.$inject = ['$scope', '$state', '$window', 'Authentication',
+    RequirementsController.$inject = ['$scope', '$state', 'requirementResolve', '$window', 'Authentication',
 
     ];
 
-    function RequirementsController($scope, $state, $window, Authentication)
+    function RequirementsController($scope, $state, requirement, $window, Authentication)
     {
         var vm = this;
 
@@ -38,18 +38,19 @@
         {
             if ($window.confirm('Are you sure you want to delete?'))
             {
-                vm.indicator.$remove($state.go('requirements.list'));
+                vm.requirement.$remove($state.go('requirements.list'));
             }
         }
 
         // Save requirement
-        function save(isValid)
+        function save()
         {
-            if (!isValid)
-            {
-                $scope.$broadcast('show-errors-check-validity', 'vm.form.requirementForm');
-                return false;
-            }
+            console.log ("heihei");
+            // if (!isValid)
+            // {
+            //     $scope.$broadcast('show-errors-check-validity', 'vm.form.requirementForm');
+            //     return false;
+            // }
 
             // TODO: move create/update logic to service
             if (vm.requirement._id)
@@ -63,7 +64,7 @@
 
             function successCallback(res)
             {
-                $state.go('requirements.view',
+                $state.go('requirements.create',
                 {
                     requirementId: res._id
                 });

@@ -23,6 +23,7 @@ module.exports = {
                 'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
                 'public/lib/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
                 'public/lib/angularUtils-pagination/dirPagination.js',
+                'public/lib/angular-messages/angular-messages.js',
                 // endbower
             ],
             tests: ['public/lib/angular-mocks/angular-mocks.js']

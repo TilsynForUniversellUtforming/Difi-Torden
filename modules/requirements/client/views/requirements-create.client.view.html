@@ -1,0 +1,68 @@
+<!DOCTYPE html> 
+<html>
+
+<body>
+ <h1>Legg til nye krav </h1>
+<!-- FORM -->
+<!-- pass in the variable if our form is valid or invalid -->
+<form name="vm.form.requirementForm" class="form-horizontal" ng-submit="vm.save(vm.form.requirementForm)" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+
+	<!-- -->
+	<div class="form-group">
+		<label>Versjon</label>
+		<input type="text" name="nr_v9" class="form-control" ng-model="vm.requirement.nr_v9" required>
+		<div class="help-block" ng-messages="vm.form.requirementForm.nr_v9.$error" ng-if="vm.form.requirementForm.nr_v9.$touched">
+			<p ng-message="required">Kravet må inneholdet en standard.</p>
+		</div>
+	</div>
+
+	<!--  -->
+	<div class="form-group">
+		<label>Krav i standard</label>
+		<textarea rows="5" cols="10" type="text" name="req_in_standard" class="form-control"  ng-model="vm.requirement.req_in_standard" required></textarea>
+		<div class="help-block" ng-messages="vm.form.requirementForm.req_in_standard.$error" ng-if="vm.form.requirementForm.req_in_standard.$touched">
+			<p ng-message="required">Kravet må inneholdet en beskrivelse på kravet.</p>
+		</div>
+	</div>
+
+	<!--  -->
+	<div class="form-group">
+		<label>Standard</label>
+		<input type="text" name="standard" class="form-control" ng-model="vm.requirement.standard" required>
+		<div class="help-block" ng-messages="vm.form.requirementForm.standard.$error" ng-if="vm.form.requirementForm.standard.$touched">
+			<p ng-message="required">Kravet må inneholdet en standard.</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label>Kapittel nummer med tittel</label>
+		<input type="text" name="chapter_title" class="form-control" ng-model="vm.requirement.chapter_title" required >
+		<div class="help-block" ng-messages="vm.form.requirementForm.chapter_title.$error" ng-if="vm.form.requirementForm.chapter_title.$touched">
+			<p ng-message="required">Kravet må inneholdet et kapittel nummer med overskrift.</p>
+		</div>
+	</div>
+
+	<!--  -->
+	<div class="form-group">
+		<label>Nivå (bør/skal/kan)</label>
+		<input type="text" name="level" class="form-control" ng-model="vm.requirement.level" required>
+		<div class="help-block" ng-messages="vm.form.requirementForm.level.$error" ng-if="vm.form.requirementForm.level.$touched">
+			<p ng-message="required">Kravet må inneholdet et nivå (Bør/Skal/Kan).</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label>Kategori</label>
+		<input type="text" name="category" class="form-control" ng-model="vm.requirement.category" required>
+		<div class="help-block" ng-messages="vm.form.requirementForm.category.$error" ng-if="vm.form.requirementForm.category.$touched">
+			<p ng-message="required">Kravet må inneholdet en kategori.</p>
+		</div>
+	</div>
+
+	<!-- -->
+	<button type="submit" class="btn btn-default" ng-disabled="vm.form.requirementForm.$invalid" >Legg til krav</button>
+</form>
+
+</div>
+</body>
+</html>
