@@ -4,26 +4,26 @@
  * Module dependencies
  */
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+    Schema = mongoose.Schema;
 
 /**
  * Indicator Schema
  */
-var IndicatorSchema = new Schema({
-    name: String,
-    max_score: Number,
-    description:String,
+var IndicatorSchema = new Schema(
+{
+    title: String,
+    description: String,
     created_by: [
     {
         type: String,
-        default: "Roger"
+        default: "Unknown"
     }],
     created_at:
     {
         type: Date,
         default: Date.now
     },
-    comment: String,
-    activities: [{}]
+    activities: [
+    {}]
 });
 mongoose.model('Indicator', IndicatorSchema);

@@ -51,15 +51,7 @@
 .content-list ul li .subheader h3:hover{
     /*color:white;*/
 }
-.content-list .header {
-    padding-top:0.1em;
-    padding-bottom:0.1em;
-    background-color: #555;
-}
-.content-list .header h2{
-    color:white;
-    font-size: 1.7em;
-}
+
 .secondary-li {
     border-left: 3px solid red;
 }
@@ -67,33 +59,49 @@
 
 .main-content{
     /*background-color: red;*/
+    /*padding:0.9em;*/
 }
-.main-content > .header {
+ .header {
     background-color: #555;
     color:white;
-    padding-top:0.1em;
-    padding-bottom:0.1em;
+    padding: 0.6em;
 }
-.main-content > .header h2{
+ .header h2{
     color:white;
     font-size: 1.7em;
-    padding-left: 0.6em;
+    
+    margin:0;
+}
+.row-fix{
+    margin-left: 0;
 }
 .main-content > .header h2 > span {
     color: #ddd; padding-right:1em;
 }
-.edits{
-    border-bottom: 1px solid #555;
-    border-right: 1px solid #555;
+.sub-header{
+    background-color: #E5E5E5;
+    padding:0.6em ;
+    border-bottom:1px solid #d5d5d5;
+}
+.sub-header:hover{
+    background-color: #DADADA;
+}
+.sub-header h3{
+    margin:0;
+    font-size: 1.4em;
 }
 .main-content > .row{
     padding-top: 0.6em;
     padding-left: 0.6em;
     padding-right: 0.6em;
 }
+.edits{
+    border-bottom: 1px solid #555;
+    border-right: 1px solid #555;
+}
 .edits > a{
     color:#eee;
-    font-size: 0.8em;
+    font-size: 0.6em;
     /*padding: 0.7em;*/
     /*padding-right: 0.35em;*/
 }
@@ -106,4 +114,29 @@
 .page-header{
     background-color: #444;
     color:white;
+}
+form.form-horizontal{
+    margin-top:1em;
+}
+.info{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F0F8FE;
+    border-radius: 50px 15px 15px 50px;
+    padding-top:0.5em;
+    padding-right: 1em;
+}
+.info .info-left{
+float:left;
+
+}
+.info .info-body{
+    
+}
+.info-img{
+    max-width: 100px;
+}
+.form-padding{
+    padding-top: 7px;
 }

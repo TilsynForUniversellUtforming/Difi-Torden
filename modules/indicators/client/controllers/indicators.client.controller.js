@@ -6,52 +6,111 @@
         .module('indicators')
         .controller('IndicatorsController', IndicatorsController);
 
-    IndicatorsController.$inject = ['$scope', '$state', '$stateParams', 'indicatorResolve','indicatorId', '$window', 'Authentication', 'IndicatorsCreateService', 'ReqsTempService'];
+    IndicatorsController.$inject = ['$scope', '$state', '$stateParams', 'indicatorResolve', 'indicatorId', '$window', 'Authentication', 'IndicatorsCreateService', '$http'];
 
-    function IndicatorsController($scope, $state, $stateParams, indicator,indicatorId, $window, Authentication, IndicatorsCreateService, ReqsTempService)
+    function IndicatorsController($scope, $state, $stateParams, indicator, indicatorId, $window, Authentication, IndicatorsCreateService, s$http)
     {
         var vm = this;
         //What we are working with
         vm.indicator = indicator;
         //quick n dirty until we change model to final form
-        if(!vm.indicator.requirements)vm.indicator.requirements=[];
-        if(!vm.indicator.activities)vm.indicator.activities=[];
+        if (!vm.indicator.requirements) vm.indicator.requirements = [];
+        if (!vm.indicator.activities) vm.indicator.activities = [];
 
         vm.authentication = Authentication;
         vm.error = null;
         vm.form = {};
         vm.remove = remove;
         vm.save = save;
-        vm.addActivity  = addActivity;
-        vm.indicatorId=indicatorId;
-
-        vm.editIndicator = function(id){
-            $state.go('indicators.edit.main', {indicatorId: indicatorId})
+        vm.addActivity = addActivity;
+        vm.indicatorId = indicatorId;
+        vm.editIndicator = function(id)
+        {
+            $state.go('indicators.edit.main',
+            {
+                indicatorId: indicatorId
+            })
         }
 
         vm.Requirements = [];
 
-        vm.addRequirement=addRequirement;
-        vm.removeRequirement=removeRequirement;
+        vm.addRequirement = addRequirement;
+        vm.removeRequirement = removeRequirement;
 
         vm.createService = IndicatorsCreateService;
         vm.createService.indicator = vm.indicator;
         vm.listSelected;
-        function addActivity(){
-            var act={
-                title:'Aktivtet uten navn',
-                inputs:[],
+        vm.collapseSection = collapseSection;
+        vm.collapse = {
+            general: false,
+            krav: true,
+            activities: true,
+            routes: true
+        };
+        vm.getLocation = function(val)
+        {
+            return $http.get('http://maps.googleapis.com/maps/api/geocode/json',
+            {
+                params:
+                {
+                    address: val,
+                    sensor: false
+                }
+            }).then(function(response)
+            {
+                return response.data.results.map(function(item)
+                {
+                    return item.formatted_address;
+                });
+            });
+        };
+
+        function collapseSection(section)
+        {
+            console.log("Collapse!")
+            switch (section)
+            {
+                case 'general':
+                    vm.collapse.general = !vm.collapse.general;
+                    console.log("general: " + vm.collapse.general);
+                    break;
+                case 'activities':
+                    vm.collapse.activities = !vm.collapse.activities;
+                    console.log("activities: " + vm.collapse.activities);
+                    break;
+                case 'krav':
+                    vm.collapse.krav = !vm.collapse.krav;
+                    console.log("krav: " + vm.collapse.krav);
+                    break;
+                case 'routes':
+                    vm.collapse.routes = !vm.collapse.routes;
+                    break;
+            }
+        }
+
+        function addActivity()
+        {
+            var act = {
+                title: 'Aktivtet uten navn',
+                inputs: [],
                 beskrivelse: '',
             }
             vm.indicator.activities.push(act);
-            $state.go('^.activity.form', {activityInd: vm.indicator.activities.length-1});
+            $state.go('^.activity.form',
+            {
+                activityInd: vm.indicator.activities.length - 1
+            });
         }
-        function addRequirement(req){
-            if(!vm.indicator.requirements)vm.indicator.requirements = [];
+
+        function addRequirement(req)
+        {
+            if (!vm.indicator.requirements) vm.indicator.requirements = [];
             vm.indicator.requirements.push(req);
         }
-        function removeRequirement(req){
-            if(typeof req ==='number')
+
+        function removeRequirement(req)
+        {
+            if (typeof req === 'number')
                 vm.indicator.requirements.splice(req, 1);
             else
                 vm.indicator.requirements.splice(vm.indicator.requirements.indexOf(req), 1);
