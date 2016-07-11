@@ -1,15 +1,30 @@
-<div class="">
-  <b><em>Svaralternativer:</em></b>
+<p>Legg til og administrer svaralternativer.</p>
+<div class="form-horizontal">
   <div class="form-group">
-    <label class="sr-only" for="">Legg til ny svaralernativ...</label>
-    <div class="input-group">
-      <div class="input-group-addon">Alternativtekst:</div>
-      <input type="text" class="form-control" ng-model="vm.input.options.alternative.text" placeholder="tekst">
-      <div class="input-group-addon">Poeng:</div>
-      <input type="number" class="form-control" ng-model="vm.input.options.alternative.points" placeholder="antall">
+    <label class="col-sm-3 control-label" for="alt-text">
+      Tekst
+    </label>
+    <div class="col-sm-8 input-group">
+      <input type="text" name="alt-text" placeholder="Skriv inn tekst" class="form-control input-md" required="" data-ng-model="ic.input.options.alternative.text" data-ng-value="ic.input.options.alternative.text">
       <div class="input-group-addon" ><a ng-click="vm.addAnswerAlternative()" style="color:black">Legg til</a></div>
     </div>
   </div>
+  <div class="form-group">
+    <label for="freetext-registration" class="col-sm-3 control-label"> Mulighet for en annen, fritekst registrering</label>
+    <div class="col-sm-8">
+      <div class="radio">
+        <label class="control-label" >
+          <input name="freetext-registration" type="radio" value="true" ng-model="vm.input.additionalFreetextAllowed">Nei
+       </label>
+      </div>
+       <div class="radio">
+        <label class="control-label" >
+          <input name="freetext-registration" type="radio" value="false" ng-model="vm.input.additionalFreetextAllowed">Ja
+       </label>
+      </div>
+    </div>
+  </div>
+</div>
   <br>
   <ul class="list-group">
     <li class="list-group-item" ng-repeat="alternative in vm.input.alternatives">
@@ -34,10 +49,7 @@
         </div>
       </div>
     </li>
-    <li  class="list-group-item">
-      <input  type="checkbox" value="true" ng-model="vm.input.additionalFreetextAllowed">
-      <label class="control-label" >Mulighet for en annen, fritekst registrering</label>
-    </li>
+    
   </ul>
   <br>
 </div>

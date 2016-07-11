@@ -16,8 +16,7 @@
             >
 
                 <div class="subheader">
-                    <h3 ng-click="vm.setWorkingObject(item)" ui-sref=".activity({indicatorId: vm.indicatorId, activityInd:$index.toString()})">{{$index+1}} - {{item.title}}</h3>
-                    id:{{$index}}
+                    <h4 ng-click="vm.setWorkingObject(item)" ui-sref=".activity({indicatorId: vm.indicatorId, activityInd:$index.toString()})">{{$index+1}} - {{item.title}}</h4>
                 </div>
                 <div >
                     <ul dnd-list="item.inputs" >
