@@ -1,63 +1,104 @@
-<section >
-    <div class="row" >
-        <div class="col-xs-11" style=" margin-left:1em; margin-right:-20px;border-top:1px solid #ddd;border-bottom:1px solid #ddd; border-right:1px solid #ddd; border-left:1px solid #ddd;padding-top:1em;">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam aperiam quam consectetur minima fugit dolor ex quis minus cupiditate aliquam labore, quibusdam error illum esse laboriosam, illo quos nam nesciunt!
-            </p>
+<section class="main">
+    <section class="main-content">
+        <div class="header" >
+            <h2>
+            <span style="font-size: 0.8em;">Indikator</span>
+            {{vm.indicator.title}}
+            <span class="pull-right edits">
+            </span>
+            <!--    <span alt="hjelp" class="pull-right glyphicon glyphicon-question-sign"></span> -->
+            </h2>
         </div>
-        <div class="col-xs-1"></div>
-    </div>
-    <div class="form-group">
-        <label  class="control-label" for="IndName">Navn:</label>
-        <input class="form-control" type="text" name="IndName" ng-model="vm.indicator.title"></input>
-    </div>
-    <div class="form-group">
-        <label  class="control-label" for="description">Beskrivelse:</label>
-        <textarea class="form-control" rows="4" name="description" ng-model="vm.indicator.description" placeholder="Beskriv indikatoren her"></textarea>
-    </div>
-    <div class="form-group">
-        <label  class="control-label" for="search">Krav:</label>
-        <input class="form-control" type="text" name="search" ng-model="vm.searchRequirement" placeholder="Søk">
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <ul ng-hide="!vm.searchRequirement.length > 0" style="list-style-type: none;  padding: 10px auto 10px auto">
-                <li ng-repeat="req in vm.Requirements | filter:vm.searchRequirement" style="border:1px solid #eee;">
-                    <div class="row">
-                        <div class="col-sm-1"><b>ID:</b> {{req.id}}</div>
-                        <div class="col-sm-2"><b>Std:</b> {{req.standard}}</div>
-                        <div class="col-sm-2"><b>Kategori:</b> {{req.category}}</div>
-                        <div class="col-sm-5">{{req.text | limitTo:85}}...</div>
-                        <div class="col-sm-2">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button class="btn btn-default">Detaljer</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button class="btn btn-primary">Legg til</button>
-                                </div>
-                            </div>
-                        </div>
+        <div class="sub-header" ng-click="vm.collapseSection('general')">
+            <h3 >
+            Generell informasjon
+            </h3>
+        </div>
+        <form class="form-horizontal" uib-collapse="vm.collapse.general">
+            <fieldset>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="indicator-title">Titel</label>
+                    <div class="col-md-8">
+                        <input id="indicator-title" name="indicator-title" type="text" placeholder="Skriv inn titel" class="form-control input-md" required="" data-ng-model="vm.form.title" data-ng-value="vm.indicator.title">
+                        <span class="help-block">Dette feltet er obligatorisk og må være mellom 3 og 50 tegn</span>
                     </div>
-                </li>
-            </ul>
+                </div>
+                <!-- Textarea -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="description">Beskrivelse</label>
+                    <div class="col-md-8">
+                        <textarea class="form-control" id="description" rows=6 name="description" data-ng-model="vm.form.description" data-ng-value="vm.indicator.description">Beskriv indikatoren her. </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="indicator-general"></label>
+                    <div class="col-md-8">
+                        <button type="submit" class="btn btn-success pull-right">Lagre</button>
+                        
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </section>
+    <section class="main-content">
+        <div class="sub-header" ng-click="vm.collapseSection('krav')">
+            <h3>
+            Krav
+            </h3>
+        </div>
+        <div class="row" uib-collapse="vm.collapse.krav">
+            <div class="col-sm-12">
+                <uib-alert type="info" close="closeAlert($index)">Krav som er valgt for forskjellige registreringer listes opp her. Du kan også legge til kravene her og tildele dem registreringer senere.</uib-alert>
+                <!--                 <div class="info">
+                    <div class="info-left">
+                        
+                        <img class="info-img" src="modules/indicators/client/img/info1.svg" alt="...">
+                        
+                    </div>
+                    <div class="info-body">
+                        <h4 class="media-heading">Informasjon: Valg av krav</h4>
+                        <p>
+                            Krav som er valgt for forskjellige registreringer listes opp her. Du kan også legge til kravene her og tildele dem registreringer senere.
+                        </p>
+                        <p><a class="pull-right">Skjul</a></p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="row" uib-collapse="vm.collapse.krav">
+            <div class="col-sm-12">
+            <h4>Søk etter krav</h4>
+            <pre>Model: {{asyncSelected | json}}</pre>
+            <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" uib-typeahead="address for address in vm.getLocation($viewValue)" uib-typeahead-loading="loadingLocations" class="form-control">
+            <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
         </div>
     </div>
 </section>
-<section>
-    <div class="row" >
-        <hr>
-        <div class="col-sm-9" style="border-right:1px solid #eee">
-            <p>
-                Velg en aktivitet fra listen til venstre for å innspisere detaljer og registreringer.
-            </p>
-        </div>
-        <div class="col-sm-3">
-            <p class="text-center">
-                <button  ng-hide="ind.creatingActivity" class="btn btn-default btn-lg" ng-click="vm.addActivity()">Ny aktivitet</button>
-            </p>
+<section class="main-content">
+    <div class="sub-header" ng-click="vm.collapseSection('activities')">
+        <h3>
+        Aktiviteter og registreringer
+        </h3>
+    </div>
+    <div class="row" uib-collapse="vm.collapse.activities">
+        <div class="col-sm-12 ">
+            <uib-alert type="info" close="closeAlert($index)"> En indikator kan bestå av en eller flere aktiviteter. Hver aktivitet kan inneholde registreringer / spørsmål. Liste til venstre kan også bruker for å administrere aktiviteter og registreringer.</uib-alert>
+            <a ng-click="vm.addActivity()">Legg till aktivitet</a>
+            
         </div>
     </div>
+</section>
+<section class="main-content">
+    <div class="sub-header" ng-click="vm.collapseSection('routes')">
+        <h3>
+            Routing
+        </h3>
+    </div>
+    <div class="row" uib-collapse="vm.collapse.routes">
+        <div class="col-sm-12 ">
+            <a ng-click="vm.addRouteRule()">Legg til en rute</a>
+        </div>
+    </div>
+</section>
 </section>

@@ -1,12 +1,14 @@
 <section>
-    <div class="page-header">
+
+    <section class="main main-content" style="margin-top:0.9em;margin-bottom:0.8em;">
+    <div class="header" style="padding-left:0.5em;">
         <h1>Ny indikataor</h1>
     </div>
-    <section>
         <div class="row browse-description">
             <div class="col col-sm-12">
                 <p>
                     <b style="color:red">OBS: WORK IN PROGRESS</b>
+
                 </p>
                 <p>
                     Har kan du lage nye indikatorer.
@@ -41,15 +43,11 @@
         </div>
     </section>
     <div class="row">
-        <div class="col-sm-3">
-            <div ui-view="side@indicators.create"></div>
+        <div class="col-sm-3" >
+            <div ui-view="side"></div>
         </div>
-        <div class="col-sm-9">
-            <div ng-if="vm.createService.views.currentView=='main'" ui-view="main@indicators.create"></div>
-            <div ng-if="vm.createService.views.currentView=='activity-details'" ui-view="activity-details@indicators.create"></div>
-            <div ng-if="vm.createService.views.currentView=='form-activity'" ui-view="activity-form@indicators.create"></div>
-            <div ng-if="vm.createService.views.currentView=='input-details'" ui-view="input-details-main@indicators.create"></div>
-            <div ng-if="vm.createService.views.currentView=='input-form'" ui-view="input-form@indicators.create"></div>
+        <div class="col-sm-9" >
+            <ui-view>
         </div>
     </div>
 </section>

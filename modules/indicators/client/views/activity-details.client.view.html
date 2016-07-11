@@ -1,20 +1,59 @@
-<section >
-    <h2>activity details</h2>
-    <a ng-click="vm.createService.goToView('form-activity', vm.createService.details)">endre</a>
-    <a ng-click="vm.removeActivity(vm.createService.details)">remove</a>
-    <p>{{vm.createService.details.title}}</p>
-    <p>{{vm.createService.details.description}}</p>
+<ui-view>
+<section class="main">
+    <section class="main-content">
+        <div class="header">
+            <h2><span style="font-size: 0.8em">Aktivitet</span>
+            {{vm.indicator.title}} >> {{ac.activity.title}}
+            <span class="pull-right edits">
+                <a ui-sref=".form({activityInd:ac.activity.id.toString()})">endre</a>
+                <a >slett</a>
+            </span>
+            </h2>
+        </div>
+        <div class="sub-header">
+            <h3>
+            Generell informasjon
+            </h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">
+                            Titel
+                        </label>
+                        <div class="col-sm-8 ">
+                            <p class="form-padding">{{ac.activity.title}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">
+                            Beskrivelse
+                        </label>
+                        <div class="col-sm-8">
+                            <p class="form-padding">{{ac.activity.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="main-content">
+        <div class="sub-header">
+            <h3>Registreringer</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="input in ac.activity.inputs" ui-view="input-details-main"></li>
+                </ul>
+            </div class="col-sm-12">
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <hr>
+                <p class="text-center"><button class="btn btn-default" ng-click="vm.createService.backToMain()">Tilbake</button></p>
+            </div>
+        </div>
+    </section>
 </section>
-
-<section>
-     <h3>Registreringer:</h3>
-    <div ng-repeat="input in vm.createService.details.inputs">
-    <hr>
-        <div ui-view="input-details-main@indicators.create"></div>
-    </div>
-</section>
-<div class="row">
-    <div class="col-sm-12">
-        <button class="btn btn-default" ng-click="vm.createService.backToMain()">Tilbake</button>
-    </div>
-</div>

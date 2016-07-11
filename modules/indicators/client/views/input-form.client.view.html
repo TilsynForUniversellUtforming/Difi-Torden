@@ -1,47 +1,115 @@
-<h2 ng-if="!vm.createService.views.options.header">Ny registrering</h2>
-<h2 ng-if="vm.createService.views.options.header">{{vm.createService.views.options.header}}</h2>
-<div class="row">
-    <div class="col-sm-12 input-button"  style="margin-bottom:10px; background-color:#eee">
-        <h3>Registreringstype:
-        <button ng-repeat="type in vm.inputTypes" class="btn btn-default btn-large" ng-value="type.name" ng-model="vm.input.type" ng-click="vm.showInput(type)">{{type.name_no}}</button></h3>
+<section class="main">
+    <secion class="main-content">
+    <div class="header">
+        <h2> <span  ng-show="!vm.createService.views.options.header" >Ny registrering </span><span  ng-show="vm.createService.views.options.header">{{vm.createService.views.options.header}}</span></h2>
     </div>
-</div>
-<div class="row" >
-    <div ng-show="vm.inputShow" class="col-sm-12">
-        <h3>{{vm.input.options.type.name_no}}</h3>
-        <div class="form-group">
-            <label for="inputTekst" class="control-label">Registreringstekst:</label>
-            <textarea class="form-control" rows="3" name="inputTekst" ng-model="vm.input.text"></textarea>
-
+    <div class="sub-header">
+        <h3>Om registreringen</h3>
+    </div>
+    <div class="row" >
+        <div class="col-sm-12" >
+            <div class="form-horizontal">
+                <div class="form-group">
+                    
+                    <label class="col-md-3 control-label" for="Registreringstyper">Registreringstype</label>
+                    <div class="col-sm-8">
+                        <div class="btn-group" role="group" aria-label="Registreringstyper" style="width:100%">
+                            <button type="button" ng-repeat="type in ic.inputTypes" class="btn btn-primary btn-large" ng-value="type.name" ng-model="ic.input.type"  uib-btn-radio="type.name" ng-click="ic.input.name_no=type.name_no;ic.input.tempUrl=type.url" style="">{{type.name_no}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label  class="control-label" for="score">Poeng: </label>
-                    <input class="" name="score" ng-model="vm.input.points" type="number"></input>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="mandytory">Obligatorisk: </label>
-                    <input name="mandytory" ng-model="vm.input.mandytory" type="checkbox" value="true"></input>
-                </div>
-            </div>
+        <div class="col-sm-12">
+            <!--      <h3>{{ic.input.name_no}}</h3> -->
+            <form class="form-horizontal" uib-collapse="vm.collapse.general">
+                <fieldset>
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="description">Registreringstekst</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="input-text" rows=6 name="input-text" data-ng-model="ic.form.text" data-ng-value="ic.input.text">...</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="radios">Obligatorisk eller frivillig</label>
+                        <div class="col-md-8">
+                            <div class="radio">
+                                <label for="radios-0">
+                                    <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                                    Obligatorisk
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="radios-1">
+                                    <input type="radio" name="radios" id="radios-1" value="2">
+                                    Frivillig
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="radio-add-picture">
+                            Legg ved bildet
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="radio">
+                                <label for="radio-add-picture">
+                                    <input type="radio" name="radio-add-picture" data-ng-value="false" data-ng-model="ic.input.additionalPicture" checked>
+                                    Nei
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="radio-add-picture">
+                                    <input type="radio" name="radio-add-picture" data-ng-value="true" data-ng-model="ic.input.additionalPicture" >
+                                    Ja
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            
             <div class="col-sm-12">
-                <div class="form-group">
-                    <div ng-include="'modules/indicators/client/views/inputs/fileUpload.html'"></div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="attatch-picture" class="col-sm-3 control-label">
+                            Vedlagte bilder
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <div ng-include="'modules/indicators/client/views/inputs/fileUpload.html'"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div ng-include="vm.input.options.type.url" >
-
+        
+    </div>
+    <div class="sub-header">
+        <h3>Fasit</h3>
+    </div>
+    <div class="row row-fix">
+        <div ng-include="ic.input.tempUrl" >
         </div>
     </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-12">
-    <button class="btn btn-default" ng-click="vm.createService.backToMain();vm.createService.resetMainView()">Avbryt</button>
-    <button class="btn btn-primary" ng-click="vm.saveInput(vm.input);vm.createService.backToMain();vm.createService.resetMainView()">Ferdig</button>
-</div>
-</div>
+    <div class="sub-header">
+        <h3>Krav</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <p>
+                Velg krav som er relevante for registreringen.
+            </p>
+        </div>
+        <div class="col-sm-12">
+            <hr>
+            <p class="text-center">
+                <button class="btn btn-default" ng-click="ic.goBack()">Avbryt</button>
+                <button class="btn btn-primary" ng-click="ic.goBack()">Ferdig</button>
+            </p>
+        </div>
+    </div>
+    </secion>
+    </sectio>
