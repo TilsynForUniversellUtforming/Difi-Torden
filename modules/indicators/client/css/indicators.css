@@ -69,11 +69,12 @@
  .header h2{
     color:white;
     font-size: 1.7em;
-    
+
     margin:0;
 }
 .row-fix{
     margin-left: 0;
+    margin-right: 0;
 }
 .main-content > .header h2 > span {
     color: #ddd; padding-right:1em;
@@ -132,11 +133,20 @@ float:left;
 
 }
 .info .info-body{
-    
+
 }
 .info-img{
     max-width: 100px;
 }
 .form-padding{
     padding-top: 7px;
+}
+.ellipsis {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   line-height: 1;        /* fallback */
+   max-height: 1*2;       /* fallback */
 }

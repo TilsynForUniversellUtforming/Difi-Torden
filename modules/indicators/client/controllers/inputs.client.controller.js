@@ -6,12 +6,15 @@
         .module('indicators')
         .controller('InputsController', InputsController);
 
-    InputsController.$inject = ['$state', '$stateParams', 'Authentication', 'IndicatorsCreateService'];
+    InputsController.$inject = ['$state','$scope', '$stateParams', 'Authentication', 'IndicatorsCreateService', 'RequirementsService'];
 
-    function InputsController($state, $stateParams, Authentication, IndicatorsCreateService)
+    function InputsController($state, $scope, $stateParams, Authentication, IndicatorsCreateService, RequirementsService)
     {
         var vm = this;
         vm.goBack = goBack;
+        vm.globalSearch = true;
+        var reqsGlobal = RequirementsService.query();
+        vm.reqSearch = RequirementsService.query();
         vm.inputTypes =
         [
             {

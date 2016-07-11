@@ -6,9 +6,9 @@
         .module('indicators')
         .controller('IndicatorsController', IndicatorsController);
 
-    IndicatorsController.$inject = ['$scope', '$state', '$stateParams', 'indicatorResolve', 'indicatorId', '$window', 'Authentication', 'IndicatorsCreateService', '$http'];
+    IndicatorsController.$inject = ['$scope', '$state', '$stateParams', 'indicatorResolve', 'indicatorId', '$window', 'Authentication', 'IndicatorsCreateService', '$http', 'RequirementsService'];
 
-    function IndicatorsController($scope, $state, $stateParams, indicator, indicatorId, $window, Authentication, IndicatorsCreateService, s$http)
+    function IndicatorsController($scope, $state, $stateParams, indicator, indicatorId, $window, Authentication, IndicatorsCreateService, $http, RequirementsService)
     {
         var vm = this;
         //What we are working with
@@ -16,7 +16,8 @@
         //quick n dirty until we change model to final form
         if (!vm.indicator.requirements) vm.indicator.requirements = [];
         if (!vm.indicator.activities) vm.indicator.activities = [];
-
+        vm.requirementsService = RequirementsService;
+        vm.requirements = RequirementsService.query();
         vm.authentication = Authentication;
         vm.error = null;
         vm.form = {};
