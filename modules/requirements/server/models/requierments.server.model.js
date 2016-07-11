@@ -14,7 +14,14 @@ var RequirementSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  user: String
+  user: String,
+  nr_v9:String,
+  req_in_standard:String,
+  standard: String,
+  chapter_title: String,
+  level: String,
+  category:String,
+  
 });
 
 mongoose.model('Requirement', RequirementSchema);
