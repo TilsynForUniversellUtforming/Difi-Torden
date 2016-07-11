@@ -1,0 +1,43 @@
+<section>
+    <h1>KRAV!!!</h1>
+
+    <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><label  for="Søk etter krav" class="fa fa-search">SØK</label>
+        <input type="text" id="Søk etter krav" class="form-control" placeholder="Søk etter krav.." ng-model="searchReq"/>
+      </div>      
+    </div>
+  </form>
+    <table class="table table-bordered table-striped" summary="Liste over kravene som er lagret i databasen.">
+        <thead>
+            <tr>
+
+                <th>nummer. v9</th>
+                <th>Krav i standard</th>
+                <th>Standard</th>
+                <th>Kapittel med tittel</th>
+                <th>Nivå (skal/bør/kan)</th>
+                <th>Kategori</th>
+                <th>hmm</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+              <tr dir-paginate='req in vm.requirements | filter: searchReq | itemsPerPage:25' >
+
+                <td>{{req.nr_v9}}</td>
+                <td>{{req.req_in_standard}}</td>
+                <td>{{req.standard}}</td>
+                <td>{{req.chapter_title}}</td>
+                <td>{{req.level}}</td>
+                <td>{{req.category}}</td>
+                <td><a ui-sref="vm.remove()">slett</a></td>
+
+            </tr>
+       </tbody>
+    </table>
+<dir-pagination-controls max-size="25" direction-links="true" boundary-links="true">
+</dir-pagination-controls>
+
+</section>
