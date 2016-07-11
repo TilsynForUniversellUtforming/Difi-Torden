@@ -1,4 +1,28 @@
 
-Fasit:
-<input name="yes-no-input" type="radio" ng-model="vm.input.solution.yes_no" value="yes">Ja</input>
-<input name="yes-no-input" type="radio" ng-model="vm.input.solution.yes_no" value="no">Nei</input>
+<form class="form-horizontal">
+    <fieldset>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="solution-yes-no">Fasit</label>
+            <div class="col-md-8">
+                <div class="radio">
+                    <label for="solution-yes-no-0">
+                        <input type="radio" name="solution-yes-no" id="solution-yes-no-0" value="no" checked="checked"  data-ng-model="vm.input.solution.yes_no">
+                        Nei
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="solution-yes-no-1">
+                        <input type="radio" name="solution-yes-no" id="solution-yes-no-1" value="yes"  data-ng-model="vm.input.solution.yes_no" >
+                        Ja
+                    </label>
+                </div>
+                 <div class="radio">
+                    <label for="solution-yes-no-2">
+                        <input type="radio" name="solution-yes-no" id="solution-yes-no-2" value="none"  data-ng-model="vm.input.solution.yes_no" >
+                        Ikke relevant
+                    </label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

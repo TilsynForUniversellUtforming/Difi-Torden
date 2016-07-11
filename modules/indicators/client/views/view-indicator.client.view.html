@@ -1,0 +1,23 @@
+<h1>{{vm.indicator.title}}</h1>
+<p>
+<a ng-click="vm.editIndicator(vm.indicator.id)">endre</a>
+    <a>slett</a>
+</p>
+<ul>
+    <li ng-repeat="act in vm.indicator.activities">
+        <p>{{act.title}}</p>
+        <p>
+            <a>endre</a>
+            <a>slett</a>
+        </p>
+        <ul>
+            <li ng-repeat="inp in act.inputs">
+                <p>{{inp.text}}</p>
+                <p>
+                    <a>endre</a>
+                    <a>slett</a>
+                </p>
+            </li>
+        </ul>
+    </li>
+</ul>

@@ -21,7 +21,8 @@
             goToView: goToView,
             backToMain: backToMain,
             setMainView: setMainView,
-            resetMainView: resetMainView
+            resetMainView: resetMainView,
+            indicator: {}
         };
 
         return service;
