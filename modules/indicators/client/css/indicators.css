@@ -68,9 +68,12 @@
 }
  .header h2{
     color:white;
-    font-size: 1.7em;
+    font-size: 1.3em;
 
     margin:0;
+}
+.header h2 span{
+     font-size: 0.8em;
 }
 .row-fix{
     margin-left: 0;

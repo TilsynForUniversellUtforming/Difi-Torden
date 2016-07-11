@@ -2,7 +2,7 @@
     <section class="main-content">
         <div class="header" >
             <h2>
-            <span style="font-size: 0.8em;">Indikator</span>
+            <span>Indikator</span>
             {{vm.indicator.title}}
             <span class="pull-right edits">
             </span>
@@ -14,13 +14,13 @@
             Generell informasjon
             </h3>
         </div>
-        <form class="form-horizontal" uib-collapse="vm.collapse.general">
+        <form class="form-horizontal" uib-collapse="vm.collapse.general" name="vm.form.indicatorForm"  ng-submit="vm.save(vm.form.indicatorForm)" novalidate>
             <fieldset>
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="indicator-title">Titel</label>
                     <div class="col-md-8">
-                        <input id="indicator-title" name="indicator-title" type="text" placeholder="Skriv inn titel" class="form-control input-md" required="" data-ng-model="vm.form.title" data-ng-value="vm.indicator.title">
+                        <input id="indicator-title" name="indicator-title" type="text" placeholder="Skriv inn titel" class="form-control input-md" required="" data-ng-model="vm.indicator.title" data-ng-value="vm.indicator.title">
                         <span class="help-block">Dette feltet er obligatorisk og må være mellom 3 og 50 tegn</span>
                     </div>
                 </div>

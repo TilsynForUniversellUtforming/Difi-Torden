@@ -23,7 +23,7 @@ var IndicatorSchema = new Schema(
         type: Date,
         default: Date.now
     },
-    activities: [
-    {}]
+    activities: {type:Array, default:[]},
+    requirements:{type:Array, default:[]}
 });
 mongoose.model('Indicator', IndicatorSchema);

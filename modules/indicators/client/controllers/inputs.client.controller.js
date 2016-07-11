@@ -11,10 +11,12 @@
     function InputsController($state, $scope, $stateParams, Authentication, IndicatorsCreateService, RequirementsService)
     {
         var vm = this;
+        vm.input = {};
         vm.goBack = goBack;
         vm.globalSearch = true;
         var reqsGlobal = RequirementsService.query();
         vm.reqSearch = RequirementsService.query();
+
         vm.inputTypes =
         [
             {

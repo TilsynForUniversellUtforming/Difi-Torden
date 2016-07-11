@@ -13,6 +13,7 @@
         var vm = this;
         //What we are working with
         vm.indicator = indicator;
+        console.log(indicator)
         //quick n dirty until we change model to final form
         if (!vm.indicator.requirements) vm.indicator.requirements = [];
         if (!vm.indicator.activities) vm.indicator.activities = [];
@@ -32,7 +33,7 @@
                 indicatorId: indicatorId
             })
         }
-
+        vm.formSave = formSave;
         vm.Requirements = [];
 
         vm.addRequirement = addRequirement;
@@ -48,24 +49,12 @@
             activities: true,
             routes: true
         };
-        vm.getLocation = function(val)
-        {
-            return $http.get('http://maps.googleapis.com/maps/api/geocode/json',
-            {
-                params:
-                {
-                    address: val,
-                    sensor: false
-                }
-            }).then(function(response)
-            {
-                return response.data.results.map(function(item)
-                {
-                    return item.formatted_address;
-                });
-            });
-        };
-
+        function formSave(){
+            vm.indicator.title = vm.form.title;
+            vm.indicator.description = vm.form.description;
+            if(!vm.indicator._id)vm.indicator.created_by = "Roger";
+            save();
+        }
         function collapseSection(section)
         {
             console.log("Collapse!")
@@ -128,19 +117,21 @@
         // Save indicator
         function save(isValid)
         {
-            if (!isValid)
-            {
-                $scope.$broadcast('show-errors-check-validity', 'vm.form.indicatorForm');
-                return false;
-            }
+            // if (!isValid)
+            // {
+            //     $scope.$broadcast('show-errors-check-validity', 'vm.form.indicatorForm');
+            //     return false;
+            // }
 
             // TODO: move create/update logic to service
             if (vm.indicator._id)
             {
+                console.log("updating indicator")
                 vm.indicator.$update(successCallback, errorCallback);
             }
             else
             {
+                console.log("creating new indicator")
                 vm.indicator.$save(successCallback, errorCallback);
             }
 

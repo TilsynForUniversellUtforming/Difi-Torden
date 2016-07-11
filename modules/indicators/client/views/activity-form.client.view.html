@@ -1,9 +1,8 @@
 <section class="main">
     <section class="main-content">
         <div class="header">
-            <h2>
-            Endre: {{ac.activity.title}}
-            <span> - Aktivitet</span>
+            <h2><span>Aktivitet</span>
+           {{vm.indicator.title}} - {{ac.activity.title}} (endre)
             <span class="pull-right edits">
                 <!--                 <a ng-click="vm.createService.goToView('form-activity', ac.activity)">endre</a> -->
                 <a ng-click="vm.removeActivity(vm.createService.details)">slett</a>
@@ -11,21 +10,31 @@
             <span alt="hjelp" class="pull-right glyphicon glyphicon-question-sign"></span>
             </h2>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="activity-title" class="control-label">Titel:</label>
-                    <input type="text" class="form-control" name="activity-title" ng-model="ac.activity.title"></input>
-                </div>
-                <div class="form-group">
-                    <label for="Description" class="control-label">Beskrivelse:</label>
-                    <textarea class="form-control" rows="3" name="Description" ng-model="ac.activity.description"></textarea>
-                </div>
-            </div>
+        <div class="sub-header">
+            <h3>Generell informasjon</h3>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <p><b>Registreringer</b></p>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                    <label for="activity-title" class="col-sm-3 control-label">Titel:</label>
+                    <div class="col-sm-8">
+                    <input type="text" class="form-control" name="activity-title" ng-model="ac.activity.title"></input></div>
+                </div>
+                <div class="form-group">
+                    <label for="Description" class="col-sm-3 control-label">Beskrivelse:</label>
+                    <div class="col-sm-8">
+                    <textarea class="form-control" rows="3" name="Description" ng-model="ac.activity.description"></textarea></div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="sub-header">
+            <h3>Registreringer</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+
                 <ul class="list-group">
                     <li class="list-group-item" ng-click="ac.newInput()">
                         <p><b><a >Ny registrering</a></b></p>

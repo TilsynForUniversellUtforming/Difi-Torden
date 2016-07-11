@@ -1,7 +1,7 @@
 <section class="main">
     <secion class="main-content">
     <div class="header">
-        <h2> <span  ng-show="!vm.createService.views.options.header" >Ny registrering </span><span  ng-show="vm.createService.views.options.header">{{vm.createService.views.options.header}}</span></h2>
+        <h2><span>Registrering</span>{{vm.indicator.title}} - {{ac.activity.title}} - Ny registrering <span  ng-show="vm.createService.views.options.header">{{vm.createService.views.options.header}}</span></h2>
     </div>
     <div class="sub-header">
         <h3>Om registreringen</h3>
@@ -105,7 +105,7 @@
             <script type="text/ng-template" id="customTemplate.html">
             <a style="" >
                 <!-- <b>NR: </b><span ng-bind-html="uibTypeaheadHighlight:query">{{match.model.nr_v9 }}</span>, <em>{{match.model.standard}} </em>,{{match.model.req_in_standard | limitTo:50 }} -->
-                <span ng-bind-html="match.label | limitTo: 90 | uibTypeaheadHighlight:query " ng-click="vm.addRequirement(match.model)"></span>
+                <span ng-bind-html="match.label | limitTo: 90 | uibTypeaheadHighlight:query " ng-click="ic.addRequirement(match.model);ic.addRequirement(match.model);"></span>
             </a>
             </script>
             <div class="form-horizontal">
