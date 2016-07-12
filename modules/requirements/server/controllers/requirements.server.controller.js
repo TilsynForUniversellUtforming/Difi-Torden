@@ -45,7 +45,12 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var requirement = req.requirement;
-
+  requirement.nr_v9 = req.body.nr_v9;
+  requirement.req_in_standard = req.body.req_in_standard;
+  requirement.standard = req.body.standard;
+  requirement.chapter_title = req.body.chapter_title;
+  requirement.level = req.body.level;
+  requirement.category = req.body.category;
 
   requirement.save(function (err) {
     if (err) {

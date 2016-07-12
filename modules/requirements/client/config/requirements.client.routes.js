@@ -11,70 +11,72 @@
     function routeConfig($stateProvider)
     {
         $stateProvider
-            .state('requirements',
+        .state('requirements',
+        {
+            abstract: true,
+            url: '/requirements',
+            template: '<ui-view/>'
+        })
+        .state('requirements.list',
+        {
+            url: '',
+            templateUrl: 'modules/requirements/client/views/requirements-list.client.view.html',
+            controller: 'RequirementsListController',
+            controllerAs: 'vm',
+
+            data:
             {
-                abstract: true,
-                url: '/requirements',
-                template: '<ui-view/>'
-            })
-            .state('requirements.list',
+                pageTitle: 'Requirements List'
+            }
+
+        })  
+
+
+        .state('requirements.edit', {
+            url: '/:requirementId/edit',
+            templateUrl: 'modules/requirements/client/views/requirements-create.client.view.html',
+            controller: 'RequirementsController',
+            controllerAs: 'vm',
+            resolve: 
             {
-                url: '',
-                templateUrl: 'modules/requirements/client/views/requirements-list.client.view.html',
-                controller: 'RequirementsListController',
-                controllerAs: 'vm',
-                
-                data:
-                {
-                    pageTitle: 'Requirements List'
-                }
-
-            })  
-
-
-            .state('requirements.edit', {
-        url: '/:requirementId/edit',
-        templateUrl: 'modules/articles/client/views/requirements-create.client.view.html',
-        controller: 'RequirementsController',
-        controllerAs: 'vm',
-        resolve: {
-          requirementResolve: getRequirement
-        },
-        data: {
-        
-          pageTitle: 'requirement edit'
-        }
+              requirementResolve: getRequirement
+            },
+           data: 
+           {
+             pageTitle: 'requirement edit'
+           }
       })
 
-            .state('requirements.create',
+        .state('requirements.create',
+        {
+            url: '/create',
+            templateUrl: 'modules/requirements/client/views/requirements-create.client.view.html',
+            controller: 'RequirementsController',
+            controllerAs: 'vm',
+            resolve: 
             {
-                url: '/create',
-                templateUrl: 'modules/requirements/client/views/requirements-create.client.view.html',
-                controller: 'RequirementsController',
-                controllerAs: 'vm',
-                resolve: {
-                    requirementResolve: newRequirement
-                },
-                data:
-                {
-                    pageTitle: 'Requirements create'
-                }
-            })            
+                requirementResolve: newRequirement
+            },
+            data:
+            {
+                pageTitle: 'Requirements create'
+            }
+        })            
     }
 
-     getRequirement.$inject = ['$stateParams', 'RequirementsService'];
+    getRequirement.$inject = ['$stateParams', 'RequirementsService'];
 
     function getRequirement($stateParams, RequirementsService) {
-    return RequirementsService.get({
-      requirementId: $stateParams.requirementId
-    }).$promise;
-  }
+        return RequirementsService.get({
+          requirementId: $stateParams.requirementId
+      }).$promise;
+    }
 
 
     newRequirement.$inject = ['RequirementsService'];
 
-  function newRequirement(RequirementsService) {
-    return new RequirementsService();
-  }
- 
+    function newRequirement(RequirementsService) {
+        return new RequirementsService();
+    }
+
 }());

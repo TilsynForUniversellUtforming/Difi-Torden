@@ -1,43 +1,47 @@
-<section>
-    <h1>KRAV!!!</h1>
 
-    <form>
+<section class="main main-content" style="margin-top:0.9em;margin-bottom:0.8em;">
+ <div class="header" style="padding-left:0.5em;">
+    <h1>Krav</h1>
+</div>
+<form>
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-addon"><label  for="Søk etter krav" class="fa fa-search">SØK</label>
-        <input type="text" id="Søk etter krav" class="form-control" placeholder="Søk etter krav.." ng-model="searchReq"/>
-      </div>      
+            <input type="text" id="Søk etter krav" class="form-control" placeholder="Søk etter krav.." ng-model="searchReq"/>
+        </div>      
     </div>
-  </form>
-    <table class="table table-bordered table-striped" summary="Liste over kravene som er lagret i databasen.">
-        <thead>
-            <tr>
+</div>
+</form>
+<table class="table table-bordered table-striped" summary="Liste over kravene som er lagret i databasen.">
+    <thead>
+        <tr>
 
-                <th>nummer. v9</th>
-                <th>Krav i standard</th>
-                <th>Standard</th>
-                <th>Kapittel med tittel</th>
-                <th>Nivå (skal/bør/kan)</th>
-                <th>Kategori</th>
-                <th>hmm</th>
-            
-            </tr>
-        </thead>
-        <tbody>
-              <tr dir-paginate='req in vm.requirements | filter: searchReq | itemsPerPage:25' >
+            <th>nummer. v9</th>
+            <th>Krav i standard</th>
+            <th>Standard</th>
+            <th>Kapittel med tittel</th>
+            <th>Nivå (skal/bør/kan)</th>
+            <th>Kategori</th>
+            <th>Slett/endre krav</th>
 
-                <td>{{req.nr_v9}}</td>
-                <td>{{req.req_in_standard}}</td>
-                <td>{{req.standard}}</td>
-                <td>{{req.chapter_title}}</td>
-                <td>{{req.level}}</td>
-                <td>{{req.category}}</td>
-                <td><a ui-sref="vm.remove()">slett</a></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr dir-paginate='req in vm.requirements | filter: searchReq | itemsPerPage:25' >
 
-            </tr>
-       </tbody>
-    </table>
-<dir-pagination-controls max-size="25" direction-links="true" boundary-links="true">
-</dir-pagination-controls>
+          <td>{{req.nr_v9}}</td>
+          <td>{{req.req_in_standard}}</td>
+          <td>{{req.standard}}</td>
+          <td>{{req.chapter_title}}</td>
+          <td>{{req.level}}</td>
+          <td>{{req.category}}</td>
+          <td><a href="" ng-click="vm.remove( req )">Slett</a>/<a href="" ui-sref="requirements.edit({requirementId: req._id})">Endre</a></td>
+
+      </tr>
+  </tbody>
+</table>
 
 </section>
+
+<dir-pagination-controls max-size="25" direction-links="true" boundary-links="true">
+</dir-pagination-controls>
