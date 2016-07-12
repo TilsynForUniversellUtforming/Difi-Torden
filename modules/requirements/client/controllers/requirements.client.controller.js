@@ -6,9 +6,7 @@
         .module('requirements')
         .controller('RequirementsController', RequirementsController);
 
-    RequirementsController.$inject = ['$scope', '$state', 'requirementResolve', '$window', 'Authentication',
-
-    ];
+    RequirementsController.$inject = ['$scope', '$state', 'requirementResolve', '$window', 'Authentication'];
 
     function RequirementsController($scope, $state, requirement, $window, Authentication)
     {
@@ -43,7 +41,7 @@
         }
 
         // Save requirement
-        function save()
+        function save(isValid)
         {
             console.log ("heihei");
             // if (!isValid)
@@ -53,8 +51,13 @@
             // }
 
             // TODO: move create/update logic to service
+
+
+           
+
             if (vm.requirement._id)
             {
+                console.log("updating......")
                 vm.requirement.$update(successCallback, errorCallback);
             }
             else
@@ -69,6 +72,8 @@
                     requirementId: res._id
                 });
             }
+
+
 
             function errorCallback(res)
             {
