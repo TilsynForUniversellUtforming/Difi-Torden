@@ -2,7 +2,7 @@
     <section class="main-content">
         <div class="header" >
             <h2>
-            <span style="font-size: 0.8em;">Indikator</span>
+            <span>Indikator</span>
             {{vm.indicator.title}}
             <span class="pull-right edits">
             </span>
@@ -14,13 +14,15 @@
             Generell informasjon
             </h3>
         </div>
-        <form class="form-horizontal" uib-collapse="vm.collapse.general">
+        <button ng-click="vm.log(vm.indicator)">test1</button>
+        <!-- <button ng-click="console.log(vm.indicator)">test1</button> -->
+        <form class="form-horizontal" uib-collapse="vm.collapse.general" name="vm.form.indicatorForm"  ng-submit="vm.save(vm.form.indicatorForm.$valid, {remainInThisState:true})" novalidate>
             <fieldset>
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="indicator-title">Titel</label>
                     <div class="col-md-8">
-                        <input id="indicator-title" name="indicator-title" type="text" placeholder="Skriv inn titel" class="form-control input-md" required="" data-ng-model="vm.form.title" data-ng-value="vm.indicator.title">
+                        <input id="indicator-title" name="indicator-title" type="text" placeholder="Skriv inn titel" class="form-control input-md" required="" data-ng-model="vm.indicator.title" data-ng-value="vm.indicator.title">
                         <span class="help-block">Dette feltet er obligatorisk og må være mellom 3 og 50 tegn</span>
                     </div>
                 </div>
@@ -28,14 +30,13 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="description">Beskrivelse</label>
                     <div class="col-md-8">
-                        <textarea class="form-control" id="description" rows=6 name="description" data-ng-model="vm.form.description" data-ng-value="vm.indicator.description">Beskriv indikatoren her. </textarea>
+                        <textarea class="form-control" id="description" rows=6 name="description" data-ng-model="vm.indicator.description" data-ng-value="vm.indicator.description">Beskriv indikatoren her. </textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="indicator-general"></label>
                     <div class="col-md-8">
                         <button type="submit" class="btn btn-success pull-right">Lagre</button>
-                        
                     </div>
                 </div>
             </fieldset>
@@ -52,9 +53,7 @@
                 <uib-alert type="info" close="closeAlert($index)">Krav som er valgt for forskjellige registreringer listes opp her. Du kan også legge til kravene her og tildele dem registreringer senere.</uib-alert>
                 <!--                 <div class="info">
                     <div class="info-left">
-                        
                         <img class="info-img" src="modules/indicators/client/img/info1.svg" alt="...">
-                        
                     </div>
                     <div class="info-body">
                         <h4 class="media-heading">Informasjon: Valg av krav</h4>
@@ -67,12 +66,57 @@
             </div>
         </div>
         <div class="row" uib-collapse="vm.collapse.krav">
+            <script type="text/ng-template" id="customTemplate.html">
+            <a style="" >
+                <!-- <b>NR: </b><span ng-bind-html="uibTypeaheadHighlight:query">{{match.model.nr_v9 }}</span>, <em>{{match.model.standard}} </em>,{{match.model.req_in_standard | limitTo:50 }} -->
+                <span ng-bind-html="match.label | limitTo: 90 | uibTypeaheadHighlight:query " ng-click="vm.addRequirement(match.model)"></span>
+            </a>
+            </script>
             <div class="col-sm-12">
-            <h4>Søk etter krav</h4>
-            <pre>Model: {{asyncSelected | json}}</pre>
-            <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" uib-typeahead="address for address in vm.getLocation($viewValue)" uib-typeahead-loading="loadingLocations" class="form-control">
-            <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">
+                        Søk etter krav
+                    </label>
+                    <div class="col-sm-8">
+                        <input
+                        type="text"
+                        ng-model="asyncSelected"
+                        placeholder="ID, Standard, Tekst..."
+                        uib-typeahead="req as ('<b>ID:</b> ' + req.nr_v9 + ', <em>Std: ' + req.standard + '</em>, ' + req.req_in_standard) for req in vm.requirements | filter:$viewValue | limitTo:12"
+                        uib-typeahead-loading="loadingRequirements"
+                        typeahead-template-url="customTemplate.html"
+                        class="form-control"
+                        typeahead-show-hint="false"
+                        typeahead-min-length="0"
+                        typeahead-on-select="vm.addRequirement($model);asyncSelected=''"
+                        typeahead-editable="false"
+                        typeahead-focus-first="false">
+                        <i ng-show="loadingRequirements" class="glyphicon glyphicon-refresh"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                <label for="" class="col-sm-3 control-label">Detaljer om kravet</label>
+                <div class="col-sm-8">
+                    <pre style="width:100%">Detaljer: {{vm.selectedReq | json}}</pre>
+                </div>
+            </div>
+            <div class="form group">
+                <label for="" class="col-sm-3 control-label">Utvalgte krav</label>
+                <div class="col-sm-8" style="padding-left:4px; padding-right:4px">
+                <ul class="list-group">
+                    <li ng-repeat="req in vm.indicator.requirements track by $index" ng-click="vm.selectedReq = req" class="list-group-item">
+                       <div class="row">
+                            <div class="col-sm-2"><p><b>ID:</b>{{req.nr_v9}}</p></div><div class="col-sm-3"><p><em>{{req.standard}}</em></p></div><div class="col-sm-6"><p>{{req.req_in_standard | limitTo: 80}}<span ng-show="req.req_in_standard.length>80">...</span></p></div>
+                       </div>
+                    </li>
+                </ul>
+            </div>
+            </div>
+            </div>
+
         </div>
+
     </div>
 </section>
 <section class="main-content">
@@ -85,14 +129,29 @@
         <div class="col-sm-12 ">
             <uib-alert type="info" close="closeAlert($index)"> En indikator kan bestå av en eller flere aktiviteter. Hver aktivitet kan inneholde registreringer / spørsmål. Liste til venstre kan også bruker for å administrere aktiviteter og registreringer.</uib-alert>
             <a ng-click="vm.addActivity()">Legg till aktivitet</a>
-            
+        </div>
+        <div class="col-sm-12">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">
+                        Alle akttiviteter
+                    </label>
+                    <div class="col-sm-8">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="activity in vm.indicator.activities">
+                                <h4>{{activity.title}}</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 <section class="main-content">
     <div class="sub-header" ng-click="vm.collapseSection('routes')">
         <h3>
-            Routing
+        Routing
         </h3>
     </div>
     <div class="row" uib-collapse="vm.collapse.routes">

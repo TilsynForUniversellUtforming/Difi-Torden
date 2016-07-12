@@ -37,14 +37,20 @@ exports.read = function (req, res) {
 };
 
 /**
- * Update an article
+ * Update an Indicator
  */
 exports.update = function (req, res) {
   var indicator = req.indicator;
 
-  // indicator.title = req.body.title;
-  // indicator.content = req.body.content
-  console.log("NOT IMPLEMENTED YET")
+  indicator.title = req.body.title;
+  indicator.content = req.body.content
+  if(req.body.activities)
+    indicator.activities = req.body.activities;
+  if(req.body.requirements)
+    indicator.requirements = req.body.requirements;
+  if(req.body.routes)
+    indicator.routes = req.body.routes;
+
   indicator.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -99,7 +105,7 @@ exports.indicatorById = function (req, res, next, id) {
     });
   }
 
-  Article.findById(id).exec(function (err, indicator) {
+  Indicator.findById(id).exec(function (err, indicator) {
     if (err) {
       return next(err);
     } else if (!indicator) {

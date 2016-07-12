@@ -3,6 +3,9 @@
 <a ng-click="vm.editIndicator(vm.indicator.id)">endre</a>
     <a>slett</a>
 </p>
+<p>
+    createb by {{vm.indicator. created_by}}
+</p>
 <ul>
     <li ng-repeat="act in vm.indicator.activities">
         <p>{{act.title}}</p>

@@ -13,17 +13,18 @@ var IndicatorSchema = new Schema(
 {
     title: String,
     description: String,
-    created_by: [
+    created_by:
     {
         type: String,
         default: "Unknown"
-    }],
+    },
     created_at:
     {
         type: Date,
         default: Date.now
     },
-    activities: [
-    {}]
+    activities: {type:Array, default:[]},
+    requirements:{type:Array, default:[]},
+    routes:{type:Array, default:[]}
 });
 mongoose.model('Indicator', IndicatorSchema);

@@ -1,7 +1,7 @@
 <section class="main">
     <secion class="main-content">
     <div class="header">
-        <h2> <span  ng-show="!vm.createService.views.options.header" >Ny registrering </span><span  ng-show="vm.createService.views.options.header">{{vm.createService.views.options.header}}</span></h2>
+        <h2><span>Registrering</span>{{vm.indicator.title}} - {{ac.activity.title}} - Ny registrering <span  ng-show="vm.createService.views.options.header">{{vm.createService.views.options.header}}</span></h2>
     </div>
     <div class="sub-header">
         <h3>Om registreringen</h3>
@@ -10,7 +10,7 @@
         <div class="col-sm-12" >
             <div class="form-horizontal">
                 <div class="form-group">
-                    
+
                     <label class="col-md-3 control-label" for="Registreringstyper">Registreringstype</label>
                     <div class="col-sm-8">
                         <div class="btn-group" role="group" aria-label="Registreringstyper" style="width:100%">
@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="description">Registreringstekst</label>
                         <div class="col-md-8">
-                            <textarea class="form-control" id="input-text" rows=6 name="input-text" data-ng-model="ic.form.text" data-ng-value="ic.input.text">...</textarea>
+                            <textarea class="form-control" id="input-text" rows=6 name="input-text" data-ng-model="ic.input.text" data-ng-value="ic.input.text">...</textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -36,13 +36,13 @@
                         <div class="col-md-8">
                             <div class="radio">
                                 <label for="radios-0">
-                                    <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                                    <input type="radio" name="radios" id="radios-0" data-ng-model="ic.input.mandytory" ng-value="true" checked="checked">
                                     Obligatorisk
                                 </label>
                             </div>
                             <div class="radio">
                                 <label for="radios-1">
-                                    <input type="radio" name="radios" id="radios-1" value="2">
+                                    <input type="radio" name="radios" id="radios-1" ng-value="false" data-ng-model="ic.input.mandytory">
                                     Frivillig
                                 </label>
                             </div>
@@ -69,7 +69,7 @@
                     </div>
                 </fieldset>
             </form>
-            
+
             <div class="col-sm-12">
                 <div class="form-horizontal">
                     <div class="form-group">
@@ -85,7 +85,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <div class="sub-header">
         <h3>Fasit</h3>
@@ -102,12 +102,76 @@
             <p>
                 Velg krav som er relevante for registreringen.
             </p>
+            <script type="text/ng-template" id="customTemplate.html">
+            <a style="" >
+                <!-- <b>NR: </b><span ng-bind-html="uibTypeaheadHighlight:query">{{match.model.nr_v9 }}</span>, <em>{{match.model.standard}} </em>,{{match.model.req_in_standard | limitTo:50 }} -->
+                <span ng-bind-html="match.label | limitTo: 90 | uibTypeaheadHighlight:query " ng-click="ic.addRequirement(match.model);vm.addRequirement(match.model);"></span>
+            </a>
+            </script>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">
+                        Søk etter krav
+                    </label>
+                    <div class="col-sm-8">
+                        <input
+                        type="text"
+                        ng-model="reqSel"
+                        placeholder="ID, Standard, Tekst..."
+                        uib-typeahead="req as ('<b>ID:</b> ' + req.nr_v9 + ', <em>Std: ' + req.standard + '</em>, ' + req.req_in_standard) for req in ic.reqSearch[ic.reqSearchInd] | filter:$viewValue | limitTo:12"
+                        uib-typeahead-loading="loadingRequirements"
+                        typeahead-template-url="customTemplate.html"
+                        class="form-control"
+                        typeahead-show-hint="false"
+                        typeahead-min-length="0"
+                        typeahead-on-select="ic.addRequirement($model);reqSel=''"
+                        typeahead-editable="false"
+                        typeahead-focus-first="false">
+                        <i ng-show="loadingRequirements" class="glyphicon glyphicon-refresh"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">
+                        Instillinger for søk
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="radio">
+                              <label for="radio-search-set">
+                                    <input type="radio" name="radio-search-set" data-ng-value=1 data-ng-model="ic.reqSearchInd" checked>
+                                    Indikator
+                                </label>
+                                  <label for="radio-search-set">
+                                    <input type="radio" name="radio-search-set" data-ng-value=0 data-ng-model="ic.reqSearchInd" >
+                                    Global
+                                </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">Detaljer om kravet</label>
+                    <div class="col-sm-8">
+                        <pre style="width:100%">Detaljer: {{vm.selectedReq | json}}</pre>
+                    </div>
+                </div>
+                <div class="form group">
+                    <label for="" class="col-sm-3 control-label">Utvalgte krav</label>
+                    <div class="col-sm-8" style="padding-left:4px; padding-right:4px">
+                        <ul class="list-group">
+                            <li ng-repeat="req in ic.input.requirements track by $index" ng-click="ic.selectedReq = req" class="list-group-item">
+                             <div class="row">
+                                <div class="col-sm-2"><p><b>ID:</b>{{req.nr_v9}}</p></div><div class="col-sm-3"><p><em>{{req.standard}}</em></p></div><div class="col-sm-6"><p>{{req.req_in_standard | limitTo: 80}}<span ng-show="req.req_in_standard.length>80">...</span></p></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         </div>
         <div class="col-sm-12">
             <hr>
             <p class="text-center">
-                <button class="btn btn-default" ng-click="ic.goBack()">Avbryt</button>
-                <button class="btn btn-primary" ng-click="ic.goBack()">Ferdig</button>
+                <button class="btn btn-default" ng-click="ic.cancel()">Avbryt</button>
+                <button class="btn btn-primary" ng-click="ic.save()">Lagre Endringer</button>
             </p>
         </div>
     </div>
