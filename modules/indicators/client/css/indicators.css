@@ -1,4 +1,3 @@
-
 .content-list{
 
     padding:0;
@@ -38,7 +37,6 @@
     -webkit-box-shadow: -3px 10px 30px -9px rgba(0,0,0,0.29);
     -moz-box-shadow: -3px 10px 30px -9px rgba(0,0,0,0.29);
     box-shadow: -3px 10px 30px -9px rgba(0,0,0,0.29);
-
 }*/
 .content-list ul li .subheader h3{
     padding-top:0.4em;
