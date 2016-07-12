@@ -75,6 +75,13 @@
 .header h2 span{
      font-size: 0.8em;
 }
+.header a {
+    color:#eee;
+    text-transform: uppercase;
+    font-size:0.8em;
+    line-height: 1.3em;
+    text-decoration: underline
+}
 .row-fix{
     margin-left: 0;
     margin-right: 0;

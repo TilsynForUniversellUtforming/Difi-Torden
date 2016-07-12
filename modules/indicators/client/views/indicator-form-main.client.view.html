@@ -16,7 +16,7 @@
         </div>
         <button ng-click="vm.log(vm.indicator)">test1</button>
         <!-- <button ng-click="console.log(vm.indicator)">test1</button> -->
-        <form class="form-horizontal" uib-collapse="vm.collapse.general" name="vm.form.indicatorForm"  ng-submit="vm.save(vm.form.indicatorForm.$valid)" novalidate>
+        <form class="form-horizontal" uib-collapse="vm.collapse.general" name="vm.form.indicatorForm"  ng-submit="vm.save(vm.form.indicatorForm.$valid, {remainInThisState:true})" novalidate>
             <fieldset>
                 <!-- Text input-->
                 <div class="form-group">

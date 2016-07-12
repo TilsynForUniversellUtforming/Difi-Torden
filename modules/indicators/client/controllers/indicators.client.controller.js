@@ -141,7 +141,7 @@
             }
 
             function successCallback(res)
-            {   if(!options.remainInThisState)
+            {   if(!options || !options.remainInThisState)
                 $state.go('indicators.view',
                 {
                     indicatorId: res._id

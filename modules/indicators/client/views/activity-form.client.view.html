@@ -3,11 +3,7 @@
         <div class="header">
             <h2><span>Aktivitet</span>
             {{vm.indicator.title}} - {{ac.activity.title}} (endre)
-            <span class="pull-right edits">
-                <!--                 <a ng-click="vm.createService.goToView('form-activity', ac.activity)">endre</a> -->
-                <a ng-click="vm.removeActivity(vm.createService.details)">slett</a>
-            </span>
-            <span alt="hjelp" class="pull-right glyphicon glyphicon-question-sign"></span>
+                <a class="pull-right" ng-click="vm.removeActivity(vm.createService.details)">slett</a>
             </h2>
         </div>
         <div class="sub-header">
@@ -63,10 +59,16 @@
             <hr>
             <div class="row">
                 <div class="col-sm-12">
-                    <p class="text-center">
-                        <button class="btn btn-default" ng-click="ac.cancel()">Avbryt</button>
-                        <button class="btn btn-default" ng-click="ac.save()">Lagre Endringer</button>
-                    </p>
+                    <div class="col-sm-6">
+                        <p class="pull-right">
+                        <a  ng-click="ac.cancel()">Avbryt</a>
+                        </p>
+                    </div>
+                      <div class="col-sm-6">
+                           <p class="pull-left">
+                            <a  ng-click="ac.save()">Lagre Endringer</a>
+                       </p>
+                      </div>
                 </div>
             </div>
         </section>

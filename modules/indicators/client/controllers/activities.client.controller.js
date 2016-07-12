@@ -29,6 +29,26 @@
         vm.cancel = cancel;
         vm.save = save;
         vm.editInput = editInput;
+        vm.localRequirements = getLocalRequirements();
+        function getLocalRequirements(){
+            var local = [];
+            for(var i = 0; i < vm.activity.inputs.length; i++){
+                for(var j = 0; j < vm.activity.inputs[i].requirements.length; j++){
+                    if(local.indexOf( vm.activity.inputs[i].requirements[j])>=0){
+                        console.log("dup");
+                    }
+                    else{
+                        local.push( angular.copy(vm.activity.inputs[i].requirements[j]));
+                        if(!local[local.length-1].inputInd){
+                            local[local.length-1].inputInd = [];
+                        }
+                        local[local.length-1].inputInd.push(i+1);
+                    }
+                }
+            }
+            console.log(local)
+            return local;
+        }
         function editInput(index){
             console.log("go to input edit state")
             if($state.current.name.indexOf('form')>=0){
@@ -52,7 +72,7 @@
                 options:[],
             };
             vm.activity.inputs.push(inp);
-            $state.go('.^.input', {inputInd:(vm.activity.inputs.length-1).toString()});
+            editInput(vm.activity.inputs.length-1)
         }
         function cancel(){
            IndicatorsCreateService.indicator.activities[$stateParams.activityInd] = oldActivity;
