@@ -112,7 +112,7 @@
 .main{
     border: 1px solid #444
 }
-.list-group-item:hover{
+li.hover:hover{
     background-color: #eee;
 }
 .page-header{
@@ -152,4 +152,32 @@ float:left;
    -webkit-line-clamp: 2; /* number of lines to show */
    line-height: 1;        /* fallback */
    max-height: 1*2;       /* fallback */
+}
+
+.input-detail-main{
+
+}
+.input-detail-main p{
+    padding:0;
+    margin-bottom:0.1em;
+    /*color:red;*/
+    font-size: 0.9em;
+}
+.input-detail-main p b {
+    text-transform: uppercase;
+}
+.input-hide-detail{
+    background-color:#ddeedd;
+    margin-bottom: -10px;
+}
+.input-hide-detail:hover{
+    background-color:#aaffaa;
+    margin-bottom: -10px;
+}
+.input-hide-detail div p {
+    color:#555;
+    font-size:1em;
+    margin:0;
+    margin-top: 0.1em;
+    text-transform: uppercase;
 }

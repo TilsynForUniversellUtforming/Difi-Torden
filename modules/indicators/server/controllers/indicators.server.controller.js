@@ -44,14 +44,15 @@ exports.update = function (req, res) {
 
   indicator.title = req.body.title;
   indicator.content = req.body.content
-  if(req.body.activitites)
-    indicator.activitites = req.body.activitites;
+  if(req.body.activities)
+    indicator.activities = req.body.activities;
   if(req.body.requirements)
     indicator.requirements = req.body.requirements;
+  if(req.body.routes)
+    indicator.routes = req.body.routes;
 
   indicator.save(function (err) {
     if (err) {
-      console.log("some fucing error")
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });

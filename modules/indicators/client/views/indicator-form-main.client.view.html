@@ -14,7 +14,9 @@
             Generell informasjon
             </h3>
         </div>
-        <form class="form-horizontal" uib-collapse="vm.collapse.general" name="vm.form.indicatorForm"  ng-submit="vm.save(vm.form.indicatorForm)" novalidate>
+        <button ng-click="vm.log(vm.indicator)">test1</button>
+        <!-- <button ng-click="console.log(vm.indicator)">test1</button> -->
+        <form class="form-horizontal" uib-collapse="vm.collapse.general" name="vm.form.indicatorForm"  ng-submit="vm.save(vm.form.indicatorForm.$valid)" novalidate>
             <fieldset>
                 <!-- Text input-->
                 <div class="form-group">
@@ -28,7 +30,7 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="description">Beskrivelse</label>
                     <div class="col-md-8">
-                        <textarea class="form-control" id="description" rows=6 name="description" data-ng-model="vm.form.description" data-ng-value="vm.indicator.description">Beskriv indikatoren her. </textarea>
+                        <textarea class="form-control" id="description" rows=6 name="description" data-ng-model="vm.indicator.description" data-ng-value="vm.indicator.description">Beskriv indikatoren her. </textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -127,6 +129,22 @@
         <div class="col-sm-12 ">
             <uib-alert type="info" close="closeAlert($index)"> En indikator kan bestå av en eller flere aktiviteter. Hver aktivitet kan inneholde registreringer / spørsmål. Liste til venstre kan også bruker for å administrere aktiviteter og registreringer.</uib-alert>
             <a ng-click="vm.addActivity()">Legg till aktivitet</a>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">
+                        Alle akttiviteter
+                    </label>
+                    <div class="col-sm-8">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="activity in vm.indicator.activities">
+                                <h4>{{activity.title}}</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

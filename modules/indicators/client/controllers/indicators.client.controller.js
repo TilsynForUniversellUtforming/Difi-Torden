@@ -13,48 +13,45 @@
         var vm = this;
         //What we are working with
         vm.indicator = indicator;
-        console.log(indicator)
+        // if( !indicator._id ){
+        //     vm.indicator = IndicatorsCreateService.indicator;
+        // }
         //quick n dirty until we change model to final form
         if (!vm.indicator.requirements) vm.indicator.requirements = [];
         if (!vm.indicator.activities) vm.indicator.activities = [];
-        vm.requirementsService = RequirementsService;
+        //service to help with creation or editing, mostly sharing data between indicator, activity an input controllers
+        vm.createService = IndicatorsCreateService;
+        vm.createService.indicator = vm.indicator;
+        //get list of the requirements
         vm.requirements = RequirementsService.query();
+        vm.addRequirement = addRequirement;
+        vm.removeRequirement = removeRequirement;
+
+        //auth
         vm.authentication = Authentication;
+
         vm.error = null;
         vm.form = {};
         vm.remove = remove;
         vm.save = save;
         vm.addActivity = addActivity;
         vm.indicatorId = indicatorId;
-        vm.editIndicator = function(id)
-        {
-            $state.go('indicators.edit.main',
-            {
-                indicatorId: indicatorId
-            })
-        }
-        vm.formSave = formSave;
-        vm.Requirements = [];
-
-        vm.addRequirement = addRequirement;
-        vm.removeRequirement = removeRequirement;
-
-        vm.createService = IndicatorsCreateService;
-        vm.createService.indicator = vm.indicator;
+        vm.editIndicator = editIndicator;
+        // vm.Requirements = [];
+        // which item in the drag and drop list is currently selected
         vm.listSelected;
+        //for simble debugging
+        vm.log=function(onj){console.log(onj)}
+
         vm.collapseSection = collapseSection;
+        //Keeps track of which subsections on the main indicator form page are collapsed currently
         vm.collapse = {
             general: false,
             krav: true,
             activities: true,
             routes: true
         };
-        function formSave(){
-            vm.indicator.title = vm.form.title;
-            vm.indicator.description = vm.form.description;
-            if(!vm.indicator._id)vm.indicator.created_by = "Roger";
-            save();
-        }
+        //manages collapsing of subsections on indicators main form page
         function collapseSection(section)
         {
             console.log("Collapse!")
@@ -77,7 +74,7 @@
                     break;
             }
         }
-
+        // adds new activity to indicators activities array, navigates to activity from page
         function addActivity()
         {
             var act = {
@@ -91,13 +88,13 @@
                 activityInd: vm.indicator.activities.length - 1
             });
         }
-
+        //adds a requirement to indicators requirements array
         function addRequirement(req)
         {
             if (!vm.indicator.requirements) vm.indicator.requirements = [];
             vm.indicator.requirements.push(req);
         }
-
+        //removes requirement from indicators requirements array
         function removeRequirement(req)
         {
             if (typeof req === 'number')
@@ -105,7 +102,14 @@
             else
                 vm.indicator.requirements.splice(vm.indicator.requirements.indexOf(req), 1);
         }
-
+        //navigates to edit page for indicator with specified id
+        function editIndicator(id)
+        {
+            $state.go('indicators.edit.main',
+            {
+                indicatorId: indicatorId
+            })
+        }
         // Remove existing indicator
         function remove()
         {
@@ -115,14 +119,15 @@
             }
         }
         // Save indicator
-        function save(isValid)
+        function save(isValid, options)
         {
-            // if (!isValid)
-            // {
-            //     $scope.$broadcast('show-errors-check-validity', 'vm.form.indicatorForm');
-            //     return false;
-            // }
-
+            if (!isValid)
+            {
+                $scope.$broadcast('show-errors-check-validity', 'vm.form.indicatorForm');
+                return false;
+            }
+            console.log("Working with:")
+            console.log(vm.indicator)
             // TODO: move create/update logic to service
             if (vm.indicator._id)
             {
@@ -136,7 +141,7 @@
             }
 
             function successCallback(res)
-            {
+            {   if(!options.remainInThisState)
                 $state.go('indicators.view',
                 {
                     indicatorId: res._id

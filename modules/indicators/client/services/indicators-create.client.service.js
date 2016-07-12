@@ -9,54 +9,26 @@
     function IndicatorsCreateService()
     {
         var service = {
-            details:
-            {},
-            views:
-            {
-                currentView: 'main',
-                main: 'main',
-                options:
-                {}
-            },
-            goToView: goToView,
-            backToMain: backToMain,
-            setMainView: setMainView,
-            resetMainView: resetMainView,
-            indicator: {}
+            indicator: indicator,
+            getBlankIndicator:getBlankIndicator
+
         };
 
         return service;
-        var storedDetails = null;
 
-        function goToView(name, item, options)
-        {
-            console.log("Current view: " + service.views.currentView + ", going to " + name)
-            service.views.currentView = name;
-            if (item && item != null && item != undefined)
-            {
-                service.details = item;
+        var indicator = getBlankIndicator();
+
+        function getBlankIndicator(){
+            return {
+                title:'Indikator Uten titel',
+                description:'',
+                created_by:null,
+                created_at:null,
+                activities:[],
+                requirements:[],
+                routes:[]
             }
-            service.views.options = options;
         }
 
-        function backToMain()
-        {
-            goToView(service.views.main, storedDetails);
-        }
-
-        function setMainView(name, options)
-        {
-            console.log("setting main view to " + name)
-            service.views.main = name;
-            if (options.details)
-            {
-                storedDetails = options.details
-            };
-        }
-
-        function resetMainView()
-        {
-            service.views.main = "main";
-        }
     }
 }());

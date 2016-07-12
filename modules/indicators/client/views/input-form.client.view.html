@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="description">Registreringstekst</label>
                         <div class="col-md-8">
-                            <textarea class="form-control" id="input-text" rows=6 name="input-text" data-ng-model="ic.form.text" data-ng-value="ic.input.text">...</textarea>
+                            <textarea class="form-control" id="input-text" rows=6 name="input-text" data-ng-model="ic.input.text" data-ng-value="ic.input.text">...</textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -36,13 +36,13 @@
                         <div class="col-md-8">
                             <div class="radio">
                                 <label for="radios-0">
-                                    <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                                    <input type="radio" name="radios" id="radios-0" data-ng-model="ic.input.mandytory" ng-value="true" checked="checked">
                                     Obligatorisk
                                 </label>
                             </div>
                             <div class="radio">
                                 <label for="radios-1">
-                                    <input type="radio" name="radios" id="radios-1" value="2">
+                                    <input type="radio" name="radios" id="radios-1" ng-value="false" data-ng-model="ic.input.mandytory">
                                     Frivillig
                                 </label>
                             </div>
@@ -105,7 +105,7 @@
             <script type="text/ng-template" id="customTemplate.html">
             <a style="" >
                 <!-- <b>NR: </b><span ng-bind-html="uibTypeaheadHighlight:query">{{match.model.nr_v9 }}</span>, <em>{{match.model.standard}} </em>,{{match.model.req_in_standard | limitTo:50 }} -->
-                <span ng-bind-html="match.label | limitTo: 90 | uibTypeaheadHighlight:query " ng-click="ic.addRequirement(match.model);ic.addRequirement(match.model);"></span>
+                <span ng-bind-html="match.label | limitTo: 90 | uibTypeaheadHighlight:query " ng-click="ic.addRequirement(match.model);vm.addRequirement(match.model);"></span>
             </a>
             </script>
             <div class="form-horizontal">
@@ -118,7 +118,7 @@
                         type="text"
                         ng-model="reqSel"
                         placeholder="ID, Standard, Tekst..."
-                        uib-typeahead="req as ('<b>ID:</b> ' + req.nr_v9 + ', <em>Std: ' + req.standard + '</em>, ' + req.req_in_standard) for req in ic.reqSearch | filter:$viewValue | limitTo:12"
+                        uib-typeahead="req as ('<b>ID:</b> ' + req.nr_v9 + ', <em>Std: ' + req.standard + '</em>, ' + req.req_in_standard) for req in ic.reqSearch[ic.reqSearchInd] | filter:$viewValue | limitTo:12"
                         uib-typeahead-loading="loadingRequirements"
                         typeahead-template-url="customTemplate.html"
                         class="form-control"
@@ -137,11 +137,11 @@
                     <div class="col-sm-8">
                         <div class="radio">
                               <label for="radio-search-set">
-                                    <input type="radio" name="radio-search-set" data-ng-value="false" data-ng-model="ic.globalSearch" checked>
+                                    <input type="radio" name="radio-search-set" data-ng-value=1 data-ng-model="ic.reqSearchInd" checked>
                                     Indikator
                                 </label>
                                   <label for="radio-search-set">
-                                    <input type="radio" name="radio-search-set" data-ng-value="true" data-ng-model="ic.globalSearch" >
+                                    <input type="radio" name="radio-search-set" data-ng-value=0 data-ng-model="ic.reqSearchInd" >
                                     Global
                                 </label>
                         </div>
@@ -170,8 +170,8 @@
         <div class="col-sm-12">
             <hr>
             <p class="text-center">
-                <button class="btn btn-default" ng-click="ic.goBack()">Avbryt</button>
-                <button class="btn btn-primary" ng-click="ic.goBack()">Ferdig</button>
+                <button class="btn btn-default" ng-click="ic.cancel()">Avbryt</button>
+                <button class="btn btn-primary" ng-click="ic.save()">Lagre Endringer</button>
             </p>
         </div>
     </div>
