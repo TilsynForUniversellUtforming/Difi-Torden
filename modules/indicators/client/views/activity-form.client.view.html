@@ -2,8 +2,8 @@
     <section class="main-content">
         <div class="header">
             <h2><span>Aktivitet</span>
-            {{vm.indicator.title}} - {{ac.activity.title}} (endre)
-                <a class="pull-right" ng-click="vm.removeActivity(vm.createService.details)">slett</a>
+            <a ui-sref=".^.main">{{vm.indicator.title}}</a>  - {{ac.activity.title}}
+                <a class="side pull-right" ng-click="vm.removeActivity(vm.createService.details)">slett</a>
             </h2>
         </div>
         <div class="sub-header">

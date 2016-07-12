@@ -3,10 +3,10 @@
     <section class="main-content">
         <div class="header">
             <h2><span style="font-size: 0.8em">Aktivitet</span>
-            {{vm.indicator.title}} >> {{ac.activity.title}}
+            <a ui-sref=".^.main">{{vm.indicator.title}}</a> - {{ac.activity.title}}
 
-                <a class="pull-right" > slett </a>
-                <a class="pull-right" style="margin-right:0.5em" ui-sref=".form({activityInd:ac.activity.id.toString()})"> endre </a>
+                <a class="pull-right side" > slett </a>
+                <a class="pull-right side" style="margin-right:0.5em" ui-sref=".form({activityInd:ac.activity.id.toString()})"> endre </a>
             </h2>
         </div>
         <div class="sub-header">
