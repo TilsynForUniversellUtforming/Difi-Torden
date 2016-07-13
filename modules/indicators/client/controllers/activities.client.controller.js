@@ -95,7 +95,7 @@
                 mandytory: true,
                 alternatives: [],
                 requirements: [],
-                options: [],
+                options: {},
             };
             vm.activity.inputs.push(inp);
             editInput(vm.activity.inputs.length - 1)

@@ -106,7 +106,7 @@
                 templateUrl: "modules/indicators/client/views/input-form.client.view.html"
 
             })
-            .state('indicators.form.input.detail', {
+            .state('indicators.form.input.detail', {//TODO Remove these?
                 url:"/details/:id",
                 templateUrl:"modules/indicators/client/views/input-details.client.view.html"
             })

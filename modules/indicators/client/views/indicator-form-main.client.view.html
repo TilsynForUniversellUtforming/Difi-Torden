@@ -4,9 +4,7 @@
             <h2>
             <span>Indikator</span>
             {{vm.indicator.title}}
-            <span class="pull-right edits">
-            </span>
-            <!--    <span alt="hjelp" class="pull-right glyphicon glyphicon-question-sign"></span> -->
+            <a class="pull-right side" ng-click="vm.remove()"> slett </a>
             </h2>
         </div>
         <div class="sub-header" ng-click="vm.collapseSection('general')">
