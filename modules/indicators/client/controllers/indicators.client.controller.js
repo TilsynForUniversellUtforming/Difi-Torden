@@ -11,9 +11,8 @@
         var vm = this;
         //What we are working with
         vm.indicator = indicator;
-        // if( !indicator._id ){
-        //     vm.indicator = IndicatorsCreateService.indicator;
-        // }
+        vm.indicatorId = indicatorId;
+
         //quick n dirty until we change model to final form
         if (!vm.indicator.requirements) vm.indicator.requirements = [];
         if (!vm.indicator.activities) vm.indicator.activities = [];
@@ -24,18 +23,20 @@
         vm.requirements = RequirementsService.query();
         vm.addRequirement = addRequirement;
         vm.removeRequirement = removeRequirement;
-
         //auth
         vm.authentication = Authentication;
 
         vm.error = null;
+        //Indiactor form
         vm.form = {};
+        //remove indicator
         vm.remove = remove;
+        //save or update
         vm.save = save;
+        //add activity to array
         vm.addActivity = addActivity;
-        vm.indicatorId = indicatorId;
         vm.editIndicator = editIndicator;
-        // vm.Requirements = [];
+
         // which item in the drag and drop list is currently selected
         vm.listSelected;
         //for simble debugging
@@ -117,14 +118,14 @@
             console.log("CTRL: Working with:")
             console.log(vm.indicator)
             IndicatorsCreateService.save(function(res) {
-                    if (!options || !options.remainInThisState)
+                    if (!options )
                         $state.go('indicators.view', {
                             indicatorId: res._id
                         });
                     else if (options && options.goToState) {
                         $state.go(options.goToState, (options.stateParams ? options.stateParams : {}));
                     } else {
-                        $state.go('indicators.edit.main')
+
                     }
                 }, function(res) {
                     vm.error = res.data.message;

@@ -5,7 +5,7 @@
             <h2><span style="font-size: 0.8em">Aktivitet</span>
             <a ui-sref=".^.main">{{vm.indicator.title}}</a> - {{ac.activity.title}}
 
-                <a class="pull-right side" > slett </a>
+                <a class="pull-right side" ng-click="ac.removeActivity()"> slett </a>
                 <a class="pull-right side" style="margin-right:0.5em" ui-sref=".form({activityInd:ac.activity.id.toString()})"> endre </a>
             </h2>
         </div>
