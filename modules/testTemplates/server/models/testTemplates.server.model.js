@@ -23,7 +23,10 @@ var TestTemplateSchema = new Schema(
         type: Date,
         default: Date.now
     },
-    activities: [
-    {}]
+   title: String,
+   description: String,
+   testObject: String,
+   indicator: String,
+
 });
 mongoose.model('TestTemplate', TestTemplateSchema);

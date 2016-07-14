@@ -41,6 +41,10 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var testTemplate = req.testTemplate;
+  testTemplate.title = req.body.title;
+  testTemplate.description = req.body.description;
+  testTemplate.testObject = req.body.testbject;
+  
 
   // testTemplate.title = req.body.title;
   // testTemplate.content = req.body.content
