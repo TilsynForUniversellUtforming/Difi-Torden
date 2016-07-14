@@ -172,7 +172,7 @@
                 controller:'RoutesController',
                 controllerAs:'rc'
             })
-            .state('indicators.edit.edit.activity', {
+            .state('indicators.edit.activity', {
                 url:"/activity/:activityInd",
                 params:{
                     activityInd:{
@@ -216,9 +216,18 @@
                         squash:false
                     },
                 },
-                controller:'InputsController',
-                controllerAs:'ic',
-                templateUrl: "modules/indicators/client/views/input-form.client.view.html"
+                views:{
+                "":{
+                   controller:'InputsController',
+                   controllerAs:'ic',
+                   templateUrl: "modules/indicators/client/views/input-form.client.view.html"
+                },
+                "new-route@indicators.edit.activity.input":{
+                    controller:"RoutesController",
+                    controllerAs:'rc',
+                    templateUrl:"modules/indicators/client/views/route-form.client.view.html"
+                }
+               }
 
             })
 

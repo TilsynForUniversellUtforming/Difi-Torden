@@ -31,6 +31,11 @@
         vm.reqSearchInd = 1;
         vm.addRequirement = addRequirement;
         vm.addAlternative = addAlternative;
+        vm.getActivititesList = getActivititesList;
+        function getActivititesList(){
+            // console.log(IndicatorsCreateService)
+            return IndicatorsCreateService.indicator.activities;
+        }
 
         function addRequirement(req)
         {
