@@ -18,7 +18,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/testTemplates',
       permissions: '*'
     }, {
-      resources: '/api/testTemplates/:testTemplatesId',
+      resources: '/api/testTemplates/:testTemplateId',
       permissions: '*'
     }]
   }, {
@@ -27,7 +27,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/testTemplates',
       permissions: ['*']
     }, {
-      resources: '/api/testTemplates/:testTemplatesId',
+      resources: '/api/testTemplates/:testTemplateId',
       permissions: ['*']
     }]
   }, {
@@ -36,7 +36,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/testTemplates',
       permissions: ['*']
     }, {
-      resources: '/api/testTemplates/:testTemplatesId',
+      resources: '/api/testTemplates/:testTemplateId',
       permissions: ['*']
     }]
   }]);
@@ -49,7 +49,7 @@ exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 return next();
   // If an article is being processed and the current user created it then allow any manipulation
-  if (req.requirement && req.user && req.requirement.user && req.requirement.user === req.user) {
+  if (req.testTemplate && req.user && req.testTemplate.user && req.testTemplate.user === req.user) {
     return next();
   }
 

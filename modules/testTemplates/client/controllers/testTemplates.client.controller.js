@@ -83,11 +83,12 @@
         // Save indicator
         function save(isValid)
         {
-            if (!isValid)
-            {
-                $scope.$broadcast('show-errors-check-validity', 'vm.form.testTemplateForm');
-                return false;
-            }
+            console.log("hohohhohoho")
+            // if (!isValid)
+            // {
+            //     $scope.$broadcast('show-errors-check-validity', 'vm.form.testTemplateForm');
+            //     return false;
+            // }
 
             // TODO: move create/update logic to service
             if (vm.testTemplate._id)

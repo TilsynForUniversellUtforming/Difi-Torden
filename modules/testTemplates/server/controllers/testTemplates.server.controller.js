@@ -77,7 +77,7 @@ exports.delete = function (req, res) {
  * List of testTemplates
  */
 exports.list = function (req, res) {
-  testTemplate.find().sort('name').exec(function (err, testTemplates) {
+  TestTemplate.find().sort('name').exec(function (err, testTemplates) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
