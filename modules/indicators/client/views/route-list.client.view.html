@@ -1,0 +1,15 @@
+<div class="row-fixed">
+    <!-- List -->
+    <ul class="list-group">
+        <!--  for creating more routes -->
+        <li class="list-group-item">
+            <a ui-sref="indicators.edit.routes.create">Legg til en rute</a>
+        </li>
+        <li class="list-group-item" ng-repeat="route in rc.routes">
+            Route Info
+            <a ui-sref="inicators.edit.routes.edit({routeId:route.id})">Endre</a>
+            <button class="btn btn-warning" ng-click="rc.deleteRoute(route)">Slett</button>
+        </li>
+    </ul>
+    
+</div>
