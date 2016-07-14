@@ -285,19 +285,24 @@
                 ]
             }
         ];
-        for(var i = 0; i < indicators.length ; i++){
-            if(indicators[i]._id == $stateParams.indicatorId)
-            {
-                return indicators[i]
-            }
-        }
-        return {error:"shit happens"};
+        // for(var i = 0; i < indicators.length ; i++){
+        //     if(indicators[i]._id == $stateParams.indicatorId)
+        //     {
+        //         return indicators[i]
+        //     }
+        // }
+        // return {error:"shit happens"};
 
         return IndicatorsService.get(
         {
             indicatorId: $stateParams.indicatorId
         }).$promise;
     }
+
+    // getActivity.$inject = ['$stateParams', 'IndicatorsService'];
+    // function getActivity($stateParams, IndicatorsService){
+
+    // }
 
     newIndicator.$inject = ['IndicatorsService'];
 

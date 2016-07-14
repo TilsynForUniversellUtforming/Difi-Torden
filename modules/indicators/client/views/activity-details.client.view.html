@@ -4,10 +4,9 @@
         <div class="header">
             <h2><span style="font-size: 0.8em">Aktivitet</span>
             {{vm.indicator.title}} >> {{ac.activity.title}}
-            <span class="pull-right edits">
-                <a ui-sref=".form({activityInd:ac.activity.id.toString()})">endre</a>
-                <a >slett</a>
-            </span>
+
+                <a class="pull-right" > slett </a>
+                <a class="pull-right" style="margin-right:0.5em" ui-sref=".form({activityInd:ac.activity.id.toString()})"> endre </a>
             </h2>
         </div>
         <div class="sub-header">
@@ -34,26 +33,74 @@
                             <p class="form-padding">{{ac.activity.description}}</p>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">
+                            Inneholder krav
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input class="form-control" type="text" ng-model="ac.reqSearch" placeholder="Søk etter krav">
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="list-group">
+                                        <li class="list-group-item" ng-repeat="req in ac.localRequirements | filter: ac.reqSearch">
+                                            Kap: {{req.chapter_title}}, Standard:{{req.standard}}
+                                            <br>
+                                            Kat: {{req.category}}
+                                            <br>
+                                            Registreringer: <span ng-repeat="ind in req.inputInd track by $index">{{ind}},</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="main-content">
-        <div class="sub-header">
-            <h3>Registreringer</h3>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="input in ac.activity.inputs" ui-view="input-details-main"></li>
-                </ul>
-            </div class="col-sm-12">
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <hr>
-                <p class="text-center"><button class="btn btn-default" ng-click="vm.createService.backToMain()">Tilbake</button></p>
+    </div>
+</section>
+<section class="main-content">
+    <div class="sub-header">
+        <h3>Registreringer</h3>
+    </div>
+    <div class="row row-fix">
+        <div class="col-sm-12">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="AlleAktiviteter" class="col-sm-3 control-label">
+                        Alle registreringer
+                    </label>
+                    <div class="col-sm-8">
+                      <div class="row">
+                        <div class="col-sm-9"> <input id="input-search" name="input-search" type="text" placeholder="Søk etter en registrering" class="form-control input-md"  data-ng-model="ac.inputSearch" ></div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-primary" ng-click="ac.newInput()">Ny registrering</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="input in ac.activity.inputs | filter: ac.inputSearch" ui-view="input-details-main"></li>
+                                <li class="list-group-item"  ng-if="ac.activity.inputs == 0">Ingen registreringer.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
+        </div class="col-sm-12">
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <hr>
+            <p class="text-center"><a ui-sref=".^.main">Tilbake</a></p>
         </div>
-    </section>
+    </div>
+</section>
 </section>
