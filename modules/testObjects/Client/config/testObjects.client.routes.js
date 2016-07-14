@@ -21,227 +21,122 @@
             {
                 url: '',
                 templateUrl: 'modules/testObjects/client/views/testObjects-list.client.view.html',
-                controller: 'TestobjectsListController',
+                controller: 'TestObjectsListController',
                 controllerAs: 'vm',
                 data:
                 {
+                    roles: ['user', 'admin', 'guest'],
                     pageTitle: 'TestObjects List'
                 }
             })
-            .state('indicators.create',
+            .state('testObjects.create',
             {
                 url: '/create',
                 views:
                 {
                     "":
                     {
-                        templateUrl: 'modules/TestObjects/client/views/creator-main.client.view.html',
+                        templateUrl: 'modules/TestObjects/client/views/testObject-creator-main.client.view.html',
                         controller: 'testObjectsController',
                         controllerAs: 'vm',
                     },
-                    "side@indicators.create":
+                    "side@testObjects.create":
                     {
-                        templateUrl: "modules/indicators/client/views/creator-side.client.view.html"
+                        templateUrl: "modules/testObjects/client/views/testObjects-creator-side.client.view.html"
                     },
                 },
                 resolve:
                 {
-                    indicatorResolve: newIndicator,
-                    indicatorId: getIndicatorId
+                    testObjectResolve: newTestObject
+                    
                 },
                 data:
                 {
                     roles: ['user', 'admin', 'guest'],
-                    pageTitle: 'Indicators Create'
+                    pageTitle: 'TestObjects Create'
                 }
             })
-            .state('indicators.create.main', {
+            .state('testObjects.create.main', {
                 url:'/main',
-                templateUrl: "modules/indicators/client/views/indicator-form-main.client.view.html"
+                templateUrl: "modules/testObjects/client/views/testObject-form-main.client.view.html"
             })
-            .state('indicators.create.activity', {
-                url:"/activity/:activityInd",
-                params:{
-                    activityInd:{
-                        value:'0',
-                        squash:false
-                    }
-                },
-                views:{
-                    "":{
-                        templateUrl:"modules/indicators/client/views/activity-details.client.view.html",
-                        controller: 'ActivitiesController',
-                        controllerAs: 'ac'
-                    },
-                     "input-details-main@indicators.form.activity.details":
-                    {
-                        templateUrl: "modules/indicators/client/views/input-details-main.client.view.html"
-                    },
-                }
-            })
-            .state('indicators.create.activity.form', {
-                url:"/form",
-                views:{
-                    "":{
-                        templateUrl:"modules/indicators/client/views/activity-form.client.view.html",
-                        controller:'ActivitiesController',
-                        controllerAs:'ac'
-                    },
-                     "input-details-main@indicators.form.activity.form":
-                    {
-                        templateUrl: "modules/indicators/client/views/input-details-main.client.view.html"
-                    }
-                }
-            })
-            .state('indicators.create.activity.input', {
-                url:"/input/:inputInd",
-                 params:{
-                    inputInd:{
-                        value:'0',
-                        squash:false
-                    }
-                },
-                controller:'InputsController',
-                controllerAs:'ic',
-                templateUrl: "modules/indicators/client/views/input-form.client.view.html"
+            
+            
+            
+           
+            // .state('testObjects.edit',
+            // {
+            //     url: '/:testObjectId/edit',
+            //      views:
+            //     {
+            //         "":
+            //         {
+            //             templateUrl: 'modules/testObjects/client/views/testObject-creator-main.client.view.html',
+            //             controller: 'TestObjectsController',
+            //             controllerAs: 'vm',
+            //         },
+            //         "side@testObjects.edit":
+            //         {
+            //             templateUrl: "modules/testObjects/client/views/testObject-creator-side.client.view.html"
+            //         },
+            //     },
+            //     resolve:
+            //     {
+            //         testObjectResolve: getTestObject,
+            //         TestObjectId: getTestObjectId
+            //     },
+            //     data:
+            //     {
+            //         roles: ['user', 'admin', 'guest'],
+            //         pageTitle: 'Edit TestObject '
+            //     }
+            // })
+            // .state('testObjects.edit.main', {
+            //     url:'/main',
+            //     templateUrl: "modules/testObjects/client/views/testObject-form-main.client.view.html"
+            // })
 
-            })
-            .state('indicators.form.input.detail', {
-                url:"/details/:id",
-                templateUrl:"modules/indicators/client/views/input-details.client.view.html"
-            })
-            .state('indicators.form.input.form', {
-                url:"/form",
-                templateUrl:"modules/indicators/client/views/input-form.client.view.html"
-            })
+         
+          
 
-            .state('indicators.edit',
-            {
-                url: '/:indicatorId/edit',
-                 views:
-                {
-                    "":
-                    {
-                        templateUrl: 'modules/indicators/client/views/creator-main.client.view.html',
-                        controller: 'IndicatorsController',
-                        controllerAs: 'vm',
-                    },
-                    "side@indicators.edit":
-                    {
-                        templateUrl: "modules/indicators/client/views/creator-side.client.view.html"
-                    },
-                },
-                resolve:
-                {
-                    indicatorResolve: getIndicator,
-                    indicatorId: getIndicatorId
-                },
-                data:
-                {
-                    roles: ['user', 'admin', 'guest'],
-                    pageTitle: 'Edit Indicator {{ indicatorResolve.name }}'
-                }
-            })
-            .state('indicators.edit.main', {
-                url:'/main',
-                templateUrl: "modules/indicators/client/views/indicator-form-main.client.view.html"
-            })
-
-            .state('indicators.edit.activity', {
-                url:"/activity/:activityInd",
-                params:{
-                    activityInd:{
-                        value:'0',
-                        squash:false
-                    }
-                },
-                views:{
-                    "":{
-                        templateUrl:"modules/indicators/client/views/activity-details.client.view.html",
-                        controller: 'ActivitiesController',
-                        controllerAs: 'ac'
-                    },
-                    "input-details-main@indicators.edit.activity":
-                    {
-                        templateUrl: "modules/indicators/client/views/input-details-main.client.view.html"
-                    },
-                },
-                 onEnter:function(){console.log("entering activity ")}
-            })
-            .state('indicators.edit.activity.form', {
-                url:"/form",
-                views:{
-                    "":{
-                        templateUrl:"modules/indicators/client/views/activity-form.client.view.html",
-                        controller:'ActivitiesController',
-                        controllerAs:'ac'
-                    },
-                    "input-details-main@indicators.edit.activity.form":
-                    {
-                        templateUrl: "modules/indicators/client/views/input-details-main.client.view.html"
-                    }
-                },
-                onEnter:function(){console.log("entering activity form")}
-            })
-            .state('indicators.edit.activity.input', {
-                url:"/input/:inputInd",
-                params:{
-                    inputInd:{
-                        value:'0',
-                        squash:false
-                    },
-                },
-                controller:'InputsController',
-                controllerAs:'ic',
-                templateUrl: "modules/indicators/client/views/input-form.client.view.html"
-
-            })
-
-            .state('indicators.view',
-            {
-                url: '/:indicatorId',
-                templateUrl: 'modules/indicators/client/views/view-indicator.client.view.html',
-                controller: 'IndicatorsController',
-                controllerAs: 'vm',
-                resolve:
-                {
-                    indicatorResolve: getIndicator,
-                    indicatorId: getIndicatorId
-                },
-                data:
-                {
-                    pageTitle: 'Indicator {{ indicatorResolve.name }}'
-                }
-            });
+            // .state('testObjects.view',
+            // {
+            //     url: '/:indicatorId',
+            //     templateUrl: 'modules/testObjects/client/views/view-indicator.client.view.html',
+            //     controller: 'TestObjectsController',
+            //     controllerAs: 'vm',
+            //     resolve:
+            //     {
+            //         TestObjectResolve: getTestObject,
+            //         TestObjectId: getTestObjectId
+            //     },
+            //     data:
+            //     {
+            //         pageTitle: 'TestObject {{ testObjectResolve.name }}'
+            //     }
+            // });
     }
-    getIndicatorId.$inject = ['$stateParams'];
-    function getIndicatorId($stateParams){
-        if($stateParams.indicatorId)
-            return $stateParams.indicatorId;
-        else return {};
-    }
-    getIndicator.$inject = ['$stateParams', 'IndicatorsService'];
+    // getIndicatorId.$inject = ['$stateParams'];
+    // function getIndicatorId($stateParams){
+    //     if($stateParams.indicatorId)
+    //         return $stateParams.indicatorId;
+    //     else return {};
+    // }
+    getTestObject.$inject = ['$stateParams', 'TestObjectsService'];
+ function getTestObject($stateParams, TestObjectsService) {
+     // body...
 
-    
-        for(var i = 0; i < indicators.length ; i++){
-            if(indicators[i]._id == $stateParams.indicatorId)
-            {
-                return indicators[i]
-            }
-        }
-        return {error:"shit happens"};
-
-        return IndicatorsService.get(
+        return TestObjectsService.get(
         {
-            indicatorId: $stateParams.indicatorId
+            testObjectId: $stateParams.testObjectId
         }).$promise;
     }
 
-    newIndicator.$inject = ['IndicatorsService'];
+    newTestObject.$inject = ['TestObjectsService'];
 
-    function newIndicator(IndicatorsService)
+    function newTestObject(TestObjectsService)
     {
-        return new IndicatorsService();
+        return new TestObjectsService();
     }
 
 }());

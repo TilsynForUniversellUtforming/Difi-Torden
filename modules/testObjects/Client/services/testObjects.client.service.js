@@ -5,7 +5,7 @@
     .module('testObjects.services')
     .factory('TestObjectsService', TestObjectsService);
 
-  IndicatorsService.$inject = ['$resource'];
+  TestObjectsService.$inject = ['$resource'];
 
   function TestObjectsService($resource) {
     return $resource('api/testObjects/:testObjectId', {

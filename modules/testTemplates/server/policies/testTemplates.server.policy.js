@@ -9,47 +9,47 @@ var acl = require('acl');
 acl = new acl(new acl.memoryBackend());
 
 /**
- * Invoke TestObjects Permissions
+ * Invoke Articles Permissions
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
     roles: ['admin'],
     allows: [{
-      resources: '/api/testObjects',
+      resources: '/api/testTemplates',
       permissions: '*'
     }, {
-      resources: '/api/testObjects/:testObjectId',
+      resources: '/api/testTemplates/:testTemplatesId',
       permissions: '*'
     }]
   }, {
     roles: ['user'],
     allows: [{
-      resources: '/api/testObjects',
+      resources: '/api/testTemplates',
       permissions: ['*']
     }, {
-      resources: '/api/TestObjects/:testObjectId',
+      resources: '/api/testTemplates/:testTemplatesId',
       permissions: ['*']
     }]
   }, {
     roles: ['guest'],
     allows: [{
-      resources: '/api/TestObjects',
+      resources: '/api/testTemplates',
       permissions: ['*']
     }, {
-      resources: '/api/TestObjects/:testObjectId',
+      resources: '/api/testTemplates/:testTemplatesId',
       permissions: ['*']
     }]
   }]);
 };
 
 /**
- * Check If TestObjects Policy Allows
+ * Check If testTemplates Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 return next();
   // If an article is being processed and the current user created it then allow any manipulation
-  if (req.TestObject && req.user && req.TestObject.user && req.TestObject.user.id === req.user.id) {
+  if (req.requirement && req.user && req.requirement.user && req.requirement.user === req.user) {
     return next();
   }
 

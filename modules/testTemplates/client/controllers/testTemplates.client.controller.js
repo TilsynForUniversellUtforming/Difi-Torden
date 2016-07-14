@@ -3,19 +3,19 @@
     'use strict';
 
     angular
-        .module('testObjects')
-        .controller('testObjectsController', TestObjectsController);
+        .module('testTemplates')
+        .controller('testTemplatesController', TestTemplatesController);
 
-    TestObjectsController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', '$http', 'testObjectResolve'];
+    TestTemplatesController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', '$http', 'testTemplateResolve'];
 
-    function TestObjectsController($scope, $state, $stateParams, testObject,  $window, Authentication, s$http)
+    function TestTemplatesController($scope, $state, $stateParams, testTemplate,  $window, Authentication, s$http)
     {
         var vm = this;
         //What we are working with
-        vm.testObject = testObject;
+        vm.testTemplate = testTemplate;
         //quick n dirty until we change model to final form
-        // if (!vm.testObject.requirements) vm.testObject.requirements = [];
-        // if (!vm.testObject.activities) vm.testObject.activities = [];
+        // if (!vm.testTemplate.requirements) vm.testTemplate.requirements = [];
+        // if (!vm.testTemplate.activities) vm.testTemplate.activities = [];
 
         vm.authentication = Authentication;
         vm.error = null;
@@ -77,7 +77,7 @@
         {
             if ($window.confirm('Are you sure you want to delete?'))
             {
-                vm.testObject.$remove($state.go('testObjects.list'));
+                vm.testTemplate.$remove($state.go('testTemplates.list'));
             }
         }
         // Save indicator
@@ -85,25 +85,25 @@
         {
             if (!isValid)
             {
-                $scope.$broadcast('show-errors-check-validity', 'vm.form.testObjectForm');
+                $scope.$broadcast('show-errors-check-validity', 'vm.form.testTemplateForm');
                 return false;
             }
 
             // TODO: move create/update logic to service
-            if (vm.testObject._id)
+            if (vm.testTemplate._id)
             {
-                vm.testObject.$update(successCallback, errorCallback);
+                vm.testTemplate.$update(successCallback, errorCallback);
             }
             else
             {
-                vm.testObject.$save(successCallback, errorCallback);
+                vm.testTemplate.$save(successCallback, errorCallback);
             }
 
             function successCallback(res)
             {
-                // $state.go('testObject.view',
+                // $state.go('testTemplate.view',
                 // {
-                //     testObjectId: res._id
+                //     testTemplateId: res._id
                 // });
                 console.log('save OK')
             }

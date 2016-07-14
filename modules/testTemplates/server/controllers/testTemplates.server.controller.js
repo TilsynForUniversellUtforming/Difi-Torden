@@ -5,109 +5,109 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  TestObject = mongoose.model('TestObject'),
+  TestTemplate = mongoose.model('TestTemplate'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
- * Create an Testobject
+ * Create an TestTemplate
  */
 exports.create = function (req, res) {
-  var testObject = new TestObject(req.body);
-  // Testobject.user = req.user;
+  var testTemplate = new TestTemplate(req.body);
+  // TestTemplate.user = req.user;
 
-  testObject.save(function (err) {
+  testTemplate.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(testObject);
+      res.json(testTemplate);
     }
   });
 };
 
 /**
- * Show the current Testobject
+ * Show the current TestTemplate
  */
 exports.read = function (req, res) {
   // convert mongoose document to JSON
-  var testObject = req.testObject ? req.testObject.toJSON() : {};
+  var testTemplate = req.testTemplate ? req.testTemplate.toJSON() : {};
 
-  res.json(testObject);
+  res.json(testTemplate);
 };
 
 /**
  * Update an article
  */
 exports.update = function (req, res) {
-  var testObject = req.testObject;
+  var testTemplate = req.testTemplate;
 
-  // testObject.title = req.body.title;
-  // testObject.content = req.body.content
+  // testTemplate.title = req.body.title;
+  // testTemplate.content = req.body.content
   console.log("NOT IMPLEMENTED YET")
-  testObject.save(function (err) {
+  testTemplate.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(testObject);
+      res.json(testTemplate);
     }
   });
 };
 
 /**
- * Delete an testObject
+ * Delete an testTemplate
  */
 exports.delete = function (req, res) {
-  var testObject = req.testObject;
+  var testTemplate = req.testTemplate;
 
-  testObject.remove(function (err) {
+  testTemplate.remove(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(testObject);
+      res.json(testTemplate);
     }
   });
 };
 
 /**
- * List of testObjects
+ * List of testTemplates
  */
 exports.list = function (req, res) {
-  TestObject.find().sort('name').exec(function (err, testObjects) {
+  testTemplate.find().sort('name').exec(function (err, testTemplates) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(testObjects);
+      res.json(testTemplates);
     }
   });
 };
 
 /**
- * testObjects middleware
+ * testTemplates middleware
  */
-exports.testObjectById = function (req, res, next, id) {
+exports.testTemplateById = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'testObject ID is invalid'
+      message: 'testTemplate ID is invalid'
     });
   }
 
-  TestObject.findById(id).exec(function (err, testObject) {
+  TestTemplate.findById(id).exec(function (err, testTemplate) {
     if (err) {
       return next(err);
-    } else if (!testObject) {
+    } else if (!testTemplate) {
       return res.status(404).send({
-        message: 'No testObject with that identifier has been found'
+        message: 'No testTemplate with that identifier has been found'
       });
     }
-    req.testObject = testObject;
+    req.testTemplate = testTemplate;
     next();
   });
 };
