@@ -6,9 +6,9 @@
         .module('testTemplates')
         .controller('testTemplatesController', TestTemplatesController);
 
-    TestTemplatesController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', '$http', 'testTemplateResolve'];
+    TestTemplatesController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', 'testTemplateResolve'];
 
-    function TestTemplatesController($scope, $state, $stateParams, testTemplate,  $window, Authentication, s$http)
+    function TestTemplatesController($scope, $state, $stateParams,  $window, Authentication, testTemplate)
     {
         var vm = this;
         //What we are working with
@@ -16,14 +16,14 @@
         //quick n dirty until we change model to final form
         // if (!vm.testTemplate.requirements) vm.testTemplate.requirements = [];
         // if (!vm.testTemplate.activities) vm.testTemplate.activities = [];
-
+        console.log(testTemplate)
         vm.authentication = Authentication;
         vm.error = null;
         vm.form = {};
         vm.remove = remove;
         vm.save = save;
         // vm.addActivity = addActivity;
-        
+
         // vm.getLocation = function(val)
         // {
         //     return $http.get('http://maps.googleapis.com/maps/api/geocode/json',
@@ -42,7 +42,7 @@
         //     });
         // };
 
-        
+
 
         // function addActivity()
         // {
