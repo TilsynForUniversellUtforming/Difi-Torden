@@ -44,6 +44,7 @@ exports.update = function (req, res) {
 
   indicator.title = req.body.title;
   indicator.content = req.body.content
+    indicator.activitiesIds = req.body.activitiesIds
   if(req.body.activities)
     indicator.activities = req.body.activities;
   if(req.body.requirements)
@@ -105,7 +106,7 @@ exports.indicatorById = function (req, res, next, id) {
     });
   }
 
-  Indicator.findById(id).exec(function (err, indicator) {
+  Indicator.findById(id).populate('activitiesIds').exec(function (err, indicator) {
     if (err) {
       return next(err);
     } else if (!indicator) {

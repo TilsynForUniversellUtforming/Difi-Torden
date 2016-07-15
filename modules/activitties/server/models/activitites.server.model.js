@@ -22,7 +22,7 @@ var ActivitySchema = new Schema(
     {}],
     description: String,
     images: [
-    {}]
+    {}],
 });
 
 mongoose.model('Activity', ActivitySchema);

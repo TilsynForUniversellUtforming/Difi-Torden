@@ -44,6 +44,7 @@
         function removeActivity(id) {
             //TODO add popup warning
             IndicatorsCreateService.indicator.activities.splice(id ? id : $stateParams.activityInd, 1);
+
             var isCreate = ($state.current.name.indexOf('create') >= 0) ? true : false;
             var isAct = ($state.current.name.indexOf('activity') >= 0) ? true : false;
             if (isAct) {

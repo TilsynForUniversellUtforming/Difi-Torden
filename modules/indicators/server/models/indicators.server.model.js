@@ -24,6 +24,7 @@ var IndicatorSchema = new Schema(
         default: Date.now
     },
     activities: {type:Array, default:[]},
+    activitiesIds: [{type: Schema.ObjectId, ref:'Activity'}],
     requirements:{type:Array, default:[]},
     routes:{type:Array, default:[]}
 });

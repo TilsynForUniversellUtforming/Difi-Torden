@@ -14,7 +14,7 @@ var path = require('path'),
 exports.create = function(req, res)
 {
     var activity = new Activity(req.body);
-    requirement.user = req.user;
+    activity.user = req.user;
 
     activity.save(function(err)
     {

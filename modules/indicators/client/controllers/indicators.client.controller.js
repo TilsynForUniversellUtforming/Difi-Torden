@@ -5,9 +5,9 @@
         .module('indicators')
         .controller('IndicatorsController', IndicatorsController);
 
-    IndicatorsController.$inject = ['$scope', '$state', '$stateParams', 'indicatorResolve', 'indicatorId', '$window', 'Authentication', 'IndicatorsCreateService', '$http', 'RequirementsService'];
+    IndicatorsController.$inject = ['$scope', '$state', '$stateParams', 'indicatorResolve', 'indicatorId', '$window', 'Authentication', 'IndicatorsCreateService', '$http', 'RequirementsService', 'ActivitiesService'];
 
-    function IndicatorsController($scope, $state, $stateParams, indicator, indicatorId, $window, Authentication, IndicatorsCreateService, $http, RequirementsService) {
+    function IndicatorsController($scope, $state, $stateParams, indicator, indicatorId, $window, Authentication, IndicatorsCreateService, $http, RequirementsService, ActivitiesService) {
         var vm = this;
         //What we are working with
         vm.indicator = indicator;
@@ -25,7 +25,7 @@
         vm.removeRequirement = removeRequirement;
         //auth
         vm.authentication = Authentication;
-
+        console.log(vm.indicator)
         vm.error = null;
         //Indiactor form
         vm.form = {};
@@ -75,12 +75,14 @@
         }
         // adds new activity to indicators activities array, navigates to activity from page
         function addActivity() {
-            var act = {
-                title: 'Aktivtet uten navn',
-                inputs: [],
-                beskrivelse: '',
-            }
+            var act = new ActivitiesService();
+            act.title = "Aktivitet uten navn";
+            act.inputs = [];
+            act.beskrivelse = "";
+            if(!vm.indicator.activitiesIds) vm.indicator.activitiesIds = [];
+            act.$save(function(res){console.log("All good"); console.log(res);vm.indicator.activitiesIds.push(res._id);}, function(res){console.log("not good")})
             vm.indicator.activities.push(act);
+
             $state.go('^.activity.form', {
                 activityInd: vm.indicator.activities.length - 1
             });
