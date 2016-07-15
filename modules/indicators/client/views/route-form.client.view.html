@@ -1,33 +1,20 @@
-<button class="btn btn-primary center-block" ng-click="rc.showCreator = true">Ny regel</button>
+<md-button class="md-raised center-block" ng-click="rc.showCreator = true" ng-if="!rc.showCreator">Legg til</md-button>
 <div class="row" ng-show="rc.showCreator">
     <div class="col-sm-12">
         <div class="row">
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="col-sm-3 control-label " for="route-input">
-                    Hvis svaret matcher:
+                        Hvis svaret matcher:
                     </label>
                     <div class="col-sm-8">
                         <!-- TYPE YES NO -->
                         <div ng-if="ic.input.type=='yesno'">
-                            <div class="radio">
-                                <label for="">
-                                <input type="radio" name="route-input" >
-                                Ja
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="">
-                                <input type="radio" name="route-input" >
-                                Nei
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="">
-                                <input type="radio" name="route-input" >
-                                Ikke relevant
-                                </label>
-                            </div>
+                            <md-radio-group ng-model="rc.RouteYesNo" class="">
+                            <md-radio-button value="true" class="md-primary">Ja </md-radio-button>
+                            <md-radio-button value="false" >Nei </md-radio-button>
+                            <md-radio-button value="Ikke Relevant">Ikke relevant </md-radio-button>
+                            </md-radio-group>
                         </div>
                         <!-- END TYPE YES NO  -->
                         <!-- TYPE FREETEXT -->
@@ -37,20 +24,17 @@
                         <!-- END TYPE FREETEXT -->
                         <!-- TYPE RADIO -->
                         <div ng-if="ic.input.type=='radio'">
-                            <div class="radio list-group-item" ng-repeat="alt in ic.input.alternatives">
-                                <label for="">
-                                <input type="radio" name="route-input" >
-                                {{alt.text}}
-                                </label>
-                            </div>
+                            <md-radio-group ng-model="rc.RouteYesNo" >
+                            <md-radio-button ng-repeat="alt in ic.input.alternatives" ng-value="alt.value + $index" class="md-primary">{{alt.text}} </md-radio-button>
+                            </md-radio-group>
                         </div>
                         <!-- END TYPE RADIO -->
                         <!-- TYPE CHECKBOX -->
                         <div ng-if="ic.input.type=='checkbox'">
                             <div class="checkbox list-group-item" ng-repeat="alt in ic.input.alternatives">
                                 <label for="">
-                                <input type="checkbox" name="route-input" >
-                                {{alt.text}}
+                                    <input type="checkbox" name="route-input" >
+                                    {{alt.text}}
                                 </label>
                             </div>
                         </div>
@@ -71,59 +55,46 @@
                     <label for="" class="col-sm-3 control-label">Gjør følgende:</label>
                     <div class="col-sm-8">
                         <div class="row">
-                            <div class="btn-group col-sm-12">
-                                <label class="btn btn-default col-sm-4" ng-model="rc.routeEvalTrue" uib-btn-radio="'goToSection'">Gå til...</label>
-                                <label class="btn btn-default col-sm-4" ng-model="rc.routeEvalTrue" uib-btn-radio="'next'">Neste...</label>
-                                <label class="btn btn-default col-sm-4" ng-model="rc.routeEvalTrue" uib-btn-radio="'endTest'">Avslutt Test</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12" ng-if="rc.routeEvalTrue=='goToSection'">
-                                <div class="row">
-                                    <div class="col-sm-12" style="padding:0.6em">
-                                        <div class="col-sm-4">
-                                            <p class="pull-right">Aktivitet:</p>
-                                        </div>
-                                        <div class="btn-group col-sm-8" uib-dropdown keyboard-nav>
-                                            <button id="goto-activity-dropdown" type="button" class="btn btn-default" uib-dropdown-toggle>
-                                            <span ng-if="rc.routeEvalTrueGoToAct"> {{rc.routeEvalTrueGoToAct.title}} </span><span ng-if="!rc.routeEvalTrueGoToAct"> Velg aktivitet </span><span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="goto-activity-dropdown">
-                                                <li ng-repeat="act in ic.getActivititesList()" role="menuitem"><a ng-click="rc.routeEvalTrueGoToAct = act">{{act.title}}</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12" ng-if="rc.routeEvalTrueGoToAct">
-                                        <div class="col-sm-4">
-                                            <p class="pull-right">Registrering:</p>
-                                        </div>
-                                        <div class="btn-group col-sm-8" uib-dropdown keyboard-nav>
-                                            <button id="goto-activity-dropdown" type="button" class="btn btn-default" uib-dropdown-toggle>
-                                            <span ng-if="rc.routeEvalTrueGoToInput"> {{rc.routeEvalTrueGoToInput.text}} </span><span ng-if="!rc.routeEvalTrueGoToInput"> Velg registrering </span><span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="goto-activity-dropdown">
-                                                <li ng-repeat="inp in rc.routeEvalTrueGoToAct.inputs" role="menuitem"><a ng-click="rc.routeEvalTrueGoToInput = inp">{{$index+1}}: {{inp.text}}</a></li>
-                                            </ul>
-                                        </div>
+                            <div class="col-sm-12">
+                                <md-tabs md-selected="rc.selectedIndex"  md-dynamic-height md-border-bottom md-autoselect>
+                                <md-tab
+                                ng-disabled="tab.disabled"
+                                label="Naviger til">
+                                <div class="demo-tab tab{{$index%4}}" style="padding:25px;">
+                                    <div >
+                                        <md-input-container>
+                                        <label>Aktivitet</label>
+                                        <md-select ng-model="rc.routeEvalTrueGoToAct">
+                                        <md-option ng-repeat="act in ic.getActivititesList()" ng-value="act">
+                                        {{act.title}}
+                                        </md-option>
+                                        </md-select>
+                                        </md-input-container >
+                                        <md-input-container  ng-if="rc.routeEvalTrueGoToAct">
+                                        <label>Registrering</label>
+                                        <md-select ng-model="rc.routeEvalTrueGoToInput">
+                                        <md-option ng-repeat="inp in rc.routeEvalTrueGoToAct.inputs" value="inp">
+                                        {{inp.text}}
+                                        </md-option>
+                                        </md-select>
+                                        </md-input-container>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-12" ng-if="rc.routeEvalTrue=='next'">
-                                <div class="radio"><label for="evalTrueNext"><input type="radio" name="evalTrueNext">
-                                    Gå til neste registrering
-                                    </label>
+                                </md-tab>
+                                <md-tab
+                                ng-disabled="tab.disabled"
+                                label="Neste seksjon">
+                                <div class="demo-tab tab{{$index%4}}" style="padding: 25px;">
+                                    <div>
+                                        <md-radio-group ng-model="rc.routeEvalTrueNext" class="">
+                                        <md-radio-button value="input" class="md-primary">Gå til neste registrering </md-radio-button>
+                                        <md-radio-button value="activity" >Gå til neste aktivitet </md-radio-button>
+                                        <md-radio-button value="indicator">Gå til neste indikator </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
                                 </div>
-                                <div class="radio"><label for="evalTrueNext"><input type="radio" name="evalTrueNext">
-                                    Gå til neste aktivitet
-                                    </label>
-                                </div>
-                                <div class="radio"><label for="evalTrueNext"><input type="radio" name="evalTrueNext">
-                                    Gå til neste indikator
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-sm-12" ng-if="rc.routeEvalTrue=='endTest'">
-                                Avslutter testen.
+                                </md-tab>
+                                </md-tabs>
                             </div>
                         </div>
                     </div>
@@ -132,70 +103,59 @@
                     <label for="" class="col-sm-3 control-label">Ellers:</label>
                     <div class="col-sm-8">
                         <div class="row">
-                            <div class="btn-group col-sm-12">
-                                <label class="btn btn-default col-sm-4" ng-model="rc.routeEvalFalse" uib-btn-radio="'goToSection'">Gå til...</label>
-                                <label class="btn btn-default col-sm-4" ng-model="rc.routeEvalFalse" uib-btn-radio="'next'">Neste...</label>
-                                <label class="btn btn-default col-sm-4" ng-model="rc.routeEvalFalse" uib-btn-radio="'endTest'">Avslutt Test</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12" ng-if="rc.routeEvalFalse=='goToSection'">
-                                <div class="row">
-                                    <div class="col-sm-12" style="padding:0.6em">
-                                        <div class="col-sm-4">
-                                            <p class="pull-right">Aktivitet:</p>
-                                        </div>
-                                        <div class="btn-group col-sm-8" uib-dropdown keyboard-nav>
-                                            <button id="goto-activity-dropdown" type="button" class="btn btn-default" uib-dropdown-toggle>
-                                            <span ng-if="rc.routeEvalFalseGoToAct"> {{rc.routeEvalFalseGoToAct.title}} </span><span ng-if="!rc.routeEvalFalseGoToAct"> Velg aktivitet </span><span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="goto-activity-dropdown">
-                                                <li ng-repeat="act in ic.getActivititesList()" role="menuitem"><a ng-click="rc.routeEvalFalseGoToAct = act">{{act.title}}</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12" ng-if="rc.routeEvalFalseGoToAct">
-                                        <div class="col-sm-4">
-                                            <p class="pull-right">Registrering:</p>
-                                        </div>
-                                        <div class="btn-group col-sm-8" uib-dropdown keyboard-nav>
-                                            <button id="goto-activity-dropdown" type="button" class="btn btn-default" uib-dropdown-toggle>
-                                            <span ng-if="rc.routeEvalFalseGoToInput"> {{rc.routeEvalFalseGoToInput.text}} </span><span ng-if="!rc.routeEvalFalseGoToInput"> Velg registrering </span><span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="goto-activity-dropdown">
-                                                <li ng-repeat="inp in rc.routeEvalFalseGoToAct.inputs" role="menuitem"><a ng-click="rc.routeEvalFalseGoToInput = inp">{{$index+1}}: {{inp.text}}</a></li>
-                                            </ul>
-                                        </div>
+                            <div class="col-sm-12" >
+                                <md-tabs md-selected="rc.selectedIndex2"  md-dynamic-height md-border-bottom md-autoselect>
+                                <md-tab
+                                label="Naviger til">
+                                <div class="demo-tab tab{{$index%4}}" style="padding:25px;">
+                                    <div >
+                                        <md-input-container>
+                                        <label>Aktivitet</label>
+                                        <md-select ng-model="rc.routeEvalFalseGoToAct">
+                                        <md-option ng-repeat="act in ic.getActivititesList()" ng-value="act">
+                                        {{act.title}}
+                                        </md-option>
+                                        </md-select>
+                                        </md-input-container >
+                                        <md-input-container  ng-if="rc.routeEvalFalseGoToAct">
+                                        <label>Registrering</label>
+                                        <md-select ng-model="rc.routeEvalFalseGoToInput">
+                                        <md-option ng-repeat="inp in rc.routeEvalFalseGoToAct.inputs" value="inp">
+                                        {{inp.text}}
+                                        </md-option>
+                                        </md-select>
+                                        </md-input-container>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-12" ng-if="rc.routeEvalFalse=='next'">
-                                <div class="radio"><label for="evalFalseNext"><input type="radio" name="evalFalseNext">
-                                    Gå til neste registrering
-                                    </label>
+                                </md-tab>
+                                <md-tab
+                                ng-disabled="tab.disabled"
+                                label="neste seksjon">
+                                <div class="demo-tab tab{{$index%4}}" style="padding: 25px;">
+                                    <div>
+                                        <md-radio-group ng-model="rc.routeEvalFalseNext" class="">
+                                        <md-radio-button value="input" class="md-primary">Gå til neste registrering </md-radio-button>
+                                        <md-radio-button value="activity" >Gå til neste aktivitet </md-radio-button>
+                                        <md-radio-button value="indicator">Gå til neste indikator </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
                                 </div>
-                                <div class="radio"><label for="evalFalseNext"><input type="radio" name="evalFalseNext">
-                                    Gå til neste aktivitet
-                                    </label>
-                                </div>
-                                <div class="radio"><label for="evalFalseNext"><input type="radio" name="evalFalseNext">
-                                    Gå til neste indikator
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-sm-12" ng-if="rc.routeEvalFalse=='endTest'">
-                                Avslutter testen.
+                                </md-tab>
+                                </md-tabs>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <p class="text-center"><button class="btn btn-default">Avbryt</button><button class="btn btn-primary">Lagre</button></p>
-        </div>
+<div class="row" >
+    <div class="col-sm-12 row-fix" >
+        <p class="text-center" style="border:2px dashed #efefef"> <md-button>Avbryt</md-button>
+      <md-button md-no-ink class="md-primary">Lagre</md-button></p>
     </div>
 </div>
+</div>
+<!-- </div> -->
 <br>
