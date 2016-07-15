@@ -55,7 +55,10 @@ exports.update = function(req, res)
 {
     var activity = req.activity;
 
-
+    activity.title = req.body.title;
+    activity.description = req.body.description;
+    activity.inputs = req.body.inputs;
+    activity.images = req.body.images;
     activity.save(function(err)
     {
         if (err)

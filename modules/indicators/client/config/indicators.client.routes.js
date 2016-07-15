@@ -180,6 +180,9 @@
                         squash:false
                     }
                 },
+                resolve:{
+                    activityResolve: getActivity
+                },
                 views:{
                     "":{
                         templateUrl:"modules/indicators/client/views/activity-details.client.view.html",
@@ -264,6 +267,15 @@
         }).$promise;
     }
 
+     getActivity.$inject = ['$stateParams', 'ActivitiesService'];
+
+    function getActivity($stateParams, ActivitiesService)
+    {
+        return ActivitiesService.get(
+        {
+            activityId: $stateParams.activityInd
+        }).$promise;
+    }
     // getActivity.$inject = ['$stateParams', 'IndicatorsService'];
     // function getActivity($stateParams, IndicatorsService){
 

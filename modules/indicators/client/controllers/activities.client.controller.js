@@ -5,14 +5,26 @@
         .module('indicators')
         .controller('ActivitiesController', ActivitiesController);
 
-    ActivitiesController.$inject = ['$scope', '$state', '$stateParams', 'indicatorId', 'Authentication', 'IndicatorsCreateService'];
+    ActivitiesController.$inject = ['$scope', '$state', '$stateParams','activityResolve', 'indicatorId', 'Authentication', 'IndicatorsCreateService', 'ActivitiesService'];
 
-    function ActivitiesController($scope, $state, $stateParams, indicatorId, Authentication, IndicatorsCreateService) {
+    function ActivitiesController($scope, $state, $stateParams,activity, indicatorId, Authentication, IndicatorsCreateService, ActivitiesService) {
         var vm = this;
 
         try {
-            vm.activity = IndicatorsCreateService.indicator.activities[$stateParams.activityInd];
-            vm.activity.id = $stateParams.activityInd;
+            // vm.activity = IndicatorsCreateService.indicator.activitiesIds[$stateParams.activityInd];
+            console.log("act id: " + $stateParams.activityInd)
+            vm.id = $stateParams.activityInd;
+            vm.activity = activity;
+            console.log(vm.activity)
+            // for (var i = 0; i < IndicatorsCreateService.indicator.activitiesIds.length; i++) {
+            //     console.log("Loop_"+i)
+            //     if (IndicatorsCreateService.indicator.activitiesIds[i]._id && IndicatorsCreateService.indicator.activitiesIds[i]._id == vm.id) {
+            //         console.log("Math found")
+            //         vm.activity =  IndicatorsCreateService.indicator.activitiesIds[i];
+            //         console.log(vm.activity)
+            //     }
+            // }
+
         } catch (e) {
             console.log("Something went wrong while retrieving activity")
             var isCreate = ($state.current.name.indexOf('create') >= 0) ? true : false;
@@ -67,6 +79,7 @@
         }
 
         function getLocalRequirements() {
+            return [];
             var local = [];
             for (var i = 0; i < vm.activity.inputs.length; i++) {
                 for (var j = 0; j < vm.activity.inputs[i].requirements.length; j++) {
@@ -123,9 +136,19 @@
         }
 
         function save() {
-            $scope.vm.save(true, {
-                remainInThisState: true
-            });
+            if (vm.activity._id) {
+                vm.activity.$update(succes, err)
+            } else {
+                vm.activity.$save(succes, err)
+            }
+
+            function succes(res) {
+                console.log("Activity Updated")
+            }
+
+            function err(res) {
+                console.log("Error, activity not updated")
+            }
         }
     }
 }());

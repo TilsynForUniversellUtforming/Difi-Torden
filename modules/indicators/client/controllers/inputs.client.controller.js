@@ -14,7 +14,14 @@
 
         try
         {
-            vm.input = IndicatorsCreateService.indicator.activities[$stateParams.activityInd].inputs[$stateParams.inputInd];
+            // vm.input = IndicatorsCreateService.indicator.activities[$stateParams.activityInd].inputs[$stateParams.inputInd];
+            for (var i = 0; i < IndicatorsCreateService.indicator.activitiesIds.length; i++) {
+                    console.log("Loop_"+i)
+                    if (IndicatorsCreateService.indicator.activitiesIds[i]._id && IndicatorsCreateService.indicator.activitiesIds[i]._id == vm.id) {
+                        console.log("Math found")
+                        vm.input =  IndicatorsCreateService.indicator.activitiesIds[i].inputs[$stateParams.inputInd];
+                    }
+                }
         }
         catch (e)
         {
