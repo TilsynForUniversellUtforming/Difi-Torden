@@ -23,8 +23,7 @@ var TestTemplateSchema = new Schema(
         type: Date,
         default: Date.now
     },
-   title: String,
-   description: String,
+   
    testObject: String,
    indicator: {type:Array, default:[]}
 
