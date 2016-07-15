@@ -106,7 +106,7 @@
                 templateUrl: "modules/indicators/client/views/input-form.client.view.html"
 
             })
-            .state('indicators.form.input.detail', {
+            .state('indicators.form.input.detail', {//TODO Remove these?
                 url:"/details/:id",
                 templateUrl:"modules/indicators/client/views/input-details.client.view.html"
             })
@@ -144,9 +144,34 @@
             })
             .state('indicators.edit.main', {
                 url:'/main',
-                templateUrl: "modules/indicators/client/views/indicator-form-main.client.view.html"
+                views:{
+                    "":{
+                        templateUrl: "modules/indicators/client/views/indicator-form-main.client.view.html"
+                    },
+                    "route-list@indicators.edit.main":{
+                        templateUrl:'modules/indicators/client/views/route-list.client.view.html',
+                        controller:'RoutesController',
+                        controllerAs:'rc'
+                    }
+                }
             })
-
+            .state('indicators.edit.routes', {
+                url:'/routes',
+                abstrsct:true,
+                template:'<ui-view/>'
+            })
+            .state('indicators.edit.routes.create',{
+                url:'/form',
+                templateUrl:'modules/indicators/client/views/route-form.client.view.html',
+                controller: 'RoutesController',
+                controllerAs: 'rc'
+            })
+            .state('indicators.edit.routes.edit',{
+                url:'/edit/:routeId',
+                templateUrl:'module/indicators/client/views/route-form.client.view.html',
+                controller:'RoutesController',
+                controllerAs:'rc'
+            })
             .state('indicators.edit.activity', {
                 url:"/activity/:activityInd",
                 params:{
@@ -191,9 +216,18 @@
                         squash:false
                     },
                 },
-                controller:'InputsController',
-                controllerAs:'ic',
-                templateUrl: "modules/indicators/client/views/input-form.client.view.html"
+                views:{
+                "":{
+                   controller:'InputsController',
+                   controllerAs:'ic',
+                   templateUrl: "modules/indicators/client/views/input-form.client.view.html"
+                },
+                "new-route@indicators.edit.activity.input":{
+                    controller:"RoutesController",
+                    controllerAs:'rc',
+                    templateUrl:"modules/indicators/client/views/route-form.client.view.html"
+                }
+               }
 
             })
 
@@ -224,75 +258,6 @@
 
     function getIndicator($stateParams, IndicatorsService)
     {
-        var indicators =
-        [
-            {
-            _id: "100",
-            title:"test 1 ",
-            description: "test 1 desc",
-            activities: [
-            {
-                title: "test 1 act 1",
-                description : "test 1 act 1 desc",
-                inputs: [{
-                    text: "test 1 act 1 input 1",
-                    type:"yesno",
-                },{
-                    text: "another test 1 act1 input 2",
-                    type:"freetext"
-                }]
-            },
-            {
-                title: "test 1 act 2",
-                description : "test 1 act 2 desc",
-                inputs: [{
-                    text: "test 1 act 2 input 1",
-                    type:"yesno",
-                },{
-                    text: "another test 1 act 2 input 2",
-                    type:"freetext"
-                }]
-            }
-            ]
-            },
-            {
-                _id: "101",
-                title:"test 2 ",
-                description: "test 2 desc",
-                activities: [
-                {
-                    title: "test 2 act 1",
-                    description : "test 2 act 1 desc",
-                    inputs: [{
-                        text: "test 2 act 1 input 1",
-                        type:"yesno",
-                    },{
-                        text: "another test 2 act1 input 2",
-                        type:"freetext"
-                    }]
-                },
-                {
-                    title: "test 2 act 2",
-                    description : "test 2 act 2 desc",
-                    inputs: [{
-                        text: "test 2 act 2 input 1",
-                        type:"yesno",
-                    },{
-                        text: "another test 2 act 2 input 2",
-                        type:"freetext"
-                    }]
-                }
-                ]
-            }
-        ];
-        // for(var i = 0; i < indicators.length ; i++){
-        //     if(indicators[i]._id == $stateParams.indicatorId)
-        //     {
-        //         return indicators[i]
-        //     }
-        // }
-        // return {error:"shit happens"};
-
         return IndicatorsService.get(
         {
             indicatorId: $stateParams.indicatorId

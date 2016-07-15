@@ -1,32 +1,31 @@
-.content-list{
 
-    padding:0;
+
+.content-list {
+    padding: 0;
+
     background-color: white;
     border: 2px solid #555;
 }
-.content-list ul{
-    list-style-type:none;
-    padding:0;
-    padding-bottom: 0.4em;
-    padding-top: 0.4em;
-    padding-left:0.7em;
-    padding-right:0.7em;
-    padding-bottom:0.5em;
+.content-list ul {
+    list-style-type: none;
+    padding: 0.4em 0.7em;
 }
-.content-list ul li.main{
+.content-list ul li.main {
     background-color: #fff;
-    padding-left:0.7em;
-    padding-right:0.7em;
-    padding-top:0.5em;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    padding-top: 0.5em;
     /*margin-bottom: 0.5em;*/
+
     margin-top: 0.5em;
     /*padding-left: 0.5em;*/
+
     border: 1px solid #ccc;
 }
-.content-list ul li .subheader{
+.content-list ul li .subheader {
     border-bottom: 1px solid #ccc;
-    padding-left:0.6em;
-    padding-right:0.6em;
+    padding-left: 0.6em;
+    padding-right: 0.6em;
     -webkit-transition: all 0.15s ease-in-out;
     -moz-transition: all 0.15s ease-in-out;
     -o-transition: all 0.15s ease-in-out;
@@ -38,152 +37,114 @@
     -moz-box-shadow: -3px 10px 30px -9px rgba(0,0,0,0.29);
     box-shadow: -3px 10px 30px -9px rgba(0,0,0,0.29);
 }*/
-.content-list ul li .subheader h3{
-    padding-top:0.4em;
-    margin-top:0;
+
+.content-list ul li .subheader h3 {
+    padding-top: 0.4em;
+    margin-top: 0;
     -webkit-transition: all 0.15s ease-in-out;
     -moz-transition: all 0.15s ease-in-out;
     -o-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out;
-
 }
-.content-list ul li .subheader h3:hover{
-    /*color:white;*/
-}
-
 .secondary-li {
     border-left: 3px solid red;
 }
-
-
-.main-content{
-    /*background-color: red;*/
-    /*padding:0.9em;*/
-}
- .header {
+.header {
     background-color: #555;
-    color:white;
+    color: white;
     padding: 0.6em;
 }
- .header h2{
-    color:white;
+.header h2 {
+    color: white;
     font-size: 1.3em;
-
-    margin:0;
+    margin: 0;
 }
-.header h2 span{
-     font-size: 0.8em;
+.header h2 span {
+    font-size: 0.8em;
 }
 .header a {
-    color:#eee;
+    color: #eee;
+    text-decoration: underline
+}
+.header a.side {
+    color: #eee;
     text-transform: uppercase;
-    font-size:0.8em;
+    font-size: 0.8em;
     line-height: 1.3em;
     text-decoration: underline
 }
-.row-fix{
+.row-fix {
     margin-left: 0;
     margin-right: 0;
 }
 .main-content > .header h2 > span {
-    color: #ddd; padding-right:1em;
+    color: #ddd;
+    padding-right: 1em;
 }
-.sub-header{
+.sub-header {
     background-color: #E5E5E5;
-    padding:0.6em ;
-    border-bottom:1px solid #d5d5d5;
+    padding: 0.6em;
+    border-bottom: 1px solid #d5d5d5;
 }
-.sub-header:hover{
+.sub-header:hover {
     background-color: #DADADA;
 }
-.sub-header h3{
-    margin:0;
+.sub-header h3 {
+    margin: 0;
     font-size: 1.4em;
 }
-.main-content > .row{
+.main-content > .row {
     padding-top: 0.6em;
     padding-left: 0.6em;
     padding-right: 0.6em;
 }
-.edits{
-    border-bottom: 1px solid #555;
-    border-right: 1px solid #555;
-}
-.edits > a{
-    color:#eee;
-    font-size: 0.6em;
-    /*padding: 0.7em;*/
-    /*padding-right: 0.35em;*/
-}
-.main{
+.main {
     border: 1px solid #444
 }
-li.hover:hover{
+li.hover:hover {
     background-color: #eee;
 }
-.page-header{
+.page-header {
     background-color: #444;
-    color:white;
+    color: white;
 }
-form.form-horizontal{
-    margin-top:1em;
+form.form-horizontal {
+    margin-top: 1em;
 }
-.info{
-    display:flex;
+.info {
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: #F0F8FE;
     border-radius: 50px 15px 15px 50px;
-    padding-top:0.5em;
+    padding-top: 0.5em;
     padding-right: 1em;
 }
-.info .info-left{
-float:left;
-
+.info .info-left {
+    float: left;
 }
-.info .info-body{
-
-}
-.info-img{
-    max-width: 100px;
-}
-.form-padding{
-    padding-top: 7px;
-}
-.ellipsis {
-   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-box-orient: vertical;
-   -webkit-line-clamp: 2; /* number of lines to show */
-   line-height: 1;        /* fallback */
-   max-height: 1*2;       /* fallback */
-}
-
-.input-detail-main{
-
-}
-.input-detail-main p{
-    padding:0;
-    margin-bottom:0.1em;
+.input-detail-main p {
+    padding: 0;
+    margin-bottom: 0.1em;
     /*color:red;*/
+
     font-size: 0.9em;
 }
 .input-detail-main p b {
     text-transform: uppercase;
 }
-.input-hide-detail{
-    background-color:#ddeedd;
+.input-hide-detail {
+    background-color: #ddeedd;
     margin-bottom: -10px;
 }
-.input-hide-detail:hover{
-    background-color:#aaffaa;
+.input-hide-detail:hover {
+    background-color: #aaffaa;
     margin-bottom: -10px;
 }
 .input-hide-detail div p {
-    color:#555;
-    font-size:1em;
-    margin:0;
+    color: #555;
+    font-size: 1em;
+    margin: 0;
     margin-top: 0.1em;
     text-transform: uppercase;
 }

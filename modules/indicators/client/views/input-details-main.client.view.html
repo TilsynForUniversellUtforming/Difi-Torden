@@ -12,7 +12,7 @@
                 <p class="col-sm-9">
                     <b class="" style="padding:0" ng-if="input.mandytory">Obligatorisk</b>
                     <b class="" style="padding:0" ng-if="!input.mandytory">Frivillig</b>
-                    <b class="" style="padding:0">, {{input.type}}</b>
+                    <b class="" style="padding:0">, {{input.type}}</b>, INDEX {{$index}}
                 </p>
                 <div style="border-left:2px solid #eee" class="col-sm-3 "><p class="pull-right"><a class="" ng-click="ac.editInput($index)"> endre </a> <a ng-click="ac.removeInput($index)" class=" "> slett </a></p>
                 </div>
@@ -24,11 +24,16 @@
          </div>
      </div>
  </div>
- <div class="row input-hide-detail">
+ <div class="row input-hide-detail" ng-click="ac.toggleInputDetails($index)">
      <div class="col-sm-12">
          <p class="text-center">
              Vis Mer
          </p>
+     </div>
+ </div>
+ <div class="row" uib-collapse="ac.expandedInputIndex != $index">
+     <div class="col-sm-12">
+         <pre>Detaljer: {{input | json}}</pre>
      </div>
  </div>
 </section>

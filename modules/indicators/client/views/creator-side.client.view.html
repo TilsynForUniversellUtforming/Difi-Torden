@@ -1,6 +1,6 @@
 <section class="content-list" style="min-height:500px">
     <div class="header">
-        <h2 class="text-center"> <a ui-sref=".main" ng-hide="!vm.indicator.title" style="text-decoration:none; color:white">{{vm.indicator.title}}</a><a ng-show="!vm.indicator.title" ui-sref=".main" style="text-decoration:none; color:white">Indikator uten navn</a></h2>
+        <h2 class="text-center"> Oversikt - <a ui-sref=".main" ng-hide="!vm.indicator.title" style="text-decoration:underline; color:white">{{vm.indicator.title}}</a><a ng-show="!vm.indicator.title" ui-sref=".main" style="text-decoration:none; color:white">Indikator uten navn</a></h2>
     </div>
     <ul dnd-list="vm.indicator.activities" class="list-group">
         <li class="list-group-item">

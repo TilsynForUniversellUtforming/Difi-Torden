@@ -8,7 +8,8 @@ module.exports = {
             css: [
                 // bower:css
                 'public/lib/bootstrap/dist/css/bootstrap.css',
-                'public/lib/bootstrap/dist/css/bootstrap-theme.css'
+                'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+                'public/lib/angular-material/angular-material.min.css'
                 // endbower
             ],
             js: [
@@ -24,6 +25,8 @@ module.exports = {
                 'public/lib/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
                 'public/lib/angularUtils-pagination/dirPagination.js',
                 'public/lib/angular-messages/angular-messages.js',
+                'public/lib/angular-aria/angular-aria.js',
+                'public/lib/angular-material/angular-material.js'
                 // endbower
             ],
             tests: ['public/lib/angular-mocks/angular-mocks.js']
