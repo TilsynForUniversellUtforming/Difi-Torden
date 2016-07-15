@@ -26,7 +26,7 @@ var TestTemplateSchema = new Schema(
    title: String,
    description: String,
    testObject: String,
-   indicator: String,
+   indicator: {type:Array, default:[]}
 
 });
 mongoose.model('TestTemplate', TestTemplateSchema);
