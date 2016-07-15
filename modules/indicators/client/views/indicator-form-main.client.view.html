@@ -4,9 +4,7 @@
             <h2>
             <span>Indikator</span>
             {{vm.indicator.title}}
-            <span class="pull-right edits">
-            </span>
-            <!--    <span alt="hjelp" class="pull-right glyphicon glyphicon-question-sign"></span> -->
+            <a class="pull-right side" ng-click="vm.remove()"> slett </a>
             </h2>
         </div>
         <div class="sub-header" ng-click="vm.collapseSection('general')">
@@ -14,7 +12,6 @@
             Generell informasjon
             </h3>
         </div>
-        <button ng-click="vm.log(vm.indicator)">test1</button>
         <!-- <button ng-click="console.log(vm.indicator)">test1</button> -->
         <form class="form-horizontal" uib-collapse="vm.collapse.general" name="vm.form.indicatorForm"  ng-submit="vm.save(vm.form.indicatorForm.$valid, {remainInThisState:true})" novalidate>
             <fieldset>
@@ -155,9 +152,7 @@
         </h3>
     </div>
     <div class="row" uib-collapse="vm.collapse.routes">
-        <div class="col-sm-12 ">
-            <a ng-click="vm.addRouteRule()">Legg til en rute</a>
-        </div>
+        <ui-view name="route-list"/>
     </div>
 </section>
 </section>

@@ -1,7 +1,7 @@
 <section class="main">
     <secion class="main-content">
     <div class="header">
-        <h2><span>Registrering</span>{{vm.indicator.title}} - {{ac.activity.title}} - Ny registrering <span  ng-show="vm.createService.views.options.header">{{vm.createService.views.options.header}}</span></h2>
+        <h2><span>Registrering</span><a ui-sref=".^.main">{{vm.indicator.title}}</a>  - <a ui-sref=".^">{{ac.activity.title}}</a>  - Registrering  <span  ng-show="vm.createService.views.options.header">{{vm.createService.views.options.header}}</span></h2>
     </div>
     <div class="sub-header">
         <h3>Om registreringen</h3>
@@ -10,7 +10,6 @@
         <div class="col-sm-12" >
             <div class="form-horizontal">
                 <div class="form-group">
-
                     <label class="col-md-3 control-label" for="Registreringstyper">Registreringstype</label>
                     <div class="col-sm-8">
                         <div class="btn-group" role="group" aria-label="Registreringstyper" style="width:100%">
@@ -69,7 +68,6 @@
                     </div>
                 </fieldset>
             </form>
-
             <div class="col-sm-12">
                 <div class="form-horizontal">
                     <div class="form-group">
@@ -85,7 +83,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="sub-header">
         <h3>Fasit</h3>
@@ -93,6 +90,17 @@
     <div class="row row-fix">
         <div ng-include="ic.input.tempUrl" >
         </div>
+    </div>
+    <div class="sub-header">
+        <h3>
+        Routing
+        </h3>
+    </div>
+    <div class="row row-fix">
+
+       <div class="col-sm-12">
+            <div ui-view="new-route"></div>
+       </div>
     </div>
     <div class="sub-header">
         <h3>Krav</h3>
@@ -136,29 +144,29 @@
                     </label>
                     <div class="col-sm-8">
                         <div class="radio">
-                              <label for="radio-search-set">
-                                    <input type="radio" name="radio-search-set" data-ng-value=1 data-ng-model="ic.reqSearchInd" checked>
-                                    Indikator
-                                </label>
-                                  <label for="radio-search-set">
-                                    <input type="radio" name="radio-search-set" data-ng-value=0 data-ng-model="ic.reqSearchInd" >
-                                    Global
-                                </label>
+                            <label for="radio-search-set">
+                                <input type="radio" name="radio-search-set" data-ng-value=1 data-ng-model="ic.reqSearchInd" checked>
+                                Indikator
+                            </label>
+                            <label for="radio-search-set">
+                                <input type="radio" name="radio-search-set" data-ng-value=0 data-ng-model="ic.reqSearchInd" >
+                                Global
+                            </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="" class="col-sm-3 control-label">Detaljer om kravet</label>
                     <div class="col-sm-8">
-                        <pre style="width:100%">Detaljer: {{vm.selectedReq | json}}</pre>
-                    </div>
+                    <pre style="width:100%">Detaljer: {{vm.selectedReq | json}}</pre>
                 </div>
-                <div class="form group">
-                    <label for="" class="col-sm-3 control-label">Utvalgte krav</label>
-                    <div class="col-sm-8" style="padding-left:4px; padding-right:4px">
-                        <ul class="list-group">
-                            <li ng-repeat="req in ic.input.requirements track by $index" ng-click="ic.selectedReq = req" class="list-group-item">
-                             <div class="row">
+            </div>
+            <div class="form group">
+                <label for="" class="col-sm-3 control-label">Utvalgte krav</label>
+                <div class="col-sm-8" style="padding-left:4px; padding-right:4px">
+                    <ul class="list-group">
+                        <li ng-repeat="req in ic.input.requirements track by $index" ng-click="ic.selectedReq = req" class="list-group-item">
+                            <div class="row">
                                 <div class="col-sm-2"><p><b>ID:</b>{{req.nr_v9}}</p></div><div class="col-sm-3"><p><em>{{req.standard}}</em></p></div><div class="col-sm-6"><p>{{req.req_in_standard | limitTo: 80}}<span ng-show="req.req_in_standard.length>80">...</span></p></div>
                             </div>
                         </li>
@@ -166,14 +174,16 @@
                 </div>
             </div>
         </div>
-        </div>
-        <div class="col-sm-12">
-            <hr>
-            <p class="text-center">
-                <button class="btn btn-default" ng-click="ic.cancel()">Avbryt</button>
-                <button class="btn btn-primary" ng-click="ic.save()">Lagre Endringer</button>
-            </p>
-        </div>
     </div>
-    </secion>
-    </sectio>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <hr>
+        <p class="text-center">
+            <button class="btn btn-default" ng-click="ic.cancel()">Avbryt</button>
+            <button class="btn btn-primary" ng-click="ic.save()">Lagre Endringer</button>
+        </p>
+    </div>
+</div>
+</secion>
+</sectio>
