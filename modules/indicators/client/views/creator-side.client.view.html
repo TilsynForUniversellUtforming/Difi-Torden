@@ -1,11 +1,15 @@
 <section>
     <div class="header">
-        <h2 class="text-center"> Oversikt - <a ui-sref=".main" ng-hide="!vm.indicator.title" style="text-decoration:underline; color:white">{{vm.indicator.title}}</a><a ng-show="!vm.indicator.title" ui-sref=".main" style="text-decoration:none; color:white">Indikator uten navn</a></h2>
+        <h2 class="text-center">Oversikt
+
+        <!-- <a ui-sref=".main" ng-hide="!vm.indicator.title" style="text-decoration:underline; color:white">{{vm.indicator.title}}</a><a ng-show="!vm.indicator.title" ui-sref=".main" style="text-decoration:none; color:white">Indikator uten navn</a> -->
+
+        </h2>
     </div>
     <ul class="list-group">
         <li class="list-group-item"  style="padding:0">
             <div class="sub-header" ng-click="vm.addActivity();" style="background-color: #eeffee">
-                <h3>Ny aktivitet</h3>
+                <h3>Ny aktivitet <span class="pull-right">+</span></h3>
             </div>
         </li>
         <li class="list-group-item" ng-repeat="item in vm.indicator.activitiesIds" style="padding:0">

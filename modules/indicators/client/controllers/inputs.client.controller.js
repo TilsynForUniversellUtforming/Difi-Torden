@@ -47,7 +47,7 @@
         function getActivititesList()
         {
             // console.log(IndicatorsCreateService)
-            return IndicatorsCreateService.indicator.activities;
+            return IndicatorsCreateService.indicator.activitiesIds;
         }
 
         function addRequirement(req)
