@@ -1,10 +1,43 @@
-<section class="content-list" style="min-height:500px">
+<section>
+    <div class="header">
+        <h2 class="text-center"> Oversikt - <a ui-sref=".main" ng-hide="!vm.indicator.title" style="text-decoration:underline; color:white">{{vm.indicator.title}}</a><a ng-show="!vm.indicator.title" ui-sref=".main" style="text-decoration:none; color:white">Indikator uten navn</a></h2>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item"  style="padding:0">
+            <div class="sub-header" ng-click="vm.addActivity();" style="background-color: #eeffee">
+                <h3>Ny aktivitet</h3>
+            </div>
+        </li>
+        <li class="list-group-item" ng-repeat="item in vm.indicator.activitiesIds" style="padding:0">
+            <div class="sub-header" ui-sref=".activity({indicatorId: vm.indicatorId, activityInd:item._id.toString()})">
+                <h3>{{item.title}}</h3>
+            </div>
+            <div class="row" style="padding:0.8em">
+                <div class="col-sm-12">
+                    <h5 style="text-transform: uppercase"> 
+                    <span ng-if="item.inputs.length > 0">{{item.inputs.length}}</span> 
+                    <span ng-if="item.inputs.length == 0">Ingen</span> 
+                    Registreringer 
+                    <span ng-if="item.inputs.length > 0 && vm.sideShowActInputs != $index" ng-click="vm.sideShowActInputs = $index"> - Vis</span>
+                    <span ng-if="item.inputs.length > 0 && vm.sideShowActInputs == $index" ng-click="vm.sideShowActInputs = -1"> - Skjul</span>
+                    </h5>
+                    <ul class="list-group" uib-collapse="vm.sideShowActInputs != $index">
+                        <li class="list-group-item" ng-repeat="inp in item.inputs">
+                            {{$parent.$index+1}}.{{$index+1}}. <span ng-if="inp.text.length"> {{inp.text}}</span><span ng-if="!inp.text.length">ingen registreringstekst.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- <section class="content-list" style="min-height:500px">
     <div class="header">
         <h2 class="text-center"> Oversikt - <a ui-sref=".main" ng-hide="!vm.indicator.title" style="text-decoration:underline; color:white">{{vm.indicator.title}}</a><a ng-show="!vm.indicator.title" ui-sref=".main" style="text-decoration:none; color:white">Indikator uten navn</a></h2>
     </div>
     <ul dnd-list="vm.indicator.activitiesIds" class="list-group">
         <li class="list-group-item">
-            <a ng-click="vm.addActivity()">Legg till aktivitet</a>
+            <a ng-click="vm.addActivity();">Legg till aktivitet</a>
         </li>
         <li ng-repeat="item in vm.indicator.activitiesIds"
             dnd-draggable="item"
@@ -14,29 +47,26 @@
             ng-class="{'actSelected': vm.listSelected === item}"
             class="list-group-item"
             >
-
-                <div class="subheader">
-                    <h4 ng-click="vm.setWorkingObject(item)" ui-sref=".activity({indicatorId: vm.indicatorId, activityInd:item._id.toString()})">{{$index+1}} - {{item.title}}</h4>
-                </div>
-                <div >
-                    <ul dnd-list="item.inputs" >
-                            <p class="text-muted" >Registreringer:</p>
-                        <li ng-repeat="in in item.inputs"
-                            dnd-draggable="in"
-                            dnd-effect-allowed="move"
-                            dnd-moved="item.inputs.splice($index, 1)"
-                            dnd-selected="vm.listSelected = in"
-                            ng-class="{selected: vm.listSelected === in}"
-                            class="secondary-ul"
-
-                            >
-                            {{$index+1}}
-                            {{in.text | limitTo: 55}}
-                        </li>
-                    </ul>
-                </div>
-                <div class="clearfix"></div>
-
+            <div class="subheader">
+                <h4 ng-click="vm.setWorkingObject(item)" ui-sref=".activity({indicatorId: vm.indicatorId, activityInd:item._id.toString()})">{{$index+1}} - {{item.title}}</h4>
+            </div>
+            <div >
+                <ul dnd-list="item.inputs" >
+                    <p class="text-muted" >Registreringer:</p>
+                    <li ng-repeat="in in item.inputs"
+                        dnd-draggable="in"
+                        dnd-effect-allowed="move"
+                        dnd-moved="item.inputs.splice($index, 1)"
+                        dnd-selected="vm.listSelected = in"
+                        ng-class="{selected: vm.listSelected === in}"
+                        class="secondary-ul"
+                        >
+                        {{$index+1}}
+                        {{in.text | limitTo: 55}}
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
         </li>
     </ul>
-</section>
+</section> -->

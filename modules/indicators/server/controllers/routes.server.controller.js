@@ -5,18 +5,17 @@
  */
 var path = require('path'),
     mongoose = require('mongoose'),
-    Activity = mongoose.model('Activity'),
+    Route = mongoose.model('Route'),
     errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
- * Create an activity
+ * Create an Input
  */
 exports.create = function(req, res)
 {
-    var activity = new Activity(req.body);
-    activity.user = req.user;
+    var route = new Route(req.body);
 
-    activity.save(function(err)
+    route.save(function(err)
     {
         if (err)
         {
@@ -27,39 +26,31 @@ exports.create = function(req, res)
         }
         else
         {
-            res.json(activity);
+            res.json(route);
         }
     });
 };
 
 /**
- * Show the current activity
+ * Show the current input
  */
 exports.read = function(req, res)
 {
     // convert mongoose document to JSON
-    var activity = req.activity ? req.activity.toJSON() :
+    var route = req.route ? req.route.toJSON() :
     {};
 
-    // Add a custom field to the Article, for determining if the current User is the "owner".
-    // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-    // activity.isCurrentUserOwner = !!(req.user && activity.user && activity.user._id.toString() === req.user._id.toString());
-
-    res.json(activity);
+    res.json(route);
 };
 
 /**
- * Update an activity
+ * Update an input
  */
 exports.update = function(req, res)
 {
-    var activity = req.activity;
+    var route = req.route;
 
-    activity.title = req.body.title;
-    activity.description = req.body.description;
-    activity.inputs = req.body.inputs;
-    activity.images = req.body.images;
-    activity.save(function(err)
+    route.save(function(err)
     {
         if (err)
         {
@@ -70,19 +61,19 @@ exports.update = function(req, res)
         }
         else
         {
-            res.json(activity);
+            res.json(route);
         }
     });
 };
 
 /**
- * Delete an activity
+ * Delete an route
  */
 exports.delete = function(req, res)
 {
-    var activity = req.activity;
+    var route = req.route;
 
-    activity.remove(function(err)
+    route.remove(function(err)
     {
         if (err)
         {
@@ -93,17 +84,17 @@ exports.delete = function(req, res)
         }
         else
         {
-            res.json(activity);
+            res.json(route);
         }
     });
 };
 
 /**
- * List of activities
+ * List of inputs
  */
 exports.list = function(req, res)
 {
-    Activity.find().sort('created').exec(function(err, activities)
+    Route.find().sort('name').exec(function(err, routes)
     {
         if (err)
         {
@@ -114,39 +105,39 @@ exports.list = function(req, res)
         }
         else
         {
-            res.json(activities);
+            res.json(routes);
         }
     });
 };
 
 /**
- * Article middleware
+ * routes  middleware
  */
-exports.activityByID = function(req, res, next, id)
+exports.routeById = function(req, res, next, id)
 {
 
     if (!mongoose.Types.ObjectId.isValid(id))
     {
         return res.status(400).send(
         {
-            message: 'activity is invalid'
+            message: 'route ID is invalid'
         });
     }
 
-    Activity.findById(id).populate('inputs').exec(function(err, activity)
+    Route.findById(id).exec(function(err, route)
     {
         if (err)
         {
             return next(err);
         }
-        else if (!activity)
+        else if (!route)
         {
             return res.status(404).send(
             {
-                message: 'No activity with that identifier has been found'
+                message: 'No route with that identifier has been found'
             });
         }
-        req.activity = activity;
+        req.route = route;
         next();
     });
 };

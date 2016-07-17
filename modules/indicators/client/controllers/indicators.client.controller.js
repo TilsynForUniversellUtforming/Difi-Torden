@@ -1,4 +1,5 @@
-(function() {
+(function()
+{
     'use strict';
 
     angular
@@ -7,7 +8,8 @@
 
     IndicatorsController.$inject = ['$scope', '$state', '$stateParams', 'indicatorResolve', 'indicatorId', '$window', 'Authentication', 'IndicatorsCreateService', '$http', 'RequirementsService', 'ActivitiesService'];
 
-    function IndicatorsController($scope, $state, $stateParams, indicator, indicatorId, $window, Authentication, IndicatorsCreateService, $http, RequirementsService, ActivitiesService) {
+    function IndicatorsController($scope, $state, $stateParams, indicator, indicatorId, $window, Authentication, IndicatorsCreateService, $http, RequirementsService, ActivitiesService)
+    {
         var vm = this;
         //What we are working with
         vm.indicator = indicator;
@@ -40,7 +42,8 @@
         // which item in the drag and drop list is currently selected
         vm.listSelected;
         //for simble debugging
-        vm.log = function(onj) {
+        vm.log = function(onj)
+        {
             console.log(onj)
         }
 
@@ -53,9 +56,11 @@
             routes: true
         };
         //manages collapsing of subsections on indicators main form page
-        function collapseSection(section) {
+        function collapseSection(section)
+        {
             console.log("Collapse!")
-            switch (section) {
+            switch (section)
+            {
                 case 'general':
                     vm.collapse.general = !vm.collapse.general;
                     console.log("general: " + vm.collapse.general);
@@ -74,64 +79,96 @@
             }
         }
         // adds new activity to indicators activities array, navigates to activity from page
-        function addActivity() {
+        function addActivity()
+        {
             var act = new ActivitiesService();
             act.title = "Aktivitet uten navn";
             act.inputs = [];
             act.beskrivelse = "";
-            if(!vm.indicator.activitiesIds) vm.indicator.activitiesIds = [];
-            act.$save(function(res){console.log("All good"); console.log(res);vm.indicator.activitiesIds.push(res._id);}, function(res){console.log("not good")})
-            vm.indicator.activities.push(act);
+            if (!vm.indicator.activitiesIds) vm.indicator.activitiesIds = [];
+            act.$save(function(res)
+            {
+                vm.indicator.activitiesIds.push(res);
+                IndicatorsCreateService.save(function(res2)
+                {
+                    console.log("ok");
+                    $state.go('indicators.edit.activity.form',
+                    {
+                        activityInd: res._id
+                    });
+                }, function(res2)
+                {
+                    console.log("feil")
+                }),
+                function(res)
+                {
+                    console.log("not good")
+                }
+            })
+            // vm.indicator.activities.push(act);
 
-            $state.go('^.activity.form', {
-                activityInd: vm.indicator.activities.length - 1
-            });
+
         }
         //adds a requirement to indicators requirements array
-        function addRequirement(req) {
+        function addRequirement(req)
+        {
             if (!vm.indicator.requirements) vm.indicator.requirements = [];
             vm.indicator.requirements.push(req);
         }
         //removes requirement from indicators requirements array
-        function removeRequirement(req) {
+        function removeRequirement(req)
+        {
             if (typeof req === 'number')
                 vm.indicator.requirements.splice(req, 1);
             else
                 vm.indicator.requirements.splice(vm.indicator.requirements.indexOf(req), 1);
         }
         //navigates to edit page for indicator with specified id
-        function editIndicator(id) {
-            $state.go('indicators.edit.main', {
+        function editIndicator(id)
+        {
+            $state.go('indicators.edit.main',
+            {
                 indicatorId: indicatorId
             })
         }
         // Remove existing indicator
-        function remove() {
-            if ($window.confirm('Are you sure you want to delete?')) {
+        function remove()
+        {
+            if ($window.confirm('Are you sure you want to delete?'))
+            {
                 vm.indicator.$remove($state.go('indicators.list'));
             }
         }
         // Save indicator
-        function save(isValid, options) {
-            if (!isValid) {
+        function save(isValid, options)
+        {
+            if (!isValid)
+            {
                 $scope.$broadcast('show-errors-check-validity', 'vm.form.indicatorForm');
                 return false;
             }
             console.log("CTRL: Working with:")
             console.log(vm.indicator)
-            IndicatorsCreateService.save(function(res) {
-                    if (!options )
-                        $state.go('indicators.view', {
-                            indicatorId: res._id
-                        });
-                    else if (options && options.goToState) {
-                        $state.go(options.goToState, (options.stateParams ? options.stateParams : {}));
-                    } else {
+            IndicatorsCreateService.save(function(res)
+            {
+                if (!options)
+                    $state.go('indicators.view',
+                    {
+                        indicatorId: res._id
+                    });
+                else if (options && options.goToState)
+                {
+                    $state.go(options.goToState, (options.stateParams ? options.stateParams :
+                    {}));
+                }
+                else
+                {
 
-                    }
-                }, function(res) {
-                    vm.error = res.data.message;
-                })
+                }
+            }, function(res)
+            {
+                vm.error = res.data.message;
+            })
 
         }
     }
