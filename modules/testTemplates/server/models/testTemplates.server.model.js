@@ -25,7 +25,7 @@ var TestTemplateSchema = new Schema(
     },
    
    testObject: String,
-   indicator: {type:Array, default:[]}
+   indicators: {type:Array, default:[]}
 
 });
 mongoose.model('TestTemplate', TestTemplateSchema);

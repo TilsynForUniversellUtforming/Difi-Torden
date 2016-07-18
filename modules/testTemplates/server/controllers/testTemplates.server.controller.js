@@ -44,6 +44,7 @@ exports.update = function (req, res) {
   testTemplate.title = req.body.title;
   testTemplate.description = req.body.description;
   testTemplate.testObject = req.body.testbject;
+  testTemplate.indicators = req.body.indicators;
   
 
   // testTemplate.title = req.body.title;

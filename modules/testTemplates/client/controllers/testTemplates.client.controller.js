@@ -6,9 +6,9 @@
         .module('testTemplates')
         .controller('testTemplatesController', TestTemplatesController);
 
-    TestTemplatesController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', 'testTemplateResolve'];
+    TestTemplatesController.$inject = ['$scope', '$state', '$stateParams', '$window', 'Authentication', 'testTemplateResolve', 'IndicatorsService'];
 
-    function TestTemplatesController($scope, $state, $stateParams,  $window, Authentication, testTemplate)
+    function TestTemplatesController($scope, $state, $stateParams,  $window, Authentication, testTemplate, IndicatorsService)
     {
         var vm = this;
         //What we are working with
@@ -22,8 +22,15 @@
         vm.form = {};
         vm.remove = remove;
         vm.save = save;
-        // vm.addActivity = addActivity;
+        vm.indicators= IndicatorsService.query();
+        vm.addIndicator = addIndicator;
+        
 
+        //adds a requirement to indicators requirements array
+        function addIndicator(req) {
+            if (!vm.testTemplate.indicators) vm.testTemplate.indicators = [];
+            vm.testTemplate.indicators.push(req);
+        }
         // vm.getLocation = function(val)
         // {
         //     return $http.get('http://maps.googleapis.com/maps/api/geocode/json',
@@ -44,34 +51,7 @@
 
 
 
-        // function addActivity()
-        // {
-        //     var act = {
-        //         title: 'Aktivtet uten navn',
-        //         inputs: [],
-        //         beskrivelse: '',
-        //     }
-        //     vm.indicator.activities.push(act);
-        //     $state.go('^.activity.form',
-        //     {
-        //         activityInd: vm.indicator.activities.length - 1
-        //     });
-        // }
-
-        // function addRequirement(req)
-        // {
-        //     if (!vm.indicator.requirements) vm.indicator.requirements = [];
-        //     vm.indicator.requirements.push(req);
-        // }
-
-        // function removeRequirement(req)
-        // {
-        //     if (typeof req === 'number')
-        //         vm.indicator.requirements.splice(req, 1);
-        //     else
-        //         vm.indicator.requirements.splice(vm.indicator.requirements.indexOf(req), 1);
-        // }
-
+        
         // Remove existing indicator
         function remove()
         {
@@ -83,7 +63,7 @@
         // Save indicator
         function save(isValid)
         {
-            console.log("hohohhohoho")
+            console.log(vm.testTemplate)
             // if (!isValid)
             // {
             //     $scope.$broadcast('show-errors-check-validity', 'vm.form.testTemplateForm');

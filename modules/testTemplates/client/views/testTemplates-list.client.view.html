@@ -3,6 +3,19 @@
     <h1>Testmaler</h1>
   </div>
   <div class="list-group">
-    
+    <a ng-repeat="testTemplate in vm.testTemplates" ui-sref="testTemplates.view({ testTemplateId: testTemplate._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="testTemplate.created_at | date:'mediumDate'"></span>
+        by
+        <span ng-if="testTemplate.created_by" ng-bind="testTemplate.created_by"></span>
+        <span ng-if="!testTemplate.created_by">Ukjent</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="testTemplate.name"></h4>
+      <p class="list-group-item-text" ng-bind="testTemplate.description"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.testTemplates.$resolved && !vm.testTemplates.length">
+    No testTemplates yet, why don't you <a ui-sref="testTemplates.create">create one</a>?
   </div>
 </section>
