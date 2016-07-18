@@ -6,21 +6,15 @@
         .module('indicators')
         .controller('InputsController', InputsController);
 
-    InputsController.$inject = ['$state', '$scope', '$stateParams', 'Authentication', 'IndicatorsCreateService', 'RequirementsService'];
+    InputsController.$inject = ['$state', '$scope', '$stateParams', 'inputResolve',
+        'Authentication', 'IndicatorsCreateService', 'RequirementsService'
+    ];
 
-    function InputsController($state, $scope, $stateParams, Authentication, IndicatorsCreateService, RequirementsService)
+    function InputsController($state, $scope, $stateParams, input, Authentication, IndicatorsCreateService, RequirementsService)
     {
         var vm = this;
+        vm.input = input;
 
-        try
-        {
-            vm.input = IndicatorsCreateService.indicator.activities[$stateParams.activityInd].inputs[$stateParams.inputInd];
-        }
-        catch (e)
-        {
-            console.log(e);
-            goBack();
-        }
         vm.goBack = goBack;
         var oldInput = angular.copy(vm.input);
         vm.cancel = cancel;
@@ -32,7 +26,9 @@
         vm.addRequirement = addRequirement;
         vm.addAlternative = addAlternative;
         vm.getActivititesList = getActivititesList;
-        function getActivititesList(){
+
+        function getActivititesList()
+        {
             // console.log(IndicatorsCreateService)
             return IndicatorsCreateService.indicator.activities;
         }
@@ -103,16 +99,34 @@
 
         function cancel()
         {
-            IndicatorsCreateService.indicator.activities[$stateParams.activityInd].inputs[$stateParams.inputInd] = oldInput;
+            vm.input = oldInput;
             goBack();
         }
 
         function save()
         {
-            $scope.ac.save(true,
+            console.log(vm.input)
+            console.log("trying to save or update input")
+            if (vm.input._id)
             {
-                remainInThisState: true
-            });
+                input.$update(function(res)
+                {
+                    console.log("updating input ok")
+                }, function(res)
+                {
+                    "updating input failed"
+                })
+            }
+            else
+            {
+                input.$save(function(res)
+                {
+                    console.log("saving input ok")
+                }, function(res)
+                {
+                    "saving input failed"
+                })
+            }
             goBack();
         }
 

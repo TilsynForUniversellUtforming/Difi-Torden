@@ -19,10 +19,13 @@ var ActivitySchema = new Schema(
     user: String,
     title: String,
     inputs: [
-    {}],
+    {
+        type: Schema.ObjectId,
+        ref: 'Input'
+    }],
     description: String,
     images: [
-    {}]
+    {}],
 });
 
 mongoose.model('Activity', ActivitySchema);
