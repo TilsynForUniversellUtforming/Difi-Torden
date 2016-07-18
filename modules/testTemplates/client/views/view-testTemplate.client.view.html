@@ -1,0 +1,26 @@
+<h1>{{vm.testTemplate.title}}</h1>
+<p>
+<a ng-click="vm.edittestTemplate(vm.testTemplate.id)">endre</a>
+    <a>slett</a>
+</p>
+<p>
+    created by {{vm.testTemplate. created_by}}
+</p>
+<ul>
+    <li ng-repeat="tes in vm.testTemplate.testObject">
+        <p>{{tes.title}}</p>
+        <p>
+            <a>endre</a>
+            <a>slett</a>
+        </p>
+        <ul>
+            <li ng-repeat="ind in vm.testTemplate.indicators">
+                <p>{{ind.text}}</p>
+                <p>
+                    <a>endre</a>
+                    <a>slett</a>
+                </p>
+            </li>
+        </ul>
+    </li>
+</ul>

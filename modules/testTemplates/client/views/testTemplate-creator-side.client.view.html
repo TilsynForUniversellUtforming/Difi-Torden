@@ -1,0 +1,29 @@
+<section class="content-list" style="min-height:500px">
+    <div class="header">
+    <h2>Testmaler</h2>
+        <h2 class="text-center"> <a ui-sref=".main" ng-hide="!vm.testTemplate.title" style="text-decoration:none; color:white">{{vm.testTemplate.title}}</a><a ng-show="!vm.testTemplate.title" ui-sref=".main" style="text-decoration:none; color:white">Testmal uten navn</a></h2>
+    </div>
+    <ul dnd-list="vm.indicator.activities" class="list-group">
+        <li class="list-group-item">
+            <a ng-click="vm.addIndicator()">Legg til indikator</a>
+        </li>
+        <li ng-repeat="item in vm.testTemplates.indicators">
+
+                <div class="subheader">
+                    <h4 ng-click="vm.setWorkingObject(item)" ui-sref=".({testTemplateId: vm.testTemplateId, activityInd:$index.toString()})">{{$index+1}} - {{item.title}}</h4>
+                </div>
+                <div >
+                    <ul dnd-list="item.inputs">
+                            <p class="text-muted" >Registreringer:</p>
+                        <li ng-repeat="in in item.inputs">
+
+                            {{$index+1}}
+                            {{in.text | limitTo: 55}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+
+        </li>
+    </ul>
+</section>
