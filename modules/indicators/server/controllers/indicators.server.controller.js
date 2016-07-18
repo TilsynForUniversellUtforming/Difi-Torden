@@ -53,7 +53,6 @@ exports.update = function(req, res)
 
     indicator.title = req.body.title;
     indicator.content = req.body.content
-    indicator.activitiesIds = req.body.activitiesIds
     if (req.body.activities)
         indicator.activities = req.body.activities;
     if (req.body.requirements)
@@ -124,7 +123,7 @@ exports.listAll = function(req, res)
 {
     Indicator.find().populate(
     {
-        path: 'activitiesIds',
+        path: 'activities',
         populate:
         {
             path: 'inputs',
@@ -151,7 +150,7 @@ exports.listActivities = function(req, res)
     var indicator = req.indicator ? req.indicator.toJSON() :
     {};
 
-    res.json(indicator.activitiesIds);
+    res.json(indicator.activities);
 }
 /**
  * Indicators middleware
@@ -169,7 +168,7 @@ exports.indicatorById = function(req, res, next, id)
 
     Indicator.findById(id).populate(
     {
-        path: 'activitiesIds',
+        path: 'activities',
         populate:
         {
             path: 'inputs',

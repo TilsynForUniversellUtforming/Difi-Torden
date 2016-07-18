@@ -12,16 +12,16 @@
                 <h3>Ny aktivitet <span class="pull-right">+</span></h3>
             </div>
         </li>
-        <li class="list-group-item" ng-repeat="item in vm.indicator.activitiesIds" style="padding:0">
+        <li class="list-group-item" ng-repeat="item in vm.indicator.activities" style="padding:0">
             <div class="sub-header" ui-sref=".activity({indicatorId: vm.indicatorId, activityInd:item._id.toString()})">
                 <h3>{{item.title}}</h3>
             </div>
             <div class="row" style="padding:0.8em">
                 <div class="col-sm-12">
-                    <h5 style="text-transform: uppercase"> 
-                    <span ng-if="item.inputs.length > 0">{{item.inputs.length}}</span> 
-                    <span ng-if="item.inputs.length == 0">Ingen</span> 
-                    Registreringer 
+                    <h5 style="text-transform: uppercase">
+                    <span ng-if="item.inputs.length > 0">{{item.inputs.length}}</span>
+                    <span ng-if="item.inputs.length == 0">Ingen</span>
+                    Registreringer
                     <span ng-if="item.inputs.length > 0 && vm.sideShowActInputs != $index" ng-click="vm.sideShowActInputs = $index"> - Vis</span>
                     <span ng-if="item.inputs.length > 0 && vm.sideShowActInputs == $index" ng-click="vm.sideShowActInputs = -1"> - Skjul</span>
                     </h5>

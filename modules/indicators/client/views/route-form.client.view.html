@@ -1,5 +1,5 @@
-<md-button class="md-raised center-block" ng-click="rc.showCreator = true" ng-if="!rc.showCreator">Legg til</md-button>
-<div class="row" ng-show="rc.showCreator">
+<md-button class="md-raised center-block" ng-click="rc.newRoute()" ng-if="!rc.showform">Legg til</md-button>
+<div class="row" ng-show="rc.showform">
     <div class="col-sm-12">
         <div class="row">
             <div class="form-horizontal">
@@ -10,7 +10,7 @@
                     <div class="col-sm-8">
                         <!-- TYPE YES NO -->
                         <div ng-if="ic.input.type=='yesno'">
-                            <md-radio-group ng-model="rc.RouteYesNo" class="">
+                            <md-radio-group ng-model="rc.route.condition" class="">
                             <md-radio-button value="true" class="md-primary">Ja </md-radio-button>
                             <md-radio-button value="false" >Nei </md-radio-button>
                             <md-radio-button value="Ikke Relevant">Ikke relevant </md-radio-button>
@@ -19,12 +19,12 @@
                         <!-- END TYPE YES NO  -->
                         <!-- TYPE FREETEXT -->
                         <div ng-if="ic.input.type=='freetext'">
-                            <input type="text" name="route-input" class="form-control">
+                            <input type="text" name="route-input" class="form-control" ng-model="rc.route.condition">
                         </div>
                         <!-- END TYPE FREETEXT -->
                         <!-- TYPE RADIO -->
                         <div ng-if="ic.input.type=='radio'">
-                            <md-radio-group ng-model="rc.RouteYesNo" >
+                            <md-radio-group ng-model="rc.route.condition" >
                             <md-radio-button ng-repeat="alt in ic.input.alternatives" ng-value="alt.value + $index" class="md-primary">{{alt.text}} </md-radio-button>
                             </md-radio-group>
                         </div>
@@ -32,16 +32,19 @@
                         <!-- TYPE CHECKBOX -->
                         <div ng-if="ic.input.type=='checkbox'">
                             <div class="checkbox list-group-item" ng-repeat="alt in ic.input.alternatives">
-                                <label for="">
-                                    <input type="checkbox" name="route-input" >
-                                    {{alt.text}}
-                                </label>
+                                <div layout="row" layout-wrap flex>
+                                    <div flex="50" >
+
+                                    <md-checkbox ng-model="rc.route.condition" ng-value="alt.value + $index" class="md-primary">{{alt.text}} </md-checkbox>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- END TYPE CHECKBOX -->
                         <!-- TYPE NUMERIC -->
                         <div ng-if="ic.input.type=='numeric'">
-                            <input type="number" name="route-input" class="form-control">
+                            <input type="number" name="route-input" class="form-control" ng-model="rc.route.condition">
                         </div>
                         <!-- END TYPE NUMERIC -->
                         <!-- TYPE PICTURE -->
@@ -64,16 +67,16 @@
                                     <div >
                                         <md-input-container>
                                         <label>Aktivitet</label>
-                                        <md-select ng-model="rc.routeEvalTrueGoToAct">
+                                        <md-select ng-model="rc.route.targetActivity">
                                         <md-option ng-repeat="act in ic.getActivititesList()" ng-value="act">
                                         {{act.title}}
                                         </md-option>
                                         </md-select>
                                         </md-input-container >
-                                        <md-input-container  ng-if="rc.routeEvalTrueGoToAct">
+                                        <md-input-container  ng-if="rc.route.targetActivity">
                                         <label>Registrering</label>
-                                        <md-select ng-model="rc.routeEvalTrueGoToInput">
-                                        <md-option ng-repeat="inp in rc.routeEvalTrueGoToAct.inputs" value="inp">
+                                        <md-select ng-model="rc.route.targetInput">
+                                        <md-option ng-repeat="inp in rc.route.targetActivity.inputs" ng-value="inp">
                                         {{inp.text}}
                                         </md-option>
                                         </md-select>
@@ -86,7 +89,7 @@
                                 label="Neste seksjon">
                                 <div class="demo-tab tab{{$index%4}}" style="padding: 25px;">
                                     <div>
-                                        <md-radio-group ng-model="rc.routeEvalTrueNext" class="">
+                                        <md-radio-group ng-model="rc.route.targetNext" class="">
                                         <md-radio-button value="input" class="md-primary">Gå til neste registrering </md-radio-button>
                                         <md-radio-button value="activity" >Gå til neste aktivitet </md-radio-button>
                                         <md-radio-button value="indicator">Gå til neste indikator </md-radio-button>
@@ -99,15 +102,15 @@
                         </div>
                     </div>
                 </div>
-              
+
             </div>
         </div>
     </div>
- 
+
 <div class="row" >
     <div class="col-sm-12 row-fix" >
-        <p class="text-center" style="border:2px dashed #efefef"> <md-button>Avbryt</md-button>
-      <md-button md-no-ink class="md-primary">Lagre</md-button></p>
+        <p class="text-center" style="border:2px dashed #efefef"> <md-button ng-click="rc.printroute()">Avbryt</md-button>
+      <md-button md-no-ink class="md-primary" ng-click="rc.save()">Lagre</md-button></p>
     </div>
 </div>
 </div>

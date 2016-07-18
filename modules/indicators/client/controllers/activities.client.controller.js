@@ -19,15 +19,6 @@
             vm.id = $stateParams.activityInd;
             vm.activity = activity;
             console.log(vm.activity)
-            // for (var i = 0; i < IndicatorsCreateService.indicator.activitiesIds.length; i++) {
-            //     console.log("Loop_"+i)
-            //     if (IndicatorsCreateService.indicator.activitiesIds[i]._id && IndicatorsCreateService.indicator.activitiesIds[i]._id == vm.id) {
-            //         console.log("Math found")
-            //         vm.activity =  IndicatorsCreateService.indicator.activitiesIds[i];
-            //         console.log(vm.activity)
-            //     }
-            // }
-
         }
         catch (e)
         {

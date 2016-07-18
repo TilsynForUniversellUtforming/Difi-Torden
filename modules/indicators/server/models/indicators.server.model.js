@@ -23,8 +23,7 @@ var IndicatorSchema = new Schema(
         type: Date,
         default: Date.now
     },
-    activities: {type:Array, default:[]},
-    activitiesIds: [{type: Schema.ObjectId, ref:'Activity'}],
+    activities: [{type: Schema.ObjectId, ref:'Activity'}],
     requirements:{type:Array, default:[]},
     routes:{type:Array, default:[]}
 });

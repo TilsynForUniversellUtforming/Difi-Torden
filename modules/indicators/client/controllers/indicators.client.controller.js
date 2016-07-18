@@ -85,10 +85,10 @@
             act.title = "Aktivitet uten navn";
             act.inputs = [];
             act.beskrivelse = "";
-            if (!vm.indicator.activitiesIds) vm.indicator.activitiesIds = [];
+            if (!vm.indicator.activities) vm.indicator.activities = [];
             act.$save(function(res)
             {
-                vm.indicator.activitiesIds.push(res);
+                vm.indicator.activities.push(res);
                 IndicatorsCreateService.save(function(res2)
                 {
                     console.log("ok");
