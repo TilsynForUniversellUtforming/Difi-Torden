@@ -1,8 +1,7 @@
 
 
-.content-list {
+..content-list {
     padding: 0;
-
     background-color: white;
     border: 2px solid #555;
 }
@@ -58,9 +57,11 @@
     color: white;
     font-size: 1.3em;
     margin: 0;
+     text-transform: uppercase;
 }
 .header h2 span {
     font-size: 0.8em;
+
 }
 .header a {
     color: #eee;
@@ -91,7 +92,9 @@
 }
 .sub-header h3 {
     margin: 0;
-    font-size: 1.4em;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: lighter;
 }
 .main-content > .row {
     padding-top: 0.6em;
@@ -146,5 +149,9 @@ form.form-horizontal {
     font-size: 1em;
     margin: 0;
     margin-top: 0.1em;
+    text-transform: uppercase;
+}
+.control-label{
+    font-weight: lighter;
     text-transform: uppercase;
 }

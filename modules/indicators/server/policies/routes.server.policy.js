@@ -18,19 +18,11 @@ exports.invokeRolesPolicies = function()
         roles: ['admin'],
         allows: [
         {
-            resources: '/api/indicators',
+            resources: '/api/routes',
             permissions: '*'
         },
         {
-            resources: '/api/indicators/full',
-            permissions: '*'
-        },
-        {
-            resources: '/api/indicators/:indicatorId',
-            permissions: '*'
-        },
-        {
-            resources: '/api/indicators/:indicatorId/activities',
+            resources: '/api/routes/:routeId',
             permissions: '*'
         }]
     },
@@ -38,40 +30,24 @@ exports.invokeRolesPolicies = function()
         roles: ['user'],
         allows: [
         {
-            resources: '/api/indicators',
+            resources: '/api/routes',
             permissions: ['*']
         },
         {
-            resources: '/api/indicators/full',
-            permissions: '*'
-        },
-        {
-            resources: '/api/indicators/:indicatorId',
+            resources: '/api/routes/:routeId',
             permissions: ['*']
-        },
-        {
-            resources: '/api/indicators/:indicatorId/activities',
-            permissions: '*'
         }]
     },
     {
         roles: ['guest'],
         allows: [
         {
-            resources: '/api/indicators',
+            resources: '/api/routes',
             permissions: ['*']
         },
         {
-            resources: '/api/indicators/full',
-            permissions: '*'
-        },
-        {
-            resources: '/api/indicators/:indicatorId',
+            resources: '/api/routes/:routeId',
             permissions: ['*']
-        },
-        {
-            resources: '/api/indicators/:indicatorId/activities',
-            permissions: '*'
         }]
     }]);
 };
@@ -82,12 +58,11 @@ exports.invokeRolesPolicies = function()
 exports.isAllowed = function(req, res, next)
 {
     var roles = (req.user) ? req.user.roles : ['guest'];
-
+    return next();
     // If an article is being processed and the current user created it then allow any manipulation
-    if (req.indicator && req.user && req.indicator.user && req.indicator.user.id === req.user.id)
-    {
-        return next();
-    }
+    // if (req.indicator && req.user && req.indicator.user && req.indicator.user.id === req.user.id) {
+    //   return next();
+    // }
 
     // Check for user roles
     acl.areAnyRolesAllowed(roles, req.route.path, req.method.toLowerCase(), function(err, isAllowed)

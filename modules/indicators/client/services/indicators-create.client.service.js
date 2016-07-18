@@ -12,10 +12,6 @@
             indicator: indicator,
             getBlankIndicator:getBlankIndicator,
             save:save,
-            backupSet:backupSet,
-            backupGet:backupGet,
-            backupRevert:backupRevert,
-            backupCompare:backupCompare
         };
 
         return service;
@@ -46,23 +42,6 @@
                 console.log("creating new indicator")
                 service.indicator.$save(successCallback, errorCallback);
             }
-        }
-        //TODO Remove those
-        function backupSet(ind){
-            indicatorOld = angular.copy(ind ? ind : service.indicator);
-        }
-        function backupGet(){
-            console.log("OLD:")
-            console.log(indicatorOld);
-            console.log("NEW:")
-            console.log(service.indicator);
-            return indicatorOld;
-        }
-        function backupRevert(){
-            service.indicator = angualr.copy(indicatorOld);
-        }
-        function backupCompare(){
-            return angular.equals(service.indicator, indicatorOld);
         }
     }
 }());

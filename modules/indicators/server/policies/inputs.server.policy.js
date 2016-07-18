@@ -18,19 +18,11 @@ exports.invokeRolesPolicies = function()
         roles: ['admin'],
         allows: [
         {
-            resources: '/api/indicators',
+            resources: '/api/inputs',
             permissions: '*'
         },
         {
-            resources: '/api/indicators/full',
-            permissions: '*'
-        },
-        {
-            resources: '/api/indicators/:indicatorId',
-            permissions: '*'
-        },
-        {
-            resources: '/api/indicators/:indicatorId/activities',
+            resources: '/api/inputs/:inputId',
             permissions: '*'
         }]
     },
@@ -38,40 +30,24 @@ exports.invokeRolesPolicies = function()
         roles: ['user'],
         allows: [
         {
-            resources: '/api/indicators',
+            resources: '/api/inputs',
             permissions: ['*']
         },
         {
-            resources: '/api/indicators/full',
-            permissions: '*'
-        },
-        {
-            resources: '/api/indicators/:indicatorId',
+            resources: '/api/inputs/:inputId',
             permissions: ['*']
-        },
-        {
-            resources: '/api/indicators/:indicatorId/activities',
-            permissions: '*'
         }]
     },
     {
         roles: ['guest'],
         allows: [
         {
-            resources: '/api/indicators',
+            resources: '/api/inputs',
             permissions: ['*']
         },
         {
-            resources: '/api/indicators/full',
-            permissions: '*'
-        },
-        {
-            resources: '/api/indicators/:indicatorId',
+            resources: '/api/inputs/:inputId',
             permissions: ['*']
-        },
-        {
-            resources: '/api/indicators/:indicatorId/activities',
-            permissions: '*'
         }]
     }]);
 };
@@ -83,11 +59,10 @@ exports.isAllowed = function(req, res, next)
 {
     var roles = (req.user) ? req.user.roles : ['guest'];
 
-    // If an article is being processed and the current user created it then allow any manipulation
-    if (req.indicator && req.user && req.indicator.user && req.indicator.user.id === req.user.id)
-    {
-        return next();
-    }
+    return next();
+    // if (req.input && req.user && req.input.user && req.input.user.id === req.user.id) {
+    //   return next();
+    // }
 
     // Check for user roles
     acl.areAnyRolesAllowed(roles, req.route.path, req.method.toLowerCase(), function(err, isAllowed)

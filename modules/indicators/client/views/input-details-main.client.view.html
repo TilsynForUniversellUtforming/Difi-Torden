@@ -12,9 +12,9 @@
                 <p class="col-sm-9">
                     <b class="" style="padding:0" ng-if="input.mandytory">Obligatorisk</b>
                     <b class="" style="padding:0" ng-if="!input.mandytory">Frivillig</b>
-                    <b class="" style="padding:0">, {{input.type}}</b>, INDEX {{$index}}
+                    <b class="" style="padding:0">, {{input.type}}</b>
                 </p>
-                <div style="border-left:2px solid #eee" class="col-sm-3 "><p class="pull-right"><a class="" ng-click="ac.editInput($index)"> endre </a> <a ng-click="ac.removeInput($index)" class=" "> slett </a></p>
+                <div style="border-left:2px solid #eee" class="col-sm-3 "><p class="pull-right"><a class="" ng-click="ac.editInput(input._id)"> endre </a> <a ng-click="ac.removeInput($index)" class=" "> slett </a></p>
                 </div>
                 <p class="col-sm-11"><b class="col-sm-3" style="padding:0">Tekst: </b> <span class="col-sm-9">{{input.text | limitTo: 100}}</span></p>
                 <p class="col-sm-11"><b class="col-sm-3" style="padding:0">Standarder: </b>
