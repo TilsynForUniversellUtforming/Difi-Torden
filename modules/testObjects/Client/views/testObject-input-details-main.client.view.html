@@ -1,0 +1,9 @@
+<section>
+    <p>
+        <b>{{$index + 1}}</b>
+        {{input.text}}
+        <a ui-sref=".input({inputId:$index.toString()})">endre</a>
+        <a ng-click="ac.removeInput($index)">slett</a>
+    </p>
+    <p> Registreringstype: {{input.type}}</p>
+</section>
