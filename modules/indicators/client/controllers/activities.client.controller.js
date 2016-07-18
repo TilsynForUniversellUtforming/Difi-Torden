@@ -12,40 +12,18 @@
     {
         var vm = this;
 
-        try
-        {
-            // vm.activity = IndicatorsCreateService.indicator.activitiesIds[$stateParams.activityInd];
-            console.log("act id: " + $stateParams.activityInd)
-            vm.id = $stateParams.activityInd;
-            vm.activity = activity;
-            console.log(vm.activity)
-        }
-        catch (e)
-        {
-            console.log("Something went wrong while retrieving activity")
-            var isCreate = ($state.current.name.indexOf('create') >= 0) ? true : false;
-            if (isCreate) $state.go('indicators.create.main')
-            else
-            {
-                try
-                {
-                    $state.go(".^.^.main");
-                }
-                catch (e)
-                {
-                    $state.go('indicators.edit.main',
-                    {
-                        indicatorId: indicatorId
-                    });
-                }
-            }
-        }
+        vm.activity = activity;
+
+        //TODO find out if we still need this
         //in case no saving will take place
         var oldActivity = angular.copy(vm.activity);
 
+        //Inputs of a given activity
+        //TODO move it somewhere else, maybe input list ctr or smth
         vm.removeInput = removeInput;
         vm.newInput = newInput;
-        vm.indicatorId = indicatorId;
+
+        // vm.indicatorId = indicatorId;
         vm.cancel = cancel;
         vm.save = save;
         vm.editInput = editInput;
@@ -57,6 +35,7 @@
         function removeActivity(id)
         {
             //TODO add popup warning
+            //TODO remove reference to its ID from the indicator.
             vm.activity.$remove(function(res)
             {
                 console.log("removing ok")
@@ -71,13 +50,13 @@
             });
 
         }
-
+        //Toggles details of chosen input
+        //TODO Make JSON to smth nicer to look at
         function toggleInputDetails(index)
         {
-            console.log("index is " + index)
             vm.expandedInputIndex = (vm.expandedInputIndex == index) ? -1 : index;
         }
-
+        //
         function getLocalRequirements()
         {
             return [];
@@ -158,7 +137,7 @@
 
         function cancel()
         {
-            IndicatorsCreateService.indicator.activities[$stateParams.activityInd] = oldActivity;
+            vm.activity = oldActivity;
             $state.go('.^');
         }
 
