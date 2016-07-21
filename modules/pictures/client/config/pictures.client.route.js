@@ -1,7 +1,4 @@
-(function () {
-  'use strict';
-
-  (function()
+(function()
 {
     'use strict';
 
@@ -31,6 +28,6 @@
           pageTitle: 'picture'
         }
       })
-      
+
   }
 }());
