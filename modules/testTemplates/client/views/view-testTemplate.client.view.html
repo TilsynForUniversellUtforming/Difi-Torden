@@ -1,14 +1,14 @@
 <h1>{{vm.testTemplate.title}}</h1>
 <p>
-<a ng-click="vm.edittestTemplate(vm.testTemplate.id)">endre</a>
+<a ng-click="vm.editTestTemplate(vm.testTemplate.id)">endre</a>
     <a>slett</a>
 </p>
 <p>
     created by {{vm.testTemplate. created_by}}
 </p>
 <ul>
-    <li ng-repeat="tes in vm.testTemplate.testObject">
-        <p>{{tes.title}}</p>
+    <li ng-repeat="object in vm.testTemplate.testObject">
+        <p>{{object.title}}</p>
         <p>
             <a>endre</a>
             <a>slett</a>
