@@ -13,9 +13,8 @@
         var vm = this;
         //What we are working with
         vm.testTemplate = testTemplate;
-        //quick n dirty until we change model to final form
-        // if (!vm.testTemplate.requirements) vm.testTemplate.requirements = [];
-        // if (!vm.testTemplate.activities) vm.testTemplate.activities = [];
+        // vm.testTemplateId = testTemplateId;
+        
         console.log(testTemplate)
         vm.authentication = Authentication;
         vm.error = null;
@@ -24,6 +23,7 @@
         vm.save = save;
         vm.indicators= IndicatorsService.query();
         vm.addIndicator = addIndicator;
+        vm.editTestTemplate = editTestTemplate;
         
 
         //adds a requirement to indicators requirements array
@@ -60,7 +60,15 @@
                 vm.testTemplate.$remove($state.go('testTemplates.list'));
             }
         }
-        // Save indicator
+        //navigates to edit page for testTemplate with specified id
+        function editTestTemplate(id)
+        {
+            $state.go('testTemplates.edit.main',
+            {
+                testTemplateId: vm.testTemplate._id
+            })
+        }
+        // Save testTemplate
         function save(isValid)
         {
             console.log(vm.testTemplate)

@@ -1,26 +1,36 @@
-<h1>{{vm.testTemplate.title}}</h1>
+<section class="main main-content" style="margin-top:0.9em;margin-bottom:0.8em;">
+    <div class="header" style="padding-left:0.5em;">
+      <h1>{{vm.testTemplate.title}}
+       <a class="pull-right side" href="#">slett</a>
+       <a class="pull-right side" style="margin-right:0.5em" ng-click="vm.editTestTemplate()">endre</a>
+   </h1>
+</div>
+
 <p>
-<a ng-click="vm.editTestTemplate(vm.testTemplate.id)">endre</a>
+<a ng-click="vm.editTestTemplate()">endre</a>
     <a>slett</a>
 </p>
 <p>
-    created by {{vm.testTemplate. created_by}}
+    created by {{vm.testTemplate.created_by}}
 </p>
 <ul>
-    <li ng-repeat="object in vm.testTemplate.testObject">
-        <p>{{object.title}}</p>
-        <p>
+    <li>
+        <p>{{ vm.testTemplate.testObject}}</p>
+        <!-- <p>
             <a>endre</a>
             <a>slett</a>
-        </p>
+        </p> -->
+        <p>hei</p>
         <ul>
+       
             <li ng-repeat="ind in vm.testTemplate.indicators">
-                <p>{{ind.text}}</p>
-                <p>
+                <p>{{ind.title}}</p>
+                <!-- <p>
                     <a>endre</a>
                     <a>slett</a>
-                </p>
+                </p> -->
             </li>
         </ul>
     </li>
 </ul>
+</section>

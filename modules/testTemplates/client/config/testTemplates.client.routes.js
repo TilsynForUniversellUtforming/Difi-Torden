@@ -76,45 +76,44 @@
                 {
                     pageTitle: 'testTemplate {{ testTemplateResolve.name }}'
                 }
-            });
+            })
             
             
            
-            // .state('testTemplates.edit',
-            // {
-            //     url: '/:testTemplateId/edit',
-            //      views:
-            //     {
-            //         "":
-            //         {
-            //             templateUrl: 'modules/testTemplates/client/views/testTemplate-creator-main.client.view.html',
-            //             controller: 'TestTemplatesController',
-            //             controllerAs: 'vm',
-            //         },
-            //         "side@testTemplates.edit":
-            //         {
-            //             templateUrl: "modules/testTemplates/client/views/testTemplate-creator-side.client.view.html"
-            //         },
-            //     },
-            //     resolve:
-            //     {
-            //         testTemplateResolve: getTestTemplate,
-            //         TestTemplateId: getTestTemplateId
-            //     },
-            //     data:
-            //     {
-            //         roles: ['user', 'admin', 'guest'],
-            //         pageTitle: 'Edit TestTemplate '
-            //     }
-            // })
-            // .state('testTemplates.edit.main', {
-            //     url:'/main',
-            //     templateUrl: "modules/testTemplates/client/views/testTemplate-form-main.client.view.html"
-            // })
+            .state('testTemplates.edit',
+            {
+                url: '/:testTemplateId/edit',
+                 views:
+                {
+                    "":
+                    {
+                        templateUrl: 'modules/testTemplates/client/views/testTemplate-creator-main.client.view.html',
+                        controller: 'testTemplatesController',
+                        controllerAs: 'vm',
+                    },
+                    "side@testTemplates.edit":
+                    {
+                        templateUrl: "modules/testTemplates/client/views/testTemplate-creator-side.client.view.html"
+                    },
+                },
+                resolve:
+                {
+                    testTemplateResolve: getTestTemplate,
+                    testTemplateId: getTestTemplateId
+                },
+                data:
+                {
+                    roles: ['user', 'admin', 'guest'],
+                    pageTitle: 'Edit TestTemplate '
+                }
+            })
+            .state('testTemplates.edit.main', {
+                url:'/main',
+                templateUrl: "modules/testTemplates/client/views/testTemplate-form-main.client.view.html"
+            });
 
          
-          
-
+       
             // .state('testTemplates.view',
             // {
             //     url: '/:indicatorId',
