@@ -13,164 +13,137 @@
             Generell informasjon
         </h3>
     </div>
-    <form class="form-horizontal" name="vm.form.testTemplateForm"  ng-submit="vm.save(vm.form.testTemplateForm.$valid)">
+    <form class="form-horizontal" name="vm.form.testTemplateForm"  ng-submit="vm.save(vm.form.testTemplateForm.$valid)" novalidate="">
 
 
         <fieldset>
 
             <div class="form-group">
                 <label class="col-md-3 control-label" for="title">Tittel</label>
-                <div class="col-md-8">
-                    <input id="testTemplate-title" name="title" type="text" placeholder="Skriv inn tittel" class="form-control input-md" data-ng-model="vm.testTemplate.title" data-ng-value="vm.testTemplate.title" required="" >
-                    <span class="help-block">Dette feltet er obligatorisk og må være mellom 3 og 50 tegn</span>
+                <div class="col-md-8" >
+                    <input id="title" name="title" type="text" placeholder="Skriv inn tittel" class="form-control input-md" data-ng-model="vm.testTemplate.title" data-ng-value="vm.testTemplate.title" required>
+                    <div class="help-block" ng-messages="vm.form.testTemplateForm.title.$error" ng-if="vm.form.testTemplateForm.title.$touched">
+                        <p ng-message="required">Kravet må inneholdet en standard.</p>
+                    </div>
+                    
+                    <!-- <span class="help-block">Dette feltet er obligatorisk og må være mellom 3 og 50 tegn</span> -->
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-3 control-label" for="description-testTemplate">Beskrivelse</label>
+                <label class="col-md-3 control-label" for="description">Beskrivelse</label>
                 <div class="col-md-8">
                     <textarea class="form-control" id="description" data-ng-model="vm.testTemplate.description" data-ng-value="vm.testTemplate.description" 
-                    rows=6 name="description">Beskriv testobjektet her. </textarea>
-                </div>
-            </div>
-            
-        </fieldset>
-    </form>
-
-    <div class="sub-header">
-        <h3 >
-            Legg til et testobjekt
-        </h3>
-    </div>
-    <form class="form-horizontal" name="vm.form.testTemplateForm"  ng-submit="vm.save(vm.form.testTemplateForm.$valid)">
-
-
-        <fieldset>
-
-            <div class="form-group">
-                <label class="col-md-3 control-label" for="testTemplate-title">Hva skal testes?</label>
-                <div class="col-md-8">
-                    <input id="testTemplate-title" name="testTemplate-title" type="text" placeholder="Skriv inn tittel" class="form-control input-md" data-ng-model="vm.testTemplate.testObject" data-ng-value="vm.testTemplate.testObject" required="" >
+                    rows=6 name="description" required>Beskriv testobjektet her. </textarea>
                     <span class="help-block">Dette feltet er obligatorisk og må være mellom 3 og 50 tegn</span>
-                </div>
-            </div>
-            
-
-
-            <div class="sub-header">
-        <h3 >
-            Last opp bilde:
-        </h3>
-    </div>
-    <form class="form-horizontal" name="vm.form.testTemplateForm"  ng-submit="vm.save(vm.form.testTemplateForm.$valid)">
-
-
-        <fieldset>
-
-            <div class="form-group">
-                <label class="col-md-3 control-label" for="testTemplate-title">Hva skal testes?</label>
-                <div class="col-md-8">
-                   <button ng-click="upload_file= ! upload_file" class="btn">Legg ved et bilde</button>
-<form ng-show="upload_file" name="picture_form">
-    <p><b>OBS. Work in progress</b></p>
-    <fieldset  class="form-group">
-        Drop File:
-        <div ngf-drop ngf-select
-        ng-model="files" 
-        class="drop-box"
-        ngf-drag-over-class="'dragover'" 
-        ngf-multiple="true" 
-        ngf-allow-dir="true"
-        accept="image/*,application/pdf"
-        ngf-pattern="'image/*,application/pdf'">
-            <p>Drop pdfs or images here or click to upload</p></div>
-        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-    </fieldset>
-     <button class="btn" type="submit" ng-click="submitPictures()">OK</button>
-    Files:
-    <ul>
-        <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
-    </ul>
-    Log:
-        <pre>{{log}}</pre>
-</form>
- 
+                    <div class="help-block" ng-messages="vm.form.testTemplateForm.description.$error" ng-if="vm.form.testTemplateForm.description.$touched">
+                        <p ng-message="required">Kravet må inneholdet en standard.</p>
+                    </div>
                 </div>
             </div>
             
         </fieldset>
+
 
         <div class="sub-header">
             <h3 >
-                Legg til indikatorer
+                Legg til et testobjekt
             </h3>
         </div>
-        <form class="form-horizontal" name="vm.form.testTemplateForm"  ng-submit="vm.save(vm.form.testTemplateForm.$valid)">
 
 
-            <fieldset>
 
-                <div class="form-group">
+        <fieldset>
 
-                    <script type="text/ng-template" id="customTemplate.html">
-                        <a style="" >
-                            {{match.model.title}}
-                            <span ="match.label | limitTo: 90 | uibTypeaheadHighlight:query " ng-click="vm.addIndicator(match.model)"></span>
-                        </a>
-                    </script>
-                    <div class="col-sm-12">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label for="" class="col-sm-3 control-label">
-                                  Søk etter indikatorer 
-                              </label>
-                              <div class="col-sm-8">
-                                <input  
-                                type="text"
-                                ng-model="asyncSelected"
-                                placeholder="ID, Standard, Tekst..."
-                                uib-typeahead="ind as  ind for ind in vm.indicators | filter:$viewValue | limitTo:12"
-                                uib-typeahead-loading="loadingIndicators"
-                                typeahead-template-url="customTemplate.html"
-                                typeahead-no-results="noResults"
-                                class="form-control"
-                                typeahead-show-hint="false"
-                                typeahead-min-length="0"
-                                typeahead-on-select="vm.addIndicator($model);asyncSelected=''"
-                                typeahead-editable="false"
-                                typeahead-focus-first="false" >
-
-                                <i ng-show="loadingIndicators" class="glyphicon glyphicon-refresh"></i>
-                                <div ng-show="noResults">
-                                  <i class="glyphicon glyphicon-remove"></i> Fant ingen indikatorer
-                              </div>
-                          </div>
-                      </div>
-
-                  </div>
-              </div>
-
-              <div class="form group">
-                <label for="" class="col-sm-3 control-label">Utvalgte indikatorer</label>
-                <div class="col-sm-8" style="padding-left:4px; padding-right:4px">
-                    <ul class="list-group">
-                        <li ng-repeat="ind in vm.testTemplate.indicators track by $index" ng-click="vm.selectedind = ind" class="list-group-item" data-ng-model="vm.testTemplate.indicator" data-ng-value="vm.testTemplate.indicator" >
-                           <div class="row">
-                            <div class="col-sm-2"><p><b>Tittel: </b>{{ind.title}}</p></div><div class="col-sm-3"><p><em>{{ind.description}}</em></p></div></p></div>
-                            <a href="" ng-click="">fjern</a>
-                        </div>
-                    </li>
-                </ul>
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="testObject">Hva skal testes?</label>
+                <div class="col-md-8">
+                    <input id="testObject" name="testObject" type="text" placeholder="Skriv inn tittel" class="form-control input-md" data-ng-model="vm.testTemplate.testObject" data-ng-value="vm.testTemplate.testObject" required >
+                    <!-- <span class="help-block">Dette feltet er obligatorisk og må være mellom 3 og 50 tegn</span> -->
+                    <div class="help-block" ng-messages="vm.form.testTemplateForm.testObject.$error" ng-if="vm.form.testTemplateForm.testObject.$touched">
+                        <p ng-message="required">Kravet må inneholdet en standard.</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-3 control-label" for="testTemplate-general"></label>
-            <div class="col-md-8">
-                <button type="submit" class="btn btn-success pull-right">Lagre</button>
+            
 
-            </div>
+
+
         </div>
     </div>
+
+</fieldset>
+
+<div class="sub-header">
+    <h3 >
+        Legg til indikatorer
+    </h3>
+</div>
+
+
+<fieldset>
+
+    <div class="form-group">
+
+        <script type="text/ng-template" id="customTemplate.html">
+            <a style="" >
+                {{match.model.title}}
+                <span ="match.label | limitTo: 90 | uibTypeaheadHighlight:query " ng-click="vm.addIndicator(match.model)"></span>
+            </a>
+        </script>
+        <div class="col-sm-12">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">
+                      Søk etter indikatorer 
+                  </label>
+                  <div class="col-sm-8">
+                    <input  
+                    type="text"
+                    ng-model="asyncSelected"
+                    placeholder="ID, Standard, Tekst..."
+                    uib-typeahead="ind as  ind for ind in vm.indicators | filter:$viewValue | limitTo:12"
+                    uib-typeahead-loading="loadingIndicators"
+                    typeahead-template-url="customTemplate.html"
+                    typeahead-no-results="noResults"
+                    class="form-control"
+                    typeahead-show-hint="false"
+                    typeahead-min-length="0"
+                    typeahead-on-select="vm.addIndicator($model);asyncSelected=''"
+                    typeahead-editable="false"
+                    typeahead-focus-first="false" >
+
+                    <i ng-show="loadingIndicators" class="glyphicon glyphicon-refresh"></i>
+                    <div ng-show="noResults">
+                      <i class="glyphicon glyphicon-remove"></i> Fant ingen indikatorer
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+
+  <div class="form group">
+    <label for="" class="col-sm-3 control-label">Utvalgte indikatorer</label>
+    <div class="col-sm-8" style="padding-left:4px; padding-right:4px">
+        <ul class="list-group">
+            <li ng-repeat="ind in vm.testTemplate.indicators track by $index" ng-click="vm.selectedind = ind" class="list-group-item" data-ng-model="vm.testTemplate.indicator" data-ng-value="vm.testTemplate.indicator" >
+             <div class="row">
+                <div class="col-sm-2"><p><b>Tittel: </b>{{ind.title}}</p></div><div class="col-sm-3"><p><em>{{ind.description}}</em></p></div></p></div>
+                <a href="" ng-click="">fjern</a>
+            </div>
+        </li>
+    </ul>
+</div>
+</div>
+<div class="form-group">
+    <label class="col-md-3 control-label" for="testTemplate-general"></label>
+    <div class="col-md-8">
+        <button type="submit" class="btn btn-success pull-right" ng-disabled="vm.form.testTemplateForm.$invalid">Lagre</button>
+
+    </div>
+</div>
+</div>
 </fieldset>
 </form>
 
@@ -179,5 +152,4 @@
 </section>
 
 
-</section>
 </section>

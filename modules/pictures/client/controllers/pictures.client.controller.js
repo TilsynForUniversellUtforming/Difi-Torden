@@ -10,10 +10,10 @@
   function PictureController($scope, $timeout, $window, Authentication, FileUploader) {
     var vm = this;
 
-    vm.picture = picture;
+    // vm.picture = picture;
 
     vm.authentication = Authentication;
-    vm.imageURL = vm.picture.pictureURL;
+    vm.imageURL = vm.picture.pictureImageURL;
     vm.uploadPicture = uploadPicture;
 
     vm.cancelUpload = cancelUpload;
@@ -55,7 +55,7 @@
       vm.success = true;
 
       // Populate user object
-      vm.user = Authentication.user = response;
+      // vm.user = Authentication.user = response;
 
       // Clear upload buttons
       cancelUpload();
@@ -82,7 +82,7 @@
     // Cancel the upload process
     function cancelUpload() {
       vm.uploader.clearQueue();
-      vm.imageURL = vm.user.profileImageURL;
+      vm.imageURL = vm.picture.pictureImageURL;
     }
   }
 }());
