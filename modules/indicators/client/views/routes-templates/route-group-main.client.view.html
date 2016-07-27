@@ -1,0 +1,32 @@
+<div class="row route-group-main">
+     <div class="col-sm-12" style="padding-left:0">
+         <div style="padding-left:1em">
+           <md-input-container>
+        <label>Velg type...</label>
+        <md-select ng-model="rc.route.condition.type">
+          <md-option value="OR" >
+            (OR) - Kun en felt må evaluere til sann.
+          </md-option>
+          <md-option value="AND" >
+            (AND) - Alle felter må evaluere til sann.
+          </md-option>
+          <md-option value="NOT" ng-disabled="true">
+            (NOT) - Alle felter må evaluere til usant.
+          </md-option>
+        </md-select>
+
+      </md-input-container>
+      <md-input-container> <md-button class="md-raised" ng-click="rc.addInput(rc.route.condition)">Ny input</md-button>
+         <md-button class="md-raised" ng-click="rc.addCondition(rc.route.condition)">Ny betingelse</md-button></md-input-container>
+         </div>
+     </div>
+    <div class="col-sm-12" style="padding-left:0">
+        <div class="route-component" ng-repeat="heeeeee in rc.route.condition.inputs track by $index">
+            <div ng-include="'modules/indicators/client/views/routes-templates/route-item.client.view.html'"></div>
+        </div>
+        <div class="route-component" ng-repeat="condition in rc.route.condition.conditions">
+
+            <div ng-include="'modules/indicators/client/views/routes-templates/route-group.client.view.html'"></div>
+        </div>
+    </div>
+</div>

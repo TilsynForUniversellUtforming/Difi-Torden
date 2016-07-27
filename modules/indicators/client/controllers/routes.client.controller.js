@@ -10,6 +10,7 @@
 
     function RoutesController($state, $scope, $stateParams, Authentication)
     {
+        console.log("ROUTES CONTROLLER REPOTING")
         var vm = this;
         vm.newRoute = newRoute;
         vm.editRoute = editRoute;
@@ -17,8 +18,18 @@
         vm.cancel = cancel;
         vm.save = save;
 
+        vm.addInput = addInput;
+        vm.addCondition = addCondition;
+
         vm.showform = false;
-        vm.route = {};
+        vm.route = {
+            condition:{
+                type:'',
+                inputs:[{id:'',values:[]}],
+                conditions:[]
+            },
+            onEvalTrue:{}
+        };
         vm.printroute = function(){
             console.log(vm.route)
         }
@@ -56,7 +67,25 @@
             }
             console.log(vm.route)
         }
-
+        function addInput(parent){
+            console.log("adding input");
+            console.log(parent)
+            if(!parent.inputs) parent.inputs = [];
+            var obj = {
+                id:'',
+                values:[]
+            }
+            parent.inputs.push(obj)
+        }
+        function addCondition(parent){
+             if(!parent.conditions)parent.conditions = [];
+            var obj = {
+                type:'',
+                inputs:[],
+                conditions:[]
+            }
+            parent.conditions.push(obj)
+        }
 
 
 

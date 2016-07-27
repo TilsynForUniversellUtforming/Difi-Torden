@@ -44,7 +44,8 @@
         }
         vm.alternative = {
             text: '',
-            isCorrect: null,
+            selected:false,
+            isCorrect:null,
             options:
             {}
         }
