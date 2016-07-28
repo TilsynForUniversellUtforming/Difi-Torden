@@ -36,13 +36,13 @@
                 {
                     "":
                     {
-                        templateUrl: 'modules/TestTemplates/client/views/testTemplate-creator-main.client.view.html',
+                        templateUrl: 'modules/TestTemplates/client/views/testTemplates-creator-main.client.view.html',
                         controller: 'testTemplatesController',
                         controllerAs: 'vm',
                     },
                     "side@testTemplates.create":
                     {
-                        templateUrl: "modules/testTemplates/client/views/testTemplate-creator-side.client.view.html"
+                        templateUrl: "modules/testTemplates/client/views/testTemplates-creator-side.client.view.html"
                     },
                 },
                 resolve:
@@ -58,13 +58,13 @@
             })
             .state('testTemplates.create.main', {
                 url:'/main',
-                templateUrl: "modules/testTemplates/client/views/testTemplate-form-main.client.view.html"
+                templateUrl: "modules/testTemplates/client/views/testTemplates-form-main.client.view.html"
             })
             
             .state('testTemplates.view',
             {
                 url: '/:testTemplateId',
-                templateUrl: 'modules/testTemplates/client/views/view-testTemplate.client.view.html',
+                templateUrl: 'modules/testTemplates/client/views/view-testTemplates.client.view.html',
                 controller: 'testTemplatesController',
                 controllerAs: 'vm',
                 resolve:
@@ -87,13 +87,13 @@
                 {
                     "":
                     {
-                        templateUrl: 'modules/testTemplates/client/views/testTemplate-creator-main.client.view.html',
+                        templateUrl: 'modules/testTemplates/client/views/testTemplates-creator-main.client.view.html',
                         controller: 'testTemplatesController',
                         controllerAs: 'vm',
                     },
                     "side@testTemplates.edit":
                     {
-                        templateUrl: "modules/testTemplates/client/views/testTemplate-creator-side.client.view.html"
+                        templateUrl: "modules/testTemplates/client/views/testTemplates-creator-side.client.view.html"
                     },
                 },
                 resolve:
@@ -109,7 +109,7 @@
             })
             .state('testTemplates.edit.main', {
                 url:'/main',
-                templateUrl: "modules/testTemplates/client/views/testTemplate-form-main.client.view.html"
+                templateUrl: "modules/testTemplates/client/views/testTemplates-form-main.client.view.html"
             });
 
          

@@ -2,7 +2,7 @@
     <section class="main-content">
         <div class="header" >
             <h2>
-                <span>Testmaler</span>
+                <span>Testmal</span>
                 {{vm.testTemplate.title}}
                 <a class="pull-right side" ng-click="vm.remove()"> slett </a>
             </h2>
@@ -45,7 +45,7 @@
         </fieldset>
 
 
-        <div class="sub-header">
+        <div class="sub-header" >
             <h3 >
                 Legg til et testobjekt
             </h3>
@@ -55,7 +55,7 @@
 
         <fieldset>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-top:12px;">
                 <label class="col-md-3 control-label" for="testObject">Hva skal testes?</label>
                 <div class="col-md-8">
                     <input id="testObject" name="testObject" type="text" placeholder="Skriv inn tittel" class="form-control input-md" data-ng-model="vm.testTemplate.testObject" data-ng-value="vm.testTemplate.testObject" required >
@@ -97,7 +97,7 @@
                     <label for="" class="col-sm-3 control-label">
                       Søk etter indikatorer 
                   </label>
-                  <div class="col-sm-8">
+                  <div class="col-sm-8" style="margin-top:12px;">
                     <input  
                     type="text"
                     ng-model="asyncSelected"
@@ -130,7 +130,7 @@
             <li ng-repeat="ind in vm.testTemplate.indicators track by $index" ng-click="vm.selectedind = ind" class="list-group-item" data-ng-model="vm.testTemplate.indicator" data-ng-value="vm.testTemplate.indicator" >
              <div class="row">
                 <div class="col-sm-2"><p><b>Tittel: </b>{{ind.title}}</p></div><div class="col-sm-3"><p><em>{{ind.description}}</em></p></div></p></div>
-                <a href="" ng-click="">fjern</a>
+                <a href="" ng-click="vm.testTemplate.indicators.splice($index,1)">fjern</a>
             </div>
         </li>
     </ul>
@@ -139,7 +139,7 @@
 <div class="form-group">
     <label class="col-md-3 control-label" for="testTemplate-general"></label>
     <div class="col-md-8">
-        <button type="submit" class="btn btn-success pull-right" ng-disabled="vm.form.testTemplateForm.$invalid">Lagre</button>
+        <md-button class="md-raised" type="submit" class="btn btn-success pull-right" ng-disabled="vm.form.testTemplateForm.$invalid">Lagre</md-button>
 
     </div>
 </div>

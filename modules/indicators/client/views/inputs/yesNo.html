@@ -2,12 +2,21 @@
 <form class="form-horizontal">
     <fieldset>
         <div class="form-group">
-            <label class="col-md-3 control-label" for="solution-yes-no">Fasit</label>
+            <label class="col-md-3 control-label" for="solution-yes-no">Fasit:</label>
             <div class="col-md-8">
                 <div class="radio">
-                    <label for="solution-yes-no-0">
-                        <input type="radio" name="solution-yes-no" id="solution-yes-no-0" value="no" checked="checked"  data-ng-model="vm.input.solution.yes_no">
+                    <label for="vm.input.solution.yes_no">
+                    <!-- <div ng-if="ic.input.type=='yesno'"> -->
+                            <md-radio-group ng-model="vm.input.solution.yes_no" class="">
+                            <md-radio-button name="solution-yes-no" id="solution-yes-no-0" value="true" class="">Ja </md-radio-button>
+                            <md-radio-button name="solution-yes-no" id="solution-yes-no-1" value="false" >Nei </md-radio-button>
+                            <md-radio-button name="solution-yes-no" id="solution-yes-no-2" value="Ikke Relevant">Ikke relevant </md-radio-button>
+                            </md-radio-group>
+                        </div>
+                        <pre>{{vm.input | json}}</pre>
+                        <!-- <md-radio-button type="radio" name="solution-yes-no" id="solution-yes-no-0" value="no"  data-ng-model="vm.input.solution.yes_no">
                         Nei
+                        </md-radio-button>
                     </label>
                 </div>
                 <div class="radio">
@@ -19,7 +28,7 @@
                  <div class="radio">
                     <label for="solution-yes-no-2">
                         <input type="radio" name="solution-yes-no" id="solution-yes-no-2" value="none"  data-ng-model="vm.input.solution.yes_no" >
-                        Ikke relevant
+                        Ikke relevant -->
                     </label>
                 </div>
             </div>
