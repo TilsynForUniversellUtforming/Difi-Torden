@@ -4,57 +4,51 @@
     <label class="col-sm-3 control-label" for="alt-text">
       Tekst
     </label>
-    <div class="col-sm-8 input-group">
-      <input type="text" name="alt-text" placeholder="Skriv inn tekst" class="form-control input-md" required="" data-ng-model="ic.alternative.text" data-ng-value="ic.alternative.text">
-      <div class="input-group-addon" ><a ng-click="ic.addAlternative()" style="color:black">Legg til</a></div>
+    <div class="col-sm-8">
+      <md-input-container class="col-sm-10">
+        <label>Skriv in alternativtekst...</label>
+        <input md-maxlength="50" required md-no-asterisk name="alt-tekst" data-ng-model="ic.alternative.text">
+        <div ng-messages="ic.alternative.text.$error">
+          <div ng-message="required">Obligatorisk felt!</div>
+          <div ng-message="md-maxlength">For lang!</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="col-sm-2">
+      <md-button ng-click="ic.addAlternative()">Legg til</md-button>
+      </md-input-container>
+
     </div>
   </div>
   <div class="form-group">
-    <label for="freetext-registration" class="col-sm-3 control-label"> Mulighet for en annen, fritekst registrering</label>
+    <label for="alternatives-list" class="col-sm-3 control-label"> alternativer</label>
     <div class="col-sm-8">
-      <div class="radio">
-        <label class="control-label" >
-          <input name="freetext-registration" type="radio" value="true" ng-model="ic.input.additionalFreetextAllowed">Nei
-       </label>
-      </div>
-       <div class="radio">
-        <label class="control-label" >
-          <input name="freetext-registration" type="radio" value="false" ng-model="ic.input.additionalFreetextAllowed">Ja
-       </label>
+      <div ng-repeat="alternative in ic.input.alternatives">
+        <div class="col-sm-8" style="padding-left:0" ng-show="editAlternative != $index">
+             <md-checkbox  ng-checked="ic.exists($index, ic.input.solution)" ng-click="ic.toggle($index, ic.input.solution)">
+          <span class="col-sm-12">{{alternative.text}}</span>
+        </md-checkbox>
+        </div>
+        <div class="col-sm-9" ng-show="editAlternative == $index">
+            <md-input-container class="col-md-12">
+                <input md-maxlength="50" required md-no-asterisk name="alt-tekst" data-ng-model="alternative.text">
+            </md-input-container>
+        </div>
+        <div class="col-sm-3">
+        <span class="pull-right"><a ng-click="ic.input.alternatives.splice($index, 1)">FJERN</a></span>
+           <span class="pull-right" style="margin-right:1em;" ng-show="editAlternative !== $index" ng-click="editAlternative = $index"><a>ENDRE</a></span>
+           <span><a ng-show="editAlternative == $index" ng-click="editAlternative = -1">OK</a></span>
+
+        </div>
       </div>
     </div>
   </div>
 </div>
-  <br>
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="alternative in ic.input.alternatives">
-      <div class="row">
-        <div class="col-sm-8">
-          <input type="checkbox" value="alternative.isCorrect" ng-model="alternative.isCorrect">
-          <span ng-show="editAlternative != $index">{{alternative.text}}</span>
-          <!-- <span ng-show="editAlternative == $index">Text:</span> -->
-          <input ng-show="editAlternative == $index" type="text" ng-value="alternative.text" ng-model="alternative.text" style="width:100%"/>
-        </div>
-       <!--  <div class="col-sm-2">
-          <span ng-show="editAlternative !== $index" > Poeng: {{alternative.points}}</span>
-          <span ng-show="editAlternative == $index" >Poeng:</span>
-          <input ng-show="editAlternative == $index" type="numeric" ng-value="alternative.points" ng-model="alternative.points" style="width:100%;"/>
-        </div> -->
-        <div class="col-sm-1">
-          <a ng-show="editAlternative !== $index" ng-click="editAlternative = $index">endre</a>
-          <a ng-show="editAlternative == $index" ng-click="editAlternative = -1">ferdig</a>
-        </div>
-        <div class="col-sm-1">
-          <a ng-click="vm.input.alternatives.splice($index, 1)">slett</a>
-        </div>
-      </div>
-    </li>
-    
-  </ul>
-  <br>
-</div>
-<!-- <div class="row">
-  <div class="col-sm-12">
-    <button class="btn pull-right" ng-click="addInput('checkbox')">Legg til registrering</button>
-  </div>
-</div> -->
+ <!--  <div class="form-group">
+    <label for="freetext-registration" class="col-sm-3 control-label">Ekstra alternativer</label>
+    <div class="col-sm-8" style="padding-left:0">
+      <md-checkbox ng-model="ic.input.additionalFreetextAllowed">
+          <span> Mulighet for en annen, fritekst registrering</span>
+        </md-checkbox>
+    </div>
+  </div> -->
+

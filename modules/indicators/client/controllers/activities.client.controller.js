@@ -119,6 +119,7 @@
             inp.mandytory = true;
             inp.alternatives = [];
             inp.requirements = [];
+            inp.solution = [];
             inp.options = {};
 
             inp.$save(function(res)
