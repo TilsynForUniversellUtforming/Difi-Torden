@@ -21,7 +21,7 @@
          </div>
      </div>
     <div class="col-sm-12" style="padding-left:0">
-        <div class="route-component" ng-repeat="heeeeee in rc.route.condition.inputs track by $index">
+        <div class="route-component" ng-repeat="input in rc.route.condition.inputs track by $index">
             <div ng-include="'modules/indicators/client/views/routes-templates/route-item.client.view.html'"></div>
         </div>
         <div class="route-component" ng-repeat="condition in rc.route.condition.conditions">

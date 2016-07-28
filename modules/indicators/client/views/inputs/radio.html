@@ -34,11 +34,6 @@
         <span ng-show="editAlternative == $index">Text:</span>
         <input ng-show="editAlternative == $index" type="text" ng-value="alternative.text" ng-model="alternative.text" style="width:100%"/>
       </div>
-    <!--   <div class="col-sm-2">
-        <span ng-show="editAlternative !== $index" > Poeng: {{alternative.points}}</span>
-        <span ng-show="editAlternative == $index" >Poeng:</span>
-        <input ng-show="editAlternative == $index" type="numeric" ng-value="alternative.points" ng-model="alternative.points" style="width:100%;"/>
-      </div> -->
       <div class="col-sm-1">
         <a ng-show="editAlternative !== $index" ng-click="editAlternative = $index">endre</a>
         <a ng-show="editAlternative == $index" ng-click="editAlternative = -1">ferdig</a>

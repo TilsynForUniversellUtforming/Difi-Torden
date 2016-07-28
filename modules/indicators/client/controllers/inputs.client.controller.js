@@ -44,8 +44,8 @@
         }
         vm.alternative = {
             text: '',
-            selected:false,
-            isCorrect:null,
+            selected: false,
+            isCorrect: null,
             options:
             {}
         }
@@ -87,6 +87,7 @@
             vm.input.alternatives.push(vm.alternative);
             vm.alternative = {
                 text: '',
+                selected: false,
                 isCorrect: null,
                 options:
                 {}
