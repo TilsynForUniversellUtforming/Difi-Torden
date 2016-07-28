@@ -23,7 +23,7 @@ var InputSchema = new Schema(
         type: Date,
         default: Date.now
     },
-    madytory: Boolean,
+    mandytory: {type:Boolean, default:true},
     requirements:
     {
         type: Array,
@@ -34,6 +34,7 @@ var InputSchema = new Schema(
         type: Array,
         default: []
     },
+    solution:[{}],
     options: [
     {}],
     alternatives: [

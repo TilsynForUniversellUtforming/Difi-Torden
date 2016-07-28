@@ -3,9 +3,9 @@
     <div class="header" style="padding-left:0.5em;">
       <a class="pull-right side" href="#" ng-click="vm.remove()">slett</a>
        <a class="pull-right side" style="margin-right:0.5em" ng-click="vm.editIndicator(vm.indicator.id)" href="#">endre</a>
-   
+
       <h1>{{vm.indicator.title}}</h1>
-      
+
    <p>
       created by {{vm.indicator. created_by}}
   </p>
@@ -13,32 +13,36 @@
 
 
 
-<ul class="list">
- 
-    <li ng-repeat="act in vm.indicator.activities" >
-        
+
+    <div ng-repeat="act in vm.indicator.activities" >
+
         <div class="sub-header">
-            <b>Aktivitet: {{act.title}}</b>
+           <h3> Aktivitet: {{act.title}}</h3>
         </div>
-        
-        <!-- <p>
-            <a>endre</a>
-            <a>slett</a>
-        </p> -->
-        
-        
+
+       <div style="padding:1em;">
+          <p><b>Beskrivelse: </b>
+          <span ng-if="act.description.length==0">Ingen</span>
+          {{act.description}}
+        </p>
+
         <ul class="sublist">
-            
-            <li ng-repeat="inp in act.inputs">
-               
-                <p>{{inp.text}}</p>
+
+            <li ng-repeat="inp in act.inputs" style="border:1px solid #eee">
+                <h4>{{inp.text}} <span ng-if="inp.text.length==0">Registrering uten tekst</span></h4>
+                <p><b>Type: </b>{{inp.type}}</p>
+                <p><b>Standarder: </b>
+                <span ng-repeat="r in inp.requirements">{{r.standard}}</span>
+                <span ng-if="inp.requirements.length == 0">Ingen.</span>
+                </p>
                <!--  <p>
                     <a>endre</a>
                     <a>slett</a>
                 </p> -->
             </li>
         </ul>
-    </li>
-</ul>
+       </div>
+    </div>
+
 
 </section>

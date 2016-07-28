@@ -1,0 +1,39 @@
+.route-component{
+    /*padding-left: 4em;*/
+    /*border-left: 1px solid #66ccbb;*/
+    /*border-top: 2px solid #66ccbb;*/
+    /*background-color: rgba(5,5,5,0.1)*/
+}
+.route-group{
+    /*border: 1px solid #ddd;*/
+    /*background-color: rgba(5,5,5,0.1)*/
+}
+.route-group-main{
+    border-left:2px solid #66ccbb;
+    padding:0em;
+}
+
+.aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aligner-item{
+
+}
+.small{
+-webkit-flex: 1 0 0;
+   flex: 1 0 0;
+   min-height:2px;
+   background-color: #66ccbb;
+}
+.big{
+    -webkit-flex: 8 0 0;
+    flex: 8 0 0;
+    border-left:2px solid #66ccbb;
+    /*padding-left:1em;*/
+    margin-bottom:1em;
+}
+md-input-container{
+  margin-top:0;
+}

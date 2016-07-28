@@ -1,3 +1,5 @@
+<div ng-include="'modules/indicators/client/views/routes-templates/route-group-main.client.view.html'"></div>
+<hr>
 <md-button class="md-raised center-block" ng-click="rc.newRoute()" ng-if="!rc.showform">Legg til</md-button>
 <div class="row" ng-show="rc.showform">
     <div class="col-sm-12">
@@ -10,6 +12,7 @@
                     <div class="col-sm-8">
                         <!-- TYPE YES NO -->
                         <div ng-if="ic.input.type=='yesno'">
+                       
                             <md-radio-group ng-model="rc.route.condition" class="">
                             <md-radio-button value="true" class="md-primary">Ja </md-radio-button>
                             <md-radio-button value="false" >Nei </md-radio-button>

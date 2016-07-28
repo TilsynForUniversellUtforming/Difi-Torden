@@ -1,7 +1,7 @@
 <section class="main">
     <secion class="main-content">
     <div class="header">
-        <h2><span>Registrering</span><a ui-sref=".^.main">{{vm.indicator.title}}</a>  - <a ui-sref=".^">{{ac.activity.title}}</a>  - Registrering  <span  ng-show="vm.createService.views.options.header">{{vm.createService.views.options.header}}</span></h2>
+        <h2><span>Registrering</span><a></a><a ui-sref=".^.^.main">{{vm.indicator.title}}</a>  - <a ui-sref=".^">{{ac.activity.title | limitTo: 20}}<span ng-show="ac.activity.title.length > 20">...</span></a>  - Registrering  <span  ng-show="vm.createService.views.options.header">{{vm.createService.views.options.header}}</span></h2>
     </div>
     <div class="sub-header">
         <h3>Om registreringen</h3>
@@ -10,11 +10,14 @@
         <div class="col-sm-12" >
             <div class="form-horizontal">
                 <div class="form-group">
-                    <label class="col-md-3 control-label" for="Registreringstyper">Registreringstype:</label>
-                    <div class="col-sm-8">
-                        <div class="btn-group" role="group" aria-label="Registreringstyper" style="width:100%">
-                            <button type="button" ng-repeat="type in ic.inputTypes" class="btn btn-primary btn-large" ng-value="type.name" ng-model="ic.input.type"  uib-btn-radio="type.name" ng-click="ic.input.name_no=type.name_no;ic.input.tempUrl=type.url" style="">{{type.name_no}}</button>
-                        </div>
+
+                    <label class="col-md-3 control-label" for="Registreringstyper">Registreringstype</label>
+                    <div class="col-sm-9" >
+                            <!-- <section layout="" layout-align="center center"> -->
+                            <md-button type="button" ng-repeat="type in ic.inputTypes"  class="md-raised col-sm-3" ng-value="type.name" ng-model="ic.input.type"  uib-btn-radio="type.name" ng-click="ic.input.name_no=type.name_no;ic.input.tempUrl=type.url;" style="">{{type.name_no}}</md-button>
+                            <!-- </section> -->
+
+
                     </div>
                 </div>
             </div>
@@ -27,29 +30,23 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="description">Registreringstekst:</label>
                         <div class="col-md-8">
-                            <textarea class="form-control" id="input-text" rows=6 name="input-text" data-ng-model="ic.input.text" data-ng-value="ic.input.text">...</textarea>
+                        <md-input-container class="col-sm-12">
+  <label>Registreringstekst</label>
+  <textarea data-ng-model="ic.input.text" data-ng-value="ic.input.text"></textarea>
+</md-input-container>
+
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="radios">Obligatorisk eller frivillig:</label>
+
+                        <label class="col-md-3 control-label" for="radios">Obligatorisk</label>
                         <div class="col-md-8">
-                            <div class="radio">
-                              <md-radio-group ng-model="ic.input.mandytory">
-                                  <md-radio-button name="radios" id="radios-0" ng-value="true">Obligatorisk</md-radio-button>
-                                  <md-radio-button name="radios" id="radios-1" ng-value="false">Frivillig</md-radio-button>
-                              </md-radio-group>
-                              <!-- <pre>{{ic.input | json}}</pre> -->
-                               <!--  <label for="radios-0">
-                                    <input type="radio" name="radios" id="radios-0" data-ng-model="ic.input.mandytory" ng-value="true" checked="checked">
-                                    Obligatorisk
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="radios-1">
-                                    <input type="radio" name="radios" id="radios-1" ng-value="false" data-ng-model="ic.input.mandytory">
-                                    Frivillig
-                                </label> -->
-                            </div>
+                        <md-radio-group>
+                            <md-radio-button data-ng-model="ic.input.mandytory" ng-value="true">Ja</md-radio-button>
+
+                            <md-radio-button data-ng-model="ic.input.mandytory" ng-value="false">Nei</md-radio-button>
+                        </md-radio-group>
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -57,23 +54,14 @@
                             Legg ved bildet
                         </label>
                         <div class="col-sm-8">
-                            <div class="radio">
-                            <md-radio-group ng-model="ic.input.additionalPicture">
-                                  <md-radio-button name="radio-add-picture"  data-ng-value="false">Obligatorisk</md-radio-button>
-                                  <md-radio-button name="radio-add-picture"  data-ng-value="true">Frivillig</md-radio-button>
-                              </md-radio-group>
-                              <pre>{{ic.input | json}}</pre>
-                                <!-- <label for="radio-add-picture">
-                                    <input type="radio" name="radio-add-picture" data-ng-value="false" data-ng-model="ic.input.additionalPicture" checked>
-                                    Nei
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="radio-add-picture">
-                                    <input type="radio" name="radio-add-picture" data-ng-value="true" data-ng-model="ic.input.additionalPicture" >
-                                    Ja
-                                </label> -->
-                            </div>
+
+                           <md-radio-group>
+                            <md-radio-button data-ng-model="ic.input.additionalPicture" ng-value="true">Ja</md-radio-button>
+
+                            <md-radio-button data-ng-model="ic.input.additionalPicture" ng-value="false">Nei</md-radio-button>
+                        </md-radio-group>
+
+
                         </div>
                     </div>
                 </fieldset>

@@ -26,7 +26,11 @@
         vm.addRequirement = addRequirement;
         vm.addAlternative = addAlternative;
         vm.getActivititesList = getActivititesList;
-
+        vm.prepareForSaving = prepareForSaving;
+        vm.test = [];
+        vm.exists = exists;
+        vm.toggle = toggle;
+        vm.currentSelected = null;
         function getActivititesList()
         {
             // console.log(IndicatorsCreateService)
@@ -44,6 +48,7 @@
         }
         vm.alternative = {
             text: '',
+            selected: false,
             isCorrect: null,
             options:
             {}
@@ -83,9 +88,11 @@
 
         function addAlternative()
         {
+            if(vm.alternative.text.length < 1 || vm.alternative.test === " ")return;
             vm.input.alternatives.push(vm.alternative);
             vm.alternative = {
                 text: '',
+                selected: false,
                 isCorrect: null,
                 options:
                 {}
@@ -128,6 +135,25 @@
                 })
             }
             goBack();
+        }
+        function prepareForSaving(type){
+            if(type==="yesno" || type === "radio" || type === "numeric"){
+                if(vm.currentSelected){
+                    vm.input.solution.push(vm.currentSelected);
+                }
+            }
+        }
+        function toggle(item,list){
+            var idx = list.indexOf(item);
+            if(idx > -1){
+                list.splice(idx, 1);
+            }
+            else{
+                list.push(item)
+            }
+        }
+        function exists(item, list){
+            return list.indexOf(item) > -1;
         }
 
     }
