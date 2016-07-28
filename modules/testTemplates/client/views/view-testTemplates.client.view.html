@@ -10,26 +10,27 @@
     created by {{vm.testTemplate.created_by}}
 </p> -->
 
-<ul class="list">
+
     <li>
        <div class="sub-header">
-        <b>Testobjekt: {{ vm.testTemplate.testObject}}</b>
+        <h3>Testobjekt: {{ vm.testTemplate.testObject}}</h3>
        </div>
-        <!-- <p>
-            <a>endre</a>
-            <a>slett</a>
-        </p> -->
-        
+
+       <div style="padding:1em;">
+          <p><b>Beskrivelse: </b>
+          <span ng-if="vm.testTemplate.description.length==0">Ingen</span>
+          {{vm.testTemplate.description}}
+        </p>
+       
+
         <ul class="sublist">
        
             <li ng-repeat="ind in vm.testTemplate.indicators">
                 <p>{{ind.title}}</p>
-                <!-- <p>
-                    <a>endre</a>
-                    <a>slett</a>
-                </p> -->
+                <p>{{ind.description}}</p>
+                
             </li>
         </ul>
     </li>
-</ul>
+
 </section>
