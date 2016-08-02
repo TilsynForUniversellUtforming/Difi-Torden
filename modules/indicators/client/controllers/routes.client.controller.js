@@ -27,10 +27,7 @@
             {
                 type: '',
                 inputs: [
-                {
-                    id: '',
-                    values: []
-                }],
+                ],
                 conditions: []
             },
             onEvalTrue:
@@ -114,16 +111,17 @@
         function prepareCondField(input, parent)
         {
             parent.type = input.type;
-            parent.values = input.alternatives;
-            if (input.type === "yesno")
-            {
-                parent.values = [
-                {
-                    text: "Ja",
-                    selected: true
-                }]
+            if(!parent.values)parent.values = [];
+            // parent.values = input.alternatives;
+            // if (input.type === "yesno")
+            // {
+            //     parent.values = [
+            //     {
+            //         text: "Ja",
+            //         selected: true
+            //     }]
 
-            }
+            // }
         }
 
 

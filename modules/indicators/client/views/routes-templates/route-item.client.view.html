@@ -1,9 +1,10 @@
 <div class="row" style="margin:0; padding:0">
     <div class="aligner">
-        <div class="aligner-item small" >
-            <div ></div>
+        <div class="small" >
+        <div class="test"></div>
+            <hr>
         </div>
-        <div class="aligner-item big">
+        <div class="aligner-item big" >
             <div style="padding:1em;">
                 <div class="form-horizontal">
                     <md-input-container>
@@ -16,55 +17,49 @@
                     </md-input-container >
                     <md-input-container  ng-if="inp.targetActivity">
                     <label>Registrering</label>
-                    <md-select ng-model="inp.id">
-                    <md-option ng-repeat="input in inp.targetActivity.inputs" ng-value="input._id" ng-click="rc.prepareCondField(input, inp)">
+                    <md-select ng-model="inp.base">
+                    <md-option ng-repeat="input in inp.targetActivity.inputs" ng-value="input" ng-click="rc.prepareCondField(input, inp)">
                     {{input.text}}
                     </md-option>
                     </md-select>
                     </md-input-container>
                     <md-input-container>
-                    <md-button>denne reg.</md-button>
+                    <!-- <md-button ng-click="rc.setToCurrent()">denne reg.</md-button> -->
                     </md-input-container>
                     <md-input-container>
-                     <pre>{{inp | json}}</pre>
-                    <div ng-if="inp.type=='yesno'">
-                        <md-radio-group  class="">
-                        <md-radio-button ng-model="inp.values[0].text" value="Ja" class="md-primary" >Ja </md-radio-button>
-                        <md-radio-button ng-model="inp.values[0].text" value="Nei" >Nei </md-radio-button>
-                        <md-radio-button ng-model="inp.values[0].text" value="Ikke Relevant">Ikke relevant </md-radio-button>
+                    <div ng-if="inp.base.type=='yesno'">
+                        <md-radio-group  class="" data-ng-model="inp.values">
+                        <md-radio-button value="true" >Ja </md-radio-button>
+                        <md-radio-button value="false">Nei </md-radio-button>
                         </md-radio-group>
                     </div>
                     <!-- END TYPE YES NO  -->
                     <!-- TYPE FREETEXT -->
-                    <div ng-if="inp.type=='freetext'">
-                        <input type="text" name="route-input" class="form-control" ng-model="rc.route.condition">
+                    <div ng-if="inp.base.type=='freetext'">
+                        <input type="text" name="route-input" class="form-control" ng-model="">
                     </div>
                     <!-- END TYPE FREETEXT -->
                     <!-- TYPE RADIO -->
-                    <div ng-if="inp.type=='radio'">
-                        <md-radio-group ng-model="rc.route.condition" >
-                        <md-radio-button ng-repeat="alt in inp.alternatives" ng-value="alt.value + $index" class="md-primary">{{alt.text}} </md-radio-button>
+                    <div ng-if="inp.base.type=='radio'">
+                        <md-radio-group ng-model="inp.values" >
+                        <md-radio-button ng-repeat="alt in inp.base.alternatives" ng-value="$index" class="md-primary">{{alt.text}} </md-radio-button>
                         </md-radio-group>
                     </div>
                     <!-- END TYPE RADIO -->
                     <!-- TYPE CHECKBOX -->
-                    <div ng-if="inp.type=='checkbox'">
-                        <div class="checkbox list-group-item" ng-repeat="alt in inp.alternatives">
-                            <div layout="row" layout-wrap flex>
-                                <div flex="50" >
-                                    <md-checkbox ng-model="rc.route.condition" ng-value="alt.value + $index" class="md-primary">{{alt.text}} </md-checkbox>
-                                </div>
-                            </div>
-                        </div>
+                    <div ng-if="inp.base.type=='checkbox'">
+                       <md-checkbox  ng-repeat="alt in inp.base.alternatives" ng-checked="ic.exists($index, inp.values)" ng-click="ic.toggle($index, inp.values)">
+                          <span class="col-sm-12">{{alt.text}}</span>
+                        </md-checkbox>
                     </div>
                     <!-- END TYPE CHECKBOX -->
                     <!-- TYPE NUMERIC -->
-                    <div ng-if="inp.type=='numeric'">
-                        <input type="number" name="route-input" class="form-control" ng-model="rc.route.condition">
+                    <div ng-if="inp.base.type=='numeric'">
+                        <input type="number" name="route-input" class="form-control" ng-model="" placeholder="tall">
                     </div>
                     <!-- END TYPE NUMERIC -->
                     <!-- TYPE PICTURE -->
-                    <div ng-if="inp.type=='picture'">
+                    <div ng-if="inp.base.type=='picture'">
                         <p>Ingen evalueringsmetode er tilgjengelig for registreringen av type "Bilde"</p>
                     </div>
                     <!-- END TYPE PICTURE -->
