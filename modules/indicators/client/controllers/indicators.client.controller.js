@@ -152,7 +152,7 @@
             IndicatorsCreateService.save(function(res)
             {
                 if (!options)
-                    $state.go('indicators.view',
+                    $state.go('indicators.edit.main',
                     {
                         indicatorId: res._id
                     });

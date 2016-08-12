@@ -3,6 +3,13 @@
     <h1>Indikatorer</h1>
   </div>
   <div class="list-group">
+      <a ui-sref="indicators.create" class="list-group-item green">
+      <small class="list-group-item-text">
+        Finner ikke indikatoren du trenger?
+        <span ng-bind="indicator.created_at | date:'mediumDate'"></span>
+      </small>
+      <h4 class="list-group-item-heading">Lag ny indikator</h4>
+    </a>
     <a ng-repeat="indicator in vm.indicators" ui-sref="indicators.view({ indicatorId: indicator._id })" class="list-group-item">
       <small class="list-group-item-text">
         Posted on
